@@ -34,11 +34,11 @@ abstract class BotEvent {
     }
 
     open suspend fun onAtMessageCreate(data: AtMessageCreateEvent) {
-        logger.info("${BotApi.getGuildById(botToken!!,data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(botToken!!,data.channel_id).name}(${data.channel_id}) - ${data.author.username}(${data.author.id}): ${data.content}")
+        logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${data.author.username}(${data.author.id}): ${data.content}")
     }
 
     open suspend fun onMessageCreate(data: MessageCreateEvent) {
-        logger.info("${BotApi.getGuildById(botToken!!,data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(botToken!!,data.channel_id).name}(${data.channel_id}) - ${data.author.username}(${data.author.id}):${if(data.attachments.isNotEmpty())  Gson().toJson(data.attachments) else ""} ${data.content}")
+        logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${data.author.username}(${data.author.id}):${if(data.attachments.isNotEmpty())  Gson().toJson(data.attachments) else ""} ${data.content}")
     }
 
     open suspend fun onChannelCreate(data: ChannelEvent) {
