@@ -2,6 +2,16 @@
 Tencent频道的机器人Kotlin SDK
 
 
+# 导入依赖
+```Maven
+<dependency>
+  <groupId>com.hcyacg</groupId>
+  <artifactId>tencent-guild-protocol</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+
+
 ## 如何使用
 1. 首先配置你的botId 和 botToken ，这个可以自由设置，我目前是放在idea的`Run/Debug Configation` 的`Program arguments`里了，格式为`id token`
 ```kotlin
