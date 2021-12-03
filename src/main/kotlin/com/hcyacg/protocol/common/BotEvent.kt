@@ -6,8 +6,7 @@ import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.config.IdentifyConfig
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import top.wsure.guild.bot.official.dtos.event.ReadyEvent
-import kotlin.math.log
+import com.hcyacg.protocol.event.ReadyEvent
 
 /**
  * 频道事件

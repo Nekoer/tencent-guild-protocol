@@ -1,13 +1,10 @@
 package com.hcyacg.protocol.common
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.BaseBotListener
 import com.hcyacg.protocol.internal.config.IdentifyConfig
 import com.hcyacg.protocol.internal.entity.*
 import com.hcyacg.protocol.internal.enums.DispatchEnums
-import com.hcyacg.protocol.internal.enums.OPCodeEnums
 import com.hcyacg.protocol.internal.enums.OPCodeEnums.*
 import com.hcyacg.protocol.utils.JsonUtils.jsonToObjectOrNull
 import com.hcyacg.protocol.utils.JsonUtils.objectToJson
@@ -15,10 +12,9 @@ import com.hcyacg.protocol.utils.ScheduleUtils
 import kotlinx.coroutines.runBlocking
 import okhttp3.Response
 import okhttp3.WebSocket
-import okio.ByteString
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import top.wsure.guild.bot.official.dtos.event.ReadyEvent
+import com.hcyacg.protocol.event.ReadyEvent
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicLong
