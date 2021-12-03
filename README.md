@@ -42,19 +42,19 @@ BotApi.getRolesByGuild(data.guild_id)
 //创建频道身份组
 BotApi.createRolesByGuild(data.guild_id, Filter(1,1,0),Info("测试",16757760,0))
 //修改频道身份组
-BotApi.changeRolesByGuild(data.guild_id, "10048074",Filter(1,1,0),Info("测试",16758465,0))
+BotApi.changeRolesByGuild(data.guild_id, "",Filter(1,1,0),Info("测试",16758465,0))
 //删除频道身份组
-BotApi.deleteRolesByGuild(data.guild_id, "10048074")
+BotApi.deleteRolesByGuild(data.guild_id, "")
 //增加频道身份组成员(除子频道管理员
-BotApi.createMemberRolesByGuild(data.guild_id, "17328292118607880762","10019092")
+BotApi.createMemberRolesByGuild(data.guild_id, "","")
 //增加频道身份组成员(仅子频道管理员
-BotApi.createChildMemberRolesByGuild(data.guild_id, BotApi.getChannelInfo(data.channel_id),"17328292118607880762","10019092")
+BotApi.createChildMemberRolesByGuild(data.guild_id, BotApi.getChannelInfo(data.channel_id),"","")
 //删除频道身份组成员(除子频道管理员
-BotApi.deleteMemberRolesByGuild(data.guild_id, "17328292118607880762","10019092")
+BotApi.deleteMemberRolesByGuild(data.guild_id, "","")
 //删除频道身份组成员(仅子频道管理员
-BotApi.deleteChildMemberRolesByGuild(data.guild_id, BotApi.getChannelInfo(data.channel_id),"17328292118607880762","10019092")
+BotApi.deleteChildMemberRolesByGuild(data.guild_id, BotApi.getChannelInfo(data.channel_id),"","")
 //修改指定子频道的权限 目前只支持修改查看权限
-BotApi.changeChannelPermissions(data.channel_id, "17328292118607880762",false)
+BotApi.changeChannelPermissions(data.channel_id, "",false)
 ```
 4. AtMessageCreateEvent 和 MessageCreateEvent 都存在回复功能
 ```kotlin
