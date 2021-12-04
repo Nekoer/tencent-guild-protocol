@@ -2,3 +2,5 @@
 /.gradle/
 /build/
 *.properties
+*.rev
+*.gpg
