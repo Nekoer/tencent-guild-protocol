@@ -41,28 +41,28 @@ abstract class BotEvent {
     }
 
     open suspend fun onChannelCreate(data: ChannelEvent) {
-        logger.info("${data.name} 子频道被创建")
+        logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${data.name}(${data.id}) 子频道被创建")
     }
 
     open suspend fun onChannelUpdate(data: ChannelEvent) {
-        logger.info("${data.name} 子频道信息已被修改")
+        logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${data.name}(${data.id}) 子频道信息已被修改")
     }
 
     open suspend fun onChannelDelete(data: ChannelEvent) {
-        logger.info("${data.name} 子频道被删除")
+        logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${data.name}(${data.id}) 子频道被删除")
     }
 
     open suspend fun onGuildCreate(data: GuildEvent) {
-        logger.info("机器人加入了 ${data.name}")
+        logger.info("机器人加入了 ${data.name}(${data.id}) 介绍: ${data.description}")
     }
 
     open suspend fun onGuildUpdate(data: GuildEvent) {
-        logger.info("${data.name} 频道信息变更")
+        logger.info("${data.name}(${data.id}) 频道信息变更")
 
     }
 
     open suspend fun onGuildDelete(data: GuildEvent) {
-        logger.info("机器人离开了 ${data.name}  介绍: ${data.description}")
+        logger.info("机器人离开了 ${data.name}(${data.id})")
     }
 
     open suspend fun onResumed(config: IdentifyConfig, sessionId: String) {}
