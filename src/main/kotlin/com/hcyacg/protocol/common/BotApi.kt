@@ -41,171 +41,170 @@ object BotApi {
     }
 
 
-    fun AtMessageCreateEvent.replyText(msg: String): Boolean {
+    fun AtMessageCreateEvent.replyText(msg: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = TextMessage(msg, this.id).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun AtMessageCreateEvent.replyTextNotId(msg: String): Boolean {
+    fun AtMessageCreateEvent.replyTextNotId(msg: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeTextMessage(msg).objectToJson()
-
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun AtMessageCreateEvent.replyTextWithImage(msg: String, imageUrl: String): Boolean {
+    fun AtMessageCreateEvent.replyTextWithImage(msg: String, imageUrl: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = TextWithImageMessage(msg, imageUrl, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun AtMessageCreateEvent.replyTextWithImageNotId(msg: String, imageUrl: String): Boolean {
+    fun AtMessageCreateEvent.replyTextWithImageNotId(msg: String, imageUrl: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeTextWithImageMessage(msg, imageUrl).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun AtMessageCreateEvent.replyImage(imageUrl: String): Boolean {
+    fun AtMessageCreateEvent.replyImage(imageUrl: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = ImageMessage(imageUrl, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
 
-    fun AtMessageCreateEvent.replyImageNotId(imageUrl: String): Boolean {
+    fun AtMessageCreateEvent.replyImageNotId(imageUrl: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeImageMessage(imageUrl).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun AtMessageCreateEvent.replyArk(messageArk: MessageArk): Boolean {
+    fun AtMessageCreateEvent.replyArk(messageArk: MessageArk): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = ArkMessage(messageArk, this.id).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun AtMessageCreateEvent.replyArkNotId(messageArk: MessageArk): Boolean {
+    fun AtMessageCreateEvent.replyArkNotId(messageArk: MessageArk): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeArkMessage(messageArk).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun AtMessageCreateEvent.replyEmbed(messageEmbed: MessageEmbed): Boolean {
+    fun AtMessageCreateEvent.replyEmbed(messageEmbed: MessageEmbed): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = EmbedMessage(messageEmbed, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun AtMessageCreateEvent.replyEmbedNotId(messageEmbed: MessageEmbed): Boolean {
+    fun AtMessageCreateEvent.replyEmbedNotId(messageEmbed: MessageEmbed): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeEmbedMessage(messageEmbed).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun AtMessageCreateEvent.replyAudio(audioUrl: String, text: String, status: Int): Boolean {
+    fun AtMessageCreateEvent.replyAudio(audioUrl: String, text: String, status: Int): Message {
         val url = sendAudio.replace("{{channel_id}}", this.channel_id)
         val json = AudioControl(audioUrl, text, status).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
 
-    fun MessageCreateEvent.replyText(msg: String): Boolean {
+    fun MessageCreateEvent.replyText(msg: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = TextMessage(msg, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun MessageCreateEvent.replyTextNotId(msg: String): Boolean {
+    fun MessageCreateEvent.replyTextNotId(msg: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeTextMessage(msg).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun MessageCreateEvent.replyTextWithImage(msg: String, imageUrl: String): Boolean {
+    fun MessageCreateEvent.replyTextWithImage(msg: String, imageUrl: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = TextWithImageMessage(msg, imageUrl, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun MessageCreateEvent.replyTextWithImageNotId(msg: String, imageUrl: String): Boolean {
+    fun MessageCreateEvent.replyTextWithImageNotId(msg: String, imageUrl: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeTextWithImageMessage(msg, imageUrl).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun MessageCreateEvent.replyImage(imageUrl: String): Boolean {
+    fun MessageCreateEvent.replyImage(imageUrl: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = ImageMessage(imageUrl, this.id).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
 
-    fun MessageCreateEvent.replyImageNotId(imageUrl: String): Boolean {
+    fun MessageCreateEvent.replyImageNotId(imageUrl: String): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeImageMessage(imageUrl).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun MessageCreateEvent.replyArk(messageArk: MessageArk): Boolean {
+    fun MessageCreateEvent.replyArk(messageArk: MessageArk): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = ArkMessage(messageArk, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun MessageCreateEvent.replyArkNotId(messageArk: MessageArk): Boolean {
+    fun MessageCreateEvent.replyArkNotId(messageArk: MessageArk): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeArkMessage(messageArk).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun MessageCreateEvent.replyEmbed(messageEmbed: MessageEmbed): Boolean {
+    fun MessageCreateEvent.replyEmbed(messageEmbed: MessageEmbed): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = EmbedMessage(messageEmbed, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
-    fun MessageCreateEvent.replyEmbedNotId(messageEmbed: MessageEmbed): Boolean {
+    fun MessageCreateEvent.replyEmbedNotId(messageEmbed: MessageEmbed): Message {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeEmbedMessage(messageEmbed).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        return true
+        return Gson().fromJson(res.toString(),Message::class.java)
     }
 
     /**

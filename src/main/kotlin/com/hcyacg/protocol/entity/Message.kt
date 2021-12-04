@@ -21,11 +21,11 @@ data class Message(
     @SerialName("content")
     val content: String,
     @SerialName("timestamp")
-    @Serializable(with = LocalDateTimeSerializer::class)
-    val timestamp: LocalDateTime,
+//    @Serializable(with = LocalDateTimeSerializer::class)
+    val timestamp: String,
     @SerialName("edited_timestamp")
-    @Serializable(with = LocalDateTimeSerializer::class)
-    val edited_timestamp: LocalDateTime,
+//    @Serializable(with = LocalDateTimeSerializer::class)
+    val edited_timestamp: String,
     @SerialName("mention_everyone")
     val mention_everyone: Boolean,
     @SerialName("author")

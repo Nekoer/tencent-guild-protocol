@@ -10,7 +10,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 object LocalDateTimeSerializer : KSerializer<LocalDateTime> {
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+    private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+
     override fun deserialize(decoder: Decoder): LocalDateTime {
         return LocalDateTime.parse(decoder.decodeString(), formatter)
     }

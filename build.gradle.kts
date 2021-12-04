@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "com.hcyacg"
-version = "0.1.8"
+version = "0.1.9"
 
 
 
@@ -27,7 +27,7 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2-native-mt")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
-    implementation("com.squareup.okhttp3:okhttp:4.9.2")
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
 
     implementation("com.alibaba:fastjson:1.2.78")
     implementation("org.apache.commons:commons-lang3:3.12.0")
