@@ -29,12 +29,12 @@ data class Intents(
     val directMessage: Boolean = false,
     val audioAction: Boolean = true,
     val atMessages: Boolean = true,
-    val privateSphereMessages: Boolean = true,
+    val messages: Boolean = false,
 ) {
     fun toIntentsValue(): Long {
         return ((if (guilds) 1.shl(0) else 0)
                 + (if (guildMembers) 1.shl(1) else 0)
-                + (if (privateSphereMessages) 1.shl(9) else 0)
+                + (if (messages) 1.shl(9) else 0)
                 + (if (directMessage) 1.shl(12) else 0)
                 + (if (audioAction) 1.shl(29) else 0)
                 + (if (atMessages) 1.shl(30) else 0))

@@ -90,12 +90,9 @@ object BotApi {
     }
 
     fun AtMessageCreateEvent.replyArk(messageArk: MessageArk): Boolean {
-        println(Gson().toJson(messageArk))
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = ArkMessage(messageArk, this.id).objectToJson()
-
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        println(res.toString())
         return true
     }
 
