@@ -7,6 +7,7 @@ import com.hcyacg.protocol.utils.LocalDateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
+
 @NoArg
 @Serializable
 data class AtMessageCreateEvent(

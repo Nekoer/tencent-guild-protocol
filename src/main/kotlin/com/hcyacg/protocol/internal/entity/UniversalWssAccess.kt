@@ -1,5 +1,4 @@
 package com.hcyacg.protocol.internal.entity
-import com.alibaba.fastjson.annotation.JSONField
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
 import kotlinx.serialization.Serializable

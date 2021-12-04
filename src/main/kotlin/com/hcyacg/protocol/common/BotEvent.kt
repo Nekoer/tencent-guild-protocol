@@ -5,8 +5,6 @@ import com.hcyacg.protocol.constant.Constant.Companion.botToken
 import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.config.IdentifyConfig
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import com.hcyacg.protocol.event.ReadyEvent
 
 /**
@@ -20,7 +18,7 @@ abstract class BotEvent {
     }
 
     open suspend fun onReady(data: ReadyEvent) {
-        logger.info("${data.shard[0] + 1} of ${data.shard[1]} 已连接")
+//        logger.info("${data.shard[0] + 1} of ${data.shard[1]} 已连接")
     }
 
     open suspend fun onGuildMemberAdd(data: GuildMemberEvent) {
@@ -38,7 +36,7 @@ abstract class BotEvent {
     }
 
     open suspend fun onMessageCreate(data: MessageCreateEvent) {
-        logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${data.author.username}(${data.author.id}):${if(data.attachments.isNotEmpty())  Gson().toJson(data.attachments) else ""} ${data.content}")
+//        logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${data.author.username}(${data.author.id}):${if(data.attachments.isNotEmpty())  Gson().toJson(data.attachments) else ""} ${data.content}")
     }
 
     open suspend fun onChannelCreate(data: ChannelEvent) {

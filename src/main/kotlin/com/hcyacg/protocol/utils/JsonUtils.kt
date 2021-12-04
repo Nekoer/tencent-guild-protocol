@@ -7,8 +7,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.decodeFromJsonElement
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+
 
 object JsonUtils {
     @OptIn(ExperimentalSerializationApi::class)

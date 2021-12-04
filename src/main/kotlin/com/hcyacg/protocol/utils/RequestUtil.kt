@@ -3,10 +3,6 @@ package com.hcyacg.protocol.utils
 import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONObject
 import okhttp3.*
-import okhttp3.internal.closeQuietly
-import java.net.InetSocketAddress
-import java.net.Proxy
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**

@@ -9,8 +9,6 @@ import com.hcyacg.protocol.internal.entity.AccessWithFragmentedWss
 import com.hcyacg.protocol.utils.RequestUtil
 import okhttp3.Headers
 import okhttp3.RequestBody
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 class Gateway {
 

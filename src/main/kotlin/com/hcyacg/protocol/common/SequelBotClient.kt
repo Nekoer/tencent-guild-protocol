@@ -5,8 +5,6 @@ import com.hcyacg.protocol.internal.BaseBotClient
 import com.hcyacg.protocol.internal.BaseBotListener
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
 
 /**

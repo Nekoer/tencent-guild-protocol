@@ -2,7 +2,6 @@ package com.hcyacg.protocol.common
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.hcyacg.protocol.common.BotApi.replyEmbedNotId
 import com.hcyacg.protocol.constant.Constant.Companion.botToken
 import com.hcyacg.protocol.constant.Constant.Companion.proUrl
 import com.hcyacg.protocol.entity.*
@@ -14,8 +13,6 @@ import com.hcyacg.protocol.event.api.*
 import com.hcyacg.protocol.utils.JsonUtils.objectToJson
 import com.hcyacg.protocol.utils.OkHttpUtils
 import okhttp3.Headers
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 object BotApi {
 

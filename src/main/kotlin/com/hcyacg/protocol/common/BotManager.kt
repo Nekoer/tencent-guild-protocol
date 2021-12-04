@@ -14,15 +14,16 @@ class BotManager(token: String) {
     }
 
     fun addListen(listener: List<BotEvent>) {
-
+        val list = listener.toMutableList()
+        list.add(MonitorMessage())
         runBlocking {
-            BotClient(IdentifyConfig(botToken!!, 4, 0), listener)
+            BotClient(IdentifyConfig(botToken!!, 4, 0), list)
             delay(3000L)
-            BotClient(IdentifyConfig(botToken!!, 4, 1), listener)
+            BotClient(IdentifyConfig(botToken!!, 4, 1), list)
             delay(3000L)
-            BotClient(IdentifyConfig(botToken!!, 4, 2), listener)
+            BotClient(IdentifyConfig(botToken!!, 4, 2), list)
             delay(3000L)
-            BotClient(IdentifyConfig(botToken!!, 4, 3), listener)
+            BotClient(IdentifyConfig(botToken!!, 4, 3), list)
         }
     }
 

@@ -13,8 +13,6 @@ import com.hcyacg.protocol.utils.ScheduleUtils
 import kotlinx.coroutines.runBlocking
 import okhttp3.Response
 import okhttp3.WebSocket
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import com.hcyacg.protocol.event.ReadyEvent
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
