@@ -3,6 +3,7 @@ package com.hcyacg.protocol.common
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hcyacg.protocol.constant.Constant.Companion.botToken
+import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.constant.Constant.Companion.proUrl
 import com.hcyacg.protocol.entity.*
 import com.hcyacg.protocol.entity.Member
@@ -45,6 +46,7 @@ object BotApi {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = TextMessage(msg, this.id).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -52,6 +54,7 @@ object BotApi {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeTextMessage(msg).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -60,6 +63,7 @@ object BotApi {
         val json = TextWithImageMessage(msg, imageUrl, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -68,6 +72,7 @@ object BotApi {
         val json = initiativeTextWithImageMessage(msg, imageUrl).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -76,6 +81,7 @@ object BotApi {
         val json = ImageMessage(imageUrl, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -85,6 +91,7 @@ object BotApi {
         val json = initiativeImageMessage(imageUrl).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -92,6 +99,7 @@ object BotApi {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = ArkMessage(messageArk, this.id).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -100,6 +108,7 @@ object BotApi {
         val json = initiativeArkMessage(messageArk).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -108,6 +117,7 @@ object BotApi {
         val json = EmbedMessage(messageEmbed, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -116,6 +126,7 @@ object BotApi {
         val json = initiativeEmbedMessage(messageEmbed).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -124,6 +135,7 @@ object BotApi {
         val json = AudioControl(audioUrl, text, status).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -133,6 +145,7 @@ object BotApi {
         val json = TextMessage(msg, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -141,6 +154,7 @@ object BotApi {
         val json = initiativeTextMessage(msg).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -149,6 +163,7 @@ object BotApi {
         val json = TextWithImageMessage(msg, imageUrl, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -157,6 +172,7 @@ object BotApi {
         val json = initiativeTextWithImageMessage(msg, imageUrl).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -164,6 +180,7 @@ object BotApi {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = ImageMessage(imageUrl, this.id).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -172,6 +189,7 @@ object BotApi {
         val url = sendMessage.replace("{{channel_id}}", this.channel_id)
         val json = initiativeImageMessage(imageUrl).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -180,6 +198,7 @@ object BotApi {
         val json = ArkMessage(messageArk, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -188,6 +207,7 @@ object BotApi {
         val json = initiativeArkMessage(messageArk).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -196,6 +216,7 @@ object BotApi {
         val json = EmbedMessage(messageEmbed, this.id).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
@@ -204,6 +225,7 @@ object BotApi {
         val json = initiativeEmbedMessage(messageEmbed).objectToJson()
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(),Message::class.java)
     }
 
