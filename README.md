@@ -25,8 +25,10 @@ implementation("com.hcyacg:tencent-guild-protocol:0.1.8")
 fun main(args: Array<String>) {
     val token = "Bot id.token"
     //放入你的Listener
-    BotManager(token).addListen(listOf())
-
+    //默认是获取公域的信息
+    BotManager(token,Intents()).addListen(listOf())
+    //私域请使用
+    BotManager(token,Intents(true,true,false,true,true,true)).addListen(listOf())
 }
 
 ```
