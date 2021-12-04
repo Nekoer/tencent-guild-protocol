@@ -59,6 +59,7 @@ data class ImageMessage(
     @SerialName("msg_id")
     val msg_id: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
 )
+
 @Serializable
 data class initiativeImageMessage(
     @SerialName("image")
@@ -96,7 +97,14 @@ data class initiativeEmbedMessage(
     val embed: MessageEmbed, //embed 消息，一种特殊的 ark
 )
 
-
+/**
+ * embed
+ *@param title    标题
+ *@param description    描述
+ *@param prompt    消息弹窗内容
+ *@param timestamp    消息创建时间
+ *@param fields    MessageEmbedField 对象数组	消息创建时间
+ */
 @Serializable
 data class MessageEmbed(
     @SerialName("title")
@@ -112,6 +120,10 @@ data class MessageEmbed(
     val fields: MessageEmbedField //消息创建时间
 )
 
+/**
+ *@param name    字段名
+ *@param value    字段值
+ */
 @Serializable
 data class MessageEmbedField(
     @SerialName("name")
@@ -120,41 +132,59 @@ data class MessageEmbedField(
     val value: String
 )
 
+/**
+ *@param url    下载地址
+ */
 @Serializable
 data class MessageAttachment(
     @SerialName("url")
     val url: String //下载地址
 )
 
+/**
+ * @param template_id    ark模板id（需要先申请） 23 链接+文本列表模板 24 文本+缩略图模板 37 大图模板
+ * @param kv    MessageAkrKv arkkv数组	kv值列表
+ */
 @Serializable
 data class MessageArk(
     @SerialName("template_id")
-    val template_id:Int,
+    val template_id: Int,
     @SerialName("kv")
-    val kv:List<MessageArkKv>
-
+    val kv: List<MessageArkKv>
 )
 
+/**
+ *@param key    key
+ *@param value    value
+ *@param obj MessageArkObj arkobj类型的数组	ark obj类型的列表
+ */
 @Serializable
 data class MessageArkKv(
     @SerialName("key")
-    val key:String,
+    val key: String,
     @SerialName("value")
-    val value:String?,
+    val value: String?,
     @SerialName("obj")
-    val obj:List<MessageArkObj>?
+    val obj: List<MessageArkObj>?
 )
 
+/**
+ *@param obj_kv    MessageArkObjKv objkv类型的数组	ark objkv列表
+ */
 @Serializable
 data class MessageArkObj(
     @SerialName("obj_kv")
-    val obj_kv:List<MessageArkObjKv>
+    val obj_kv: List<MessageArkObjKv>
 )
 
+/**
+ *@param key    key
+ *@param value    value
+ */
 @Serializable
 data class MessageArkObjKv(
     @SerialName("key")
-    val key:String,
+    val key: String,
     @SerialName("value")
-    val value:String
+    val value: String
 )

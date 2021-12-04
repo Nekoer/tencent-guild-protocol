@@ -8,16 +8,16 @@ Tencent频道的机器人Kotlin SDK
 <dependency>
   <groupId>com.hcyacg</groupId>
   <artifactId>tencent-guild-protocol</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
 </dependency>
 ```
 #### Gradle Groovy DSL
 ```Gradle Groovy DSL
-implementation 'com.hcyacg:tencent-guild-protocol:0.1.2'
+implementation 'com.hcyacg:tencent-guild-protocol:0.1.3'
 ```
 #### Gradle Kotlin DSL
 ```Gradle Kotlin DSL
-implementation("com.hcyacg:tencent-guild-protocol:0.1.2")
+implementation("com.hcyacg:tencent-guild-protocol:0.1.3")
 ```
 ## 如何使用
 1. 首先配置你的botId 和 botToken ，这个可以自由设置，我目前是放在idea的`Run/Debug Configation` 的`Program arguments`里了，格式为`id token`
@@ -72,6 +72,19 @@ BotApi.deleteMemberRolesByGuild(data.guild_id, "","")
 BotApi.deleteChildMemberRolesByGuild(data.guild_id, BotApi.getChannelInfo(data.channel_id),"","")
 //修改指定子频道的权限 目前只支持修改查看权限
 BotApi.changeChannelPermissions(data.channel_id, "",false)
+```
+#### 私域功能
+```Kotlin
+//获取频道成员列表
+BotApi.getGuildMemberList(data.guild_id,"0",1)
+//创建子频道
+BotApi.createChannel(data.guild_id, ChannelDto("测试", ChannelType.textSubchannel, 排序id, "父类节点"))
+//修改子频道信息
+BotApi.changeChannelInfo(data.channel_id,ChannelDto("测试", ChannelType.textSubchannel, 排序id, "父类节点"))
+//删除子频道
+BotApi.deleteChannel(data.channel_id)
+//删除用户
+BotApi.deleteMember(data.guild_id,"用户id")
 ```
 4. AtMessageCreateEvent 和 MessageCreateEvent 都存在回复功能
 ```kotlin

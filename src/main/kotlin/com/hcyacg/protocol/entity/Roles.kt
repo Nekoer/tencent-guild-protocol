@@ -4,6 +4,7 @@ import com.hcyacg.protocol.anno.NoArg
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 @NoArg
 data class Roles (
@@ -15,6 +16,11 @@ data class Roles (
     val number_limit:Int,
 )
 
+/**
+ *@param  name	是否修改名称: 0-否, 1-是
+ *@param  color 是否修改颜色: 0-否, 1-是
+ *@param  hoist	是否修改在成员列表中单独展示: 0-否, 1-是
+ */
 @Serializable
 @NoArg
 data class Filter (
@@ -26,6 +32,11 @@ data class Filter (
     val hoist:Long,
 )
 
+/**
+ *@param name	名称
+ *@param color	ARGB的HEX十六进制颜色值转换后的十进制数值
+ *@param hoist	在成员列表中单独展示: 0-否, 1-是
+ */
 @Serializable
 @NoArg
 data class Info (
@@ -37,6 +48,7 @@ data class Info (
     val hoist:Long,
 )
 
+
 @Serializable
 @NoArg
 data class RoleVo (
@@ -46,6 +58,10 @@ data class RoleVo (
     val role:Role,
 )
 
+/**
+ * @param filter 标识需要修改哪些字段
+ * @param info 携带需要修改的字段内容
+ */
 @Serializable
 @NoArg
 data class RoleDto (
