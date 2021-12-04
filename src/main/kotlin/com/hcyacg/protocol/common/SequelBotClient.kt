@@ -1,5 +1,6 @@
 package com.hcyacg.protocol.common
 
+import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.internal.BaseBotClient
 import com.hcyacg.protocol.internal.BaseBotListener
 import okhttp3.OkHttpClient
@@ -15,7 +16,6 @@ open class SequelBotClient<T: BaseBotListener> (
     private val uri: String,
     private val listener: T
 ): BaseBotClient {
-    private val logger: Logger = LoggerFactory.getLogger(this::class.java)
     private val client: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .readTimeout(30, TimeUnit.SECONDS) //设置读取超时时间

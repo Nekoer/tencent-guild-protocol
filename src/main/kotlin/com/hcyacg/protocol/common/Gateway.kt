@@ -4,6 +4,7 @@ package com.hcyacg.protocol.common
 import com.google.gson.Gson
 import com.hcyacg.protocol.constant.Constant
 import com.hcyacg.protocol.constant.Constant.Companion.accessWithFragmentedWss
+import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.internal.entity.AccessWithFragmentedWss
 import com.hcyacg.protocol.utils.RequestUtil
 import okhttp3.Headers
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory
 class Gateway {
 
     companion object {
-        private val logger: Logger = LoggerFactory.getLogger(this::class.java)
         private val headers = Headers.Builder()
         private var requestBody: RequestBody? = null
 

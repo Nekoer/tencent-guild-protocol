@@ -1,5 +1,6 @@
 package com.hcyacg.protocol.utils
 
+import com.hcyacg.protocol.constant.Constant.Companion.logger
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -10,7 +11,6 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object JsonUtils {
-    val logger: Logger = LoggerFactory.getLogger(javaClass)
     @OptIn(ExperimentalSerializationApi::class)
     val formatter = Json {
         ignoreUnknownKeys = true

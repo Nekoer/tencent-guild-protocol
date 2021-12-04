@@ -18,8 +18,6 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object BotApi {
-    private val logger: Logger = LoggerFactory.getLogger(javaClass)
-
 
     private const val userMe = "$proUrl/users/@me"
     private const val userMeGuild = "$userMe/guilds"

@@ -1,5 +1,6 @@
 package com.hcyacg.protocol.common
 
+import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.BaseBotListener
 import com.hcyacg.protocol.internal.config.IdentifyConfig
@@ -28,7 +29,6 @@ class BotListener(
     private val identifyOpDto = Identify(config.toIdentifyOperationData()).objectToJson()
     var sessionId: String = ""
 
-    private val logger: Logger = LoggerFactory.getLogger(javaClass)
     private val logHeader = "${config.index + 1} of ${config.shards}"
 
     private var hbTimer: Timer? = null

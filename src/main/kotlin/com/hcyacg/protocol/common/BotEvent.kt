@@ -2,6 +2,7 @@ package com.hcyacg.protocol.common
 
 import com.google.gson.Gson
 import com.hcyacg.protocol.constant.Constant.Companion.botToken
+import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.config.IdentifyConfig
 import org.slf4j.Logger
@@ -12,7 +13,7 @@ import com.hcyacg.protocol.event.ReadyEvent
  * 频道事件
  */
 abstract class BotEvent {
-    private val logger: Logger = LoggerFactory.getLogger(javaClass)
+
 
     open fun getToken():String?{
         return botToken
