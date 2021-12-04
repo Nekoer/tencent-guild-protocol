@@ -8,16 +8,16 @@ Tencent频道的机器人Kotlin SDK
 <dependency>
   <groupId>com.hcyacg</groupId>
   <artifactId>tencent-guild-protocol</artifactId>
-  <version>0.1.3</version>
+  <version>0.1.4</version>
 </dependency>
 ```
 #### Gradle Groovy DSL
 ```Gradle Groovy DSL
-implementation 'com.hcyacg:tencent-guild-protocol:0.1.3'
+implementation 'com.hcyacg:tencent-guild-protocol:0.1.4'
 ```
 #### Gradle Kotlin DSL
 ```Gradle Kotlin DSL
-implementation("com.hcyacg:tencent-guild-protocol:0.1.3")
+implementation("com.hcyacg:tencent-guild-protocol:0.1.4")
 ```
 ## 如何使用
 1. 首先配置你的botId 和 botToken ，这个可以自由设置，我目前是放在idea的`Run/Debug Configation` 的`Program arguments`里了，格式为`id token`
