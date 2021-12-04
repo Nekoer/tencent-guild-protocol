@@ -23,13 +23,13 @@ abstract class BotEvent {
     }
 
     open suspend fun onGuildMemberAdd(data: GuildMemberEvent) {
-        logger.info("${data.user.username}(${data.user.id}) 加入了本频道")
+        logger.info("${data.user.username}(${data.user.id}) 加入了 ${BotApi.getGuildById(data.guild_id).name}(${data.guild_id})")
     }
 
     open suspend fun onGuildMemberUpdate(data: GuildMemberEvent) {}
 
     open suspend fun onGuildMemberRemove(data: GuildMemberEvent) {
-        logger.info("${data.user.username}(${data.user.id}) 退出了本频道")
+        logger.info("${data.user.username}(${data.user.id}) 退出了 ${BotApi.getGuildById(data.guild_id).name}(${data.guild_id})")
     }
 
     open suspend fun onAtMessageCreate(data: AtMessageCreateEvent) {
