@@ -20,12 +20,12 @@ implementation 'com.hcyacg:tencent-guild-protocol:0.1.4'
 implementation("com.hcyacg:tencent-guild-protocol:0.1.4")
 ```
 ## 如何使用
-1. 首先配置你的botId 和 botToken ，这个可以自由设置，我目前是放在idea的`Run/Debug Configation` 的`Program arguments`里了，格式为`id token`
+1. 首先配置你的botId 和 botToken
 ```kotlin
     // 就可以直接从args里面拿到了，如果你觉得麻烦可以用自己的方法实现，能拿到就行，直接写代码里也行
 fun main(args: Array<String>) {
 
-    val token = "Bot ${args.first()}.${args.last()}"
+    val token = "Bot id.token"
     //放入你的Listener
     BotManager(token).addListen(listOf())
 
