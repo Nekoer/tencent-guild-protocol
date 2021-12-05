@@ -2,12 +2,14 @@ package com.hcyacg.protocol.common
 
 import com.google.gson.Gson
 import com.hcyacg.protocol.constant.Constant
+import com.hcyacg.protocol.constant.Constant.Companion.bot
 import com.hcyacg.protocol.event.*
 
 
 internal class MonitorMessage:BotEvent(){
 
     override suspend fun onReady(data: ReadyEvent) {
+        bot = data.user
         Constant.logger.info("${data.shard[0] + 1} of ${data.shard[1]} 已连接")
     }
 
@@ -26,7 +28,9 @@ internal class MonitorMessage:BotEvent(){
     }
 
     override suspend fun onMessageCreate(data: MessageCreateEvent) {
-        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${data.author.username}(${data.author.id}):${if(data.attachments.isNotEmpty())  Gson().toJson(data.attachments) else ""} ${data.content}")
+        if (data.content.indexOf("<@!${bot!!.id}>") < 0){
+            Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${data.author.username}(${data.author.id}):${if(data.attachments.isNotEmpty())  Gson().toJson(data.attachments) else ""} ${data.content}")
+        }
     }
 
     override suspend fun onChannelCreate(data: ChannelEvent) {
