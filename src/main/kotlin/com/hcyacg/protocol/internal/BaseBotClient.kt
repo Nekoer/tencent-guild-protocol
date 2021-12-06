@@ -3,7 +3,7 @@ package com.hcyacg.protocol.internal
 /**
  * 机器人客户端父类
  */
-interface BaseBotClient {
+internal interface BaseBotClient {
 
     fun reconnect()
 
