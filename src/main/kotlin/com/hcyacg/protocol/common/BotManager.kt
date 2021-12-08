@@ -17,7 +17,7 @@ class BotManager(token: String,intents:Intents) {
         }
     }
 
-    fun addListen(listener: List<BotEvent>) {
+    fun addListen(vararg listener: BotEvent) {
         val list = listener.toMutableList()
         list.add(MonitorMessage())
         runBlocking {

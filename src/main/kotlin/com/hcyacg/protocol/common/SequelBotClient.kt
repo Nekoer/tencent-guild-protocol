@@ -15,7 +15,11 @@ open class SequelBotClient<T: BaseBotListener> (
     private val listener: T
 ): BaseBotClient {
     private val client: OkHttpClient by lazy {
-        OkHttpClient.Builder().build()
+        OkHttpClient.Builder()
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .build()
     }
     private val request: Request by lazy { Request.Builder().get().url(uri).build() }
 

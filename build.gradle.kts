@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "com.hcyacg"
-version = "0.2.2"
+version = "0.2.4"
 
 
 
