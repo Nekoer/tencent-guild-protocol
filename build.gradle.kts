@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "com.hcyacg"
-version = "0.2.4"
+version = "0.2.5"
 
 
 
@@ -29,7 +29,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
 
-    implementation("com.alibaba:fastjson:1.2.78")
     implementation("org.apache.commons:commons-lang3:3.12.0")
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
     implementation("org.jsoup:jsoup:1.14.3")
