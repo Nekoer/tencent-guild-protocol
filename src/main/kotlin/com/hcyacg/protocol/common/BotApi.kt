@@ -240,6 +240,7 @@ object BotApi {
         val url = guildInfo.replace("{{guild_id}}", guildId)
 
         val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Guild::class.java)
     }
 
@@ -251,6 +252,7 @@ object BotApi {
     fun getRolesByGuild(guildId: String): Roles {
         val url = roles.replace("{{guild_id}}", guildId)
         val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Roles::class.java)
     }
 
@@ -265,6 +267,7 @@ object BotApi {
 
         val json = RoleDto(filter, info).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), RoleVo::class.java)
     }
 
@@ -279,7 +282,7 @@ object BotApi {
         val url = changeRole.replace("{{guild_id}}", guildId).replace("{{role_id}}", roleId)
         val json = RoleDto(filter, info).objectToJson()
         val res = OkHttpUtils.patchJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        println(res)
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), RoleVo::class.java)
     }
 
@@ -292,7 +295,7 @@ object BotApi {
         val url = changeRole.replace("{{guild_id}}", guildId).replace("{{role_id}}", roleId)
 
         val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
-        println(res.body?.string())
+        logger.debug(res.body!!.string())
         return res.code == 204
     }
 
@@ -307,6 +310,7 @@ object BotApi {
         val url = editMemberRole.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
             .replace("{{role_id}}", roleId)
         val res = OkHttpUtils.put(url, mutableMapOf(), officeApiHeader())
+        logger.debug(res.code.toString())
         return res.code == 204
     }
 
@@ -322,6 +326,7 @@ object BotApi {
             .replace("{{role_id}}", roleId)
         val json = channel.objectToJson()
         val res = OkHttpUtils.put(url, OkHttpUtils.addJson(json), Headers.headersOf("Authorization", botToken!!))
+        logger.debug(res.code.toString())
         return res.code == 204
     }
 
@@ -335,6 +340,7 @@ object BotApi {
         val url = editMemberRole.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
             .replace("{{role_id}}", roleId)
         val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
+        logger.debug(res.code.toString())
         return res.code == 204
     }
 
@@ -350,6 +356,7 @@ object BotApi {
             .replace("{{role_id}}", roleId)
         val json = channel.objectToJson()
         val res = OkHttpUtils.delete(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.code.toString())
         return res.code == 204
     }
 
@@ -362,6 +369,7 @@ object BotApi {
         val url = memberInfo.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
 
         val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Member::class.java)
     }
 
@@ -372,6 +380,7 @@ object BotApi {
     fun getChannelInfo(channelId: String): Channel {
         val url = channel.replace("{{channel_id}}", channelId)
         val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Channel::class.java)
     }
 
@@ -383,6 +392,7 @@ object BotApi {
         val url = channelList.replace("{{guild_id}}", guildId)
 
         val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), object : TypeToken<List<Channel>>() {}.type)
     }
 
@@ -395,6 +405,7 @@ object BotApi {
         val url = getMessage.replace("{{channel_id}}", channelId).replace("{{message_id}}", messageId)
 
         val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Message::class.java)
     }
 
@@ -406,6 +417,7 @@ object BotApi {
     fun getChannelPermissions(channelId: String, userId: String): ChannelPermissions {
         val url = channelPermissions.replace("{{channel_id}}", channelId).replace("{{user_id}}", userId)
         val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), ChannelPermissions::class.java)
     }
 
@@ -424,6 +436,7 @@ object BotApi {
             map["remove"] = 1.shl(1).toString()
         }
         val res = OkHttpUtils.put(url, map, officeApiHeader())
+        logger.debug(res.code.toString())
         return res.code == 204
     }
 
@@ -442,6 +455,7 @@ object BotApi {
         val url = memberList.replace("{{guild_id}}", guildId)
         url.plus("?after=$userId").plus("&limit=$limit")
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), object : TypeToken<List<Member>>() {}.type)
     }
 
@@ -453,6 +467,7 @@ object BotApi {
     fun deleteMember(guildId: String, userId: String): Boolean {
         val url = memberInfo.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
         val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
+        logger.debug(res.code.toString())
         return res.code == 204
     }
 
@@ -465,6 +480,7 @@ object BotApi {
         val url = channelList.replace("{{guild_id}}", guildId)
         val json = channelDto.objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Channel::class.java)
     }
 
@@ -477,6 +493,7 @@ object BotApi {
         val url = channel.replace("{{channel_id}}", channelId)
         val json = channelDto.objectToJson()
         val res = OkHttpUtils.patchJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Channel::class.java)
     }
 
@@ -487,6 +504,7 @@ object BotApi {
     fun deleteChannel(channelId: String): Boolean {
         val url = channel.replace("{{channel_id}}", channelId)
         val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
+        logger.debug(res.code.toString())
         return res.code == 200
     }
 
@@ -499,6 +517,7 @@ object BotApi {
         val url = announces.replace("{{channel_id}}", channelId)
         val json = "{\"message_id\": \"$messageId\"}"
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Announces::class.java)
     }
 
@@ -510,6 +529,7 @@ object BotApi {
     fun deleteAnnounces(channelId: String, messageId: String): Boolean {
         val url = deleteAnnounces.replace("{{channel_id}}", channelId).replace("{{message_id}}", messageId)
         val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
+        logger.debug(res.code.toString())
         return res.code == 200
     }
 }
