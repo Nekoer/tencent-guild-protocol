@@ -34,6 +34,9 @@ object BotApi {
     private const val changeRole = "$guildInfo/roles/{{role_id}}"
     private const val editMemberRole = "$guildInfo/members/{{user_id}}/roles/{{role_id}}"
 
+    private const val announces = "$proUrl/channels/{{channel_id}}/announces"
+    private const val deleteAnnounces = "$announces/{{message_id}}"
+
 
     private fun officeApiHeader(): MutableMap<String, String> {
         return mutableMapOf(
@@ -47,7 +50,7 @@ object BotApi {
         val json = TextMessage(msg, this.id).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyTextNotId(msg: String): Message {
@@ -55,7 +58,7 @@ object BotApi {
         val json = initiativeTextMessage(msg).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyTextWithImage(msg: String, imageUrl: String): Message {
@@ -64,7 +67,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyTextWithImageNotId(msg: String, imageUrl: String): Message {
@@ -73,7 +76,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyImage(imageUrl: String): Message {
@@ -82,7 +85,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
 
@@ -92,7 +95,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyArk(messageArk: MessageArk): Message {
@@ -100,7 +103,7 @@ object BotApi {
         val json = ArkMessage(messageArk, this.id).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyArkNotId(messageArk: MessageArk): Message {
@@ -109,7 +112,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyEmbed(messageEmbed: MessageEmbed): Message {
@@ -118,7 +121,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyEmbedNotId(messageEmbed: MessageEmbed): Message {
@@ -127,7 +130,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyAudio(audioUrl: String, text: String, status: Int): Message {
@@ -136,7 +139,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
 
@@ -146,7 +149,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun MessageCreateEvent.replyTextNotId(msg: String): Message {
@@ -155,7 +158,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun MessageCreateEvent.replyTextWithImage(msg: String, imageUrl: String): Message {
@@ -164,7 +167,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun MessageCreateEvent.replyTextWithImageNotId(msg: String, imageUrl: String): Message {
@@ -173,7 +176,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun MessageCreateEvent.replyImage(imageUrl: String): Message {
@@ -181,7 +184,7 @@ object BotApi {
         val json = ImageMessage(imageUrl, this.id).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
 
@@ -190,7 +193,7 @@ object BotApi {
         val json = initiativeImageMessage(imageUrl).objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun MessageCreateEvent.replyArk(messageArk: MessageArk): Message {
@@ -199,7 +202,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun MessageCreateEvent.replyArkNotId(messageArk: MessageArk): Message {
@@ -208,7 +211,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun MessageCreateEvent.replyEmbed(messageEmbed: MessageEmbed): Message {
@@ -217,7 +220,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     fun MessageCreateEvent.replyEmbedNotId(messageEmbed: MessageEmbed): Message {
@@ -226,7 +229,7 @@ object BotApi {
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
-        return Gson().fromJson(res.toString(),Message::class.java)
+        return Gson().fromJson(res.toString(), Message::class.java)
     }
 
     /**
@@ -435,7 +438,7 @@ object BotApi {
      * @param userId 上一次回包中最大的用户ID， 如果是第一次请求填0，默认为0
      * @param limit 分页大小，1-1000，默认是1
      */
-    fun getGuildMemberList(guildId: String,userId: String,limit:Int): List<Member>{
+    fun getGuildMemberList(guildId: String, userId: String, limit: Int): List<Member> {
         val url = memberList.replace("{{guild_id}}", guildId)
         url.plus("?after=$userId").plus("&limit=$limit")
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
@@ -447,9 +450,9 @@ object BotApi {
      * @param guildId 频道id
      * @param userId 用户id
      */
-    fun deleteMember(guildId: String, userId: String):Boolean{
+    fun deleteMember(guildId: String, userId: String): Boolean {
         val url = memberInfo.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
-        val res = OkHttpUtils.delete(url, mutableMapOf(),officeApiHeader())
+        val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
         return res.code == 204
     }
 
@@ -458,7 +461,7 @@ object BotApi {
      * @param guildId  频道id
      * @param channelDto 创建子频道需要的参数对象
      */
-    fun createChannel(guildId: String,channelDto: ChannelDto):Channel{
+    fun createChannel(guildId: String, channelDto: ChannelDto): Channel {
         val url = channelList.replace("{{guild_id}}", guildId)
         val json = channelDto.objectToJson()
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
@@ -470,7 +473,7 @@ object BotApi {
      * @param channelId  子频道id
      * @param channelDto 创建子频道需要的参数对象
      */
-    fun changeChannelInfo(channelId: String,channelDto: ChannelDto):Channel{
+    fun changeChannelInfo(channelId: String, channelDto: ChannelDto): Channel {
         val url = channel.replace("{{channel_id}}", channelId)
         val json = channelDto.objectToJson()
         val res = OkHttpUtils.patchJson(url, OkHttpUtils.addJson(json), officeApiHeader())
@@ -481,10 +484,32 @@ object BotApi {
      * 删除子频道
      * @param channelId 子频道id
      */
-    fun deleteChannel(channelId: String):Boolean{
+    fun deleteChannel(channelId: String): Boolean {
         val url = channel.replace("{{channel_id}}", channelId)
-        val res = OkHttpUtils.delete(url, mutableMapOf(),officeApiHeader())
+        val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
         return res.code == 200
     }
 
+    /**
+     * 创建子频道公告
+     * @param channelId 子频道id
+     * @param messageId 消息id
+     */
+    fun createAnnounces(channelId: String, messageId: String): Announces {
+        val url = announces.replace("{{channel_id}}", channelId)
+        val json = "{\"message_id\": \"$messageId\"}"
+        val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        return Gson().fromJson(res.toString(), Announces::class.java)
+    }
+
+    /**
+     * 删除子频道公告
+     * @param channelId 子频道id
+     * @param messageId 消息id
+     */
+    fun deleteAnnounces(channelId: String, messageId: String): Boolean {
+        val url = deleteAnnounces.replace("{{channel_id}}", channelId).replace("{{message_id}}", messageId)
+        val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
+        return res.code == 200
+    }
 }
