@@ -8,16 +8,16 @@ Tencent频道的机器人Kotlin SDK
 <dependency>
   <groupId>com.hcyacg</groupId>
   <artifactId>tencent-guild-protocol</artifactId>
-  <version>0.2.7</version>
+  <version>0.2.8</version>
 </dependency>
 ```
 #### Gradle Groovy DSL
 ```Gradle Groovy DSL
-implementation 'com.hcyacg:tencent-guild-protocol:0.2.7'
+implementation 'com.hcyacg:tencent-guild-protocol:0.2.8'
 ```
 #### Gradle Kotlin DSL
 ```Gradle Kotlin DSL
-implementation("com.hcyacg:tencent-guild-protocol:0.2.7")
+implementation("com.hcyacg:tencent-guild-protocol:0.2.8")
 ```
 ## 如何使用
 1. 首先配置你的botId 和 botToken
@@ -26,9 +26,9 @@ fun main(args: Array<String>) {
     val token = "Bot id.token"
     //放入你的Listener
     //默认是获取公域的信息
-    BotManager(token,Intents()).addListen(listOf())
+    BotManager(token,false).addListen()
     //私域请使用
-    BotManager(token,Intents(true,true,false,true,true,true)).addListen(listOf())
+    BotManager(token,true).addListen()
 }
 
 ```
@@ -72,6 +72,10 @@ BotApi.deleteMemberRolesByGuild(data.guild_id, "","")
 BotApi.deleteChildMemberRolesByGuild(data.guild_id, BotApi.getChannelInfo(data.channel_id),"","")
 //修改指定子频道的权限 目前只支持修改查看权限
 BotApi.changeChannelPermissions(data.channel_id, "",false)
+//创建子频道公告
+BotApi.createAnnounces(data.channel_id,data.id)
+//删除子频道公告
+BotApi.deleteAnnounces(data.channel_id,message_id)
 ```
 #### 私域功能
 ```Kotlin

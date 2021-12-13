@@ -17,6 +17,9 @@ class Constant {
          */
         const val testUrl: String = "https://sandbox.api.sgroup.qq.com"
 
+        /**
+         * 网关返回的数据
+         */
         var accessWithFragmentedWss: AccessWithFragmentedWss? = null
 
         var botToken: String? = null
