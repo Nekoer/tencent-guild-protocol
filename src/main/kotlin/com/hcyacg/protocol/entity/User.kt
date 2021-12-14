@@ -8,15 +8,15 @@ import kotlinx.serialization.Serializable
 @NoArg
 data class User(
     @SerialName("bot")
-    val bot: Boolean,
+    val bot: Boolean?,
     @SerialName("id")
-    val id: String,
+    val id: String?,
     @SerialName("username")
-    val username: String,
+    val username: String?,
     @SerialName("avatar")
-    val avatar: String,
+    val avatar: String?,
     @SerialName("union_openid")
-    val union_openid: String,
+    val union_openid: String?,
     @SerialName("union_user_account")
-    val union_user_account: String,
+    val union_user_account: String?,
 )

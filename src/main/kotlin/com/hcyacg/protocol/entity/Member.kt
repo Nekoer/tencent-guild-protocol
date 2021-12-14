@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 @NoArg
 data class Member(
     @SerialName("user")
-    val user: User,
+    val user: User?,
     @SerialName("nick")
     val nick: String,
     @SerialName("joined_at")

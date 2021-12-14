@@ -1,6 +1,5 @@
 package com.hcyacg.protocol.common
 
-import com.hcyacg.protocol.constant.Constant.Companion.accessWithFragmentedWss
 import com.hcyacg.protocol.constant.Constant.Companion.botToken
 import com.hcyacg.protocol.internal.config.IdentifyConfig
 import com.hcyacg.protocol.internal.config.Intents

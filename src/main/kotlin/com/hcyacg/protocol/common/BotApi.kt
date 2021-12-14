@@ -37,6 +37,9 @@ object BotApi {
     private const val announces = "$proUrl/channels/{{channel_id}}/announces"
     private const val deleteAnnounces = "$announces/{{message_id}}"
 
+    private const val schedules = "$proUrl/channels/{{channel_id}}/schedules"
+    private const val scheduleUrl = "$schedules/{{schedule_id}}"
+
 
     private fun officeApiHeader(): MutableMap<String, String> {
         return mutableMapOf(
@@ -532,4 +535,84 @@ object BotApi {
         logger.debug(res.code.toString())
         return res.code == 200
     }
+
+    /**
+     * 则返回结束时间在 since 之后的日程列表
+     * @param channelId 子频道id
+     * @param since 时间戳
+     */
+    fun getScheduleListByTime(channelId: String, since: Long): List<Schedule> {
+        val url = schedules.replace("{{channel_id}}", channelId)
+        url.plus("?since=$since")
+        val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
+        logger.debug(res.toString())
+        return Gson().fromJson(res.toString(), object : TypeToken<List<Schedule>>() {}.type)
+    }
+
+    /**
+     * 返回当天的日程列表
+     * @param channelId 子频道id
+     */
+    fun getScheduleList(channelId: String): List<Schedule> {
+        val url = schedules.replace("{{channel_id}}", channelId)
+        val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
+        logger.debug(res.toString())
+        return Gson().fromJson(res.toString(), object : TypeToken<List<Schedule>>() {}.type)
+    }
+
+    /**
+     * 获取单个日程信息
+     * @param channelId 子频道id
+     * @param scheduleId 日程id
+     */
+    fun getScheduleById(channelId: String, scheduleId: String): Schedule {
+        val url = scheduleUrl.replace("{{channel_id}}", channelId).replace("{{schedule_id}}", scheduleId)
+        val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
+        logger.debug(res.toString())
+        return Gson().fromJson(res.toString(), Schedule::class.java)
+    }
+
+
+    /**
+     * 创建日程
+     * 要求操作人具有管理频道的权限，如果是机器人，则需要将机器人设置为管理员。
+     * @param channelId 子频道id
+     * @param schedule 日程对象
+     */
+    fun createSchedule(channelId: String, schedule: Schedule): Schedule {
+        val url = schedules.replace("{{channel_id}}", channelId)
+        val json = schedule.objectToJson()
+        val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
+        return Gson().fromJson(res.toString(), Schedule::class.java)
+    }
+
+    /**
+     * 修改日程
+     * 要求操作人具有管理频道的权限，如果是机器人，则需要将机器人设置为管理员。
+     * @param channelId 子频道id
+     * @param scheduleId 日程id
+     * @param schedule 日程对象，不需要带id
+     */
+    fun changeScheduleById(channelId: String, scheduleId: String, schedule: Schedule): Schedule {
+        val url = scheduleUrl.replace("{{channel_id}}", channelId).replace("{{schedule_id}}", scheduleId)
+        val json = schedule.objectToJson()
+        val res = OkHttpUtils.patchJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res.toString())
+        return Gson().fromJson(res.toString(), Schedule::class.java)
+    }
+
+    /**
+     * 删除日程
+     * 要求操作人具有管理频道的权限，如果是机器人，则需要将机器人设置为管理员。
+     * @param channelId 子频道id
+     * @param scheduleId 日程id
+     */
+    fun deleteScheduleById(channelId: String, scheduleId: String):Boolean {
+        val url = scheduleUrl.replace("{{channel_id}}", channelId).replace("{{schedule_id}}", scheduleId)
+        val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
+        logger.debug(res.code.toString())
+        return res.code == 204
+    }
+
 }

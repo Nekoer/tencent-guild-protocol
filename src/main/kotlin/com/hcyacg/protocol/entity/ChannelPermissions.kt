@@ -16,7 +16,7 @@ data class ChannelPermissions(
 )
 
 @Serializable
- class Permissions{
+class Permissions{
      companion object {
         /**
          * 可查看子频道
