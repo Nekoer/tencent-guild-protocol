@@ -11,7 +11,7 @@ class BotManager(token: String,isPrivate:Boolean) {
     /**
      * 默认公域
      */
-    var intent :Intents = Intents(guilds = true, guildMembers = true,directMessage = false,audioAction = true,atMessages = true,messages = false)
+    var intent :Intents = Intents(guilds = true, guildMembers = true,directMessage = false,audioAction = true,atMessages = true,messages = false, forum = false, guildMessageReactions = true)
     init {
         if (null == botToken) {
             botToken = token
@@ -21,7 +21,7 @@ class BotManager(token: String,isPrivate:Boolean) {
          * 判断是否是私域
          */
         if (isPrivate){
-            intent = Intents(guilds = true, guildMembers = true,directMessage = false,audioAction = true,atMessages = true,messages = true)
+            intent = Intents(guilds = true, guildMembers = true,directMessage = false,audioAction = true,atMessages = true,messages = true, forum = false, guildMessageReactions = true)
         }
     }
 

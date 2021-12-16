@@ -43,6 +43,17 @@ abstract class BotEvent {
 
     open suspend fun onResumed(config: IdentifyConfig, sessionId: String) {}
 
+    open suspend fun onMessageReactionAdd(data:MessageReactionEvent){}
+
+    open suspend fun onMessageReactionRemove(data:MessageReactionEvent){}
+
+    open suspend fun onAudioStart(data:AudioActionEvent){}
+
+    open suspend fun onAudioFinish(data:AudioActionEvent){}
+
+    open suspend fun onAudioOnMic(data:AudioActionEvent){}
+
+    open suspend fun onAudioOffMic(data:AudioActionEvent){}
 
     //TODO 官方有许多事件，后续在这里添加事件名称
 

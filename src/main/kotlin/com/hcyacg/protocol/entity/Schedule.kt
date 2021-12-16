@@ -29,7 +29,7 @@ data class Schedule(
     @SerialName("end_timestamp")
     val end_timestamp:String,
     @SerialName("creator")
-    val creator:Member,
+    var creator:Member?,
     @SerialName("jump_channel_id")
     val jump_channel_id:String,
     @SerialName("remind_type")

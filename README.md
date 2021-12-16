@@ -8,16 +8,16 @@ Tencent频道的机器人Kotlin SDK
 <dependency>
   <groupId>com.hcyacg</groupId>
   <artifactId>tencent-guild-protocol</artifactId>
-  <version>0.2.9</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 #### Gradle Groovy DSL
 ```Gradle Groovy DSL
-implementation 'com.hcyacg:tencent-guild-protocol:0.2.9'
+implementation 'com.hcyacg:tencent-guild-protocol:0.3.0'
 ```
 #### Gradle Kotlin DSL
 ```Gradle Kotlin DSL
-implementation("com.hcyacg:tencent-guild-protocol:0.2.9")
+implementation("com.hcyacg:tencent-guild-protocol:0.3.0")
 ```
 ## 如何使用
 1. 首先配置你的botId 和 botToken
@@ -26,9 +26,9 @@ fun main(args: Array<String>) {
     val token = "Bot id.token"
     //放入你的Listener
     //默认是获取公域的信息
-    BotManager(token,false).addListen()
+    BotManager(token,false).addListen(Test())
     //私域请使用
-    BotManager(token,true).addListen()
+    BotManager(token,true).addListen(Test())
 }
 
 ```
@@ -76,6 +76,23 @@ BotApi.changeChannelPermissions(data.channel_id, "",false)
 BotApi.createAnnounces(data.channel_id,data.id)
 //删除子频道公告
 BotApi.deleteAnnounces(data.channel_id,message_id)
+//获得机器人信息
+BotApi.getMe()
+//获取当前用户频道列表
+BotApi.getMeGuildsAfter(data.guild_id,100)
+BotApi.getMeGuildsBefore(data.guild_id,100)
+
+//获取日程列表
+BotApi.getScheduleList(日程子频道id)
+//创建日程
+BotApi.createSchedule(日程子频道id, 日程对象)
+//修改日程
+BotApi.changeScheduleById(日程子频道id,日程id, 日程对象)
+//根据日程id删除日程
+BotApi.deleteScheduleById(日程子频道id,日程id)
+//返回结束时间在时间戳之后的日程列表
+BotApi.getScheduleListByTime(日程子频道id,时间戳)
+
 ```
 #### 私域功能
 ```Kotlin

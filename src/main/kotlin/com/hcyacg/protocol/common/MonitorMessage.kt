@@ -58,4 +58,32 @@ internal class MonitorMessage:BotEvent(){
         Constant.logger.info("机器人离开了 ${data.name}(${data.id})")
     }
 
+    override suspend fun onMessageReactionAdd(data: MessageReactionEvent) {
+        val memberInfo = BotApi.getMemberInfo(data.guild_id, data.user_id)
+        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${memberInfo.user!!.username}(${data.user_id}): 添加了表情表态对象: ${data.emoji} ${getInfo(data.emoji.id)}")
+    }
+
+    override suspend fun onMessageReactionRemove(data: MessageReactionEvent) {
+        val memberInfo = BotApi.getMemberInfo(data.guild_id, data.user_id)
+        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${memberInfo.user!!.username}(${data.user_id}): 删除了表情表态对象: ${data.emoji} ${getInfo(data.emoji.id)}")
+    }
+
+
+    override suspend fun onAudioStart(data: AudioActionEvent) {
+        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${data.text} -${data.audio_url}")
+    }
+
+    override suspend fun onAudioFinish(data: AudioActionEvent) {
+        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - ${data.text} -${data.audio_url}")
+    }
+
+    override suspend fun onAudioOnMic(data: AudioActionEvent) {
+        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - 上麦了")
+
+    }
+
+    override suspend fun onAudioOffMic(data: AudioActionEvent) {
+        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${BotApi.getChannelInfo(data.channel_id).name}(${data.channel_id}) - 下麦了")
+
+    }
 }

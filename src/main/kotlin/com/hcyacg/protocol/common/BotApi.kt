@@ -8,6 +8,7 @@ import com.hcyacg.protocol.constant.Constant.Companion.proUrl
 import com.hcyacg.protocol.entity.*
 import com.hcyacg.protocol.entity.Member
 import com.hcyacg.protocol.entity.Message
+import com.hcyacg.protocol.entity.User
 import com.hcyacg.protocol.event.AtMessageCreateEvent
 import com.hcyacg.protocol.event.MessageCreateEvent
 import com.hcyacg.protocol.event.api.*
@@ -443,6 +444,39 @@ object BotApi {
         return res.code == 204
     }
 
+    /**
+     * 获取当前用户信息
+     */
+    fun getMe(): User {
+        val res = OkHttpUtils.getJson(userMe, officeApiHeader())
+        logger.debug(res.toString())
+        val user = Gson().fromJson(res.toString(), User::class.java)
+        user.bot = true
+        return user
+    }
+
+    /**
+     * 获取当前用户频道列表
+     * guildId	string	读此id之前的数据	guild id, before/after 只能带一个
+     * limit	int	每次拉取多少条数据	最大不超过100，默认100
+     */
+    fun getMeGuildsBefore(guildId: String, limit: Int):List<Guild> {
+        val url = userMeGuild.plus("?before=$guildId").plus("&limit=$limit")
+        val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res.toString())
+        return Gson().fromJson(res.toString(), object : TypeToken<List<Guild>>() {}.type)
+    }
+    /**
+     * 获取当前用户频道列表
+     * guildId	string	读此id之后的数据	guild id, before/after 只能带一个
+     * limit	int	每次拉取多少条数据	最大不超过100，默认100
+     */
+    fun getMeGuildsAfter(guildId: String, limit: Int) :List<Guild> {
+        val url = userMeGuild.plus("?after=$guildId").plus("&limit=$limit")
+        val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res.toString())
+        return Gson().fromJson(res.toString(), object : TypeToken<List<Guild>>() {}.type)
+    }
 
     /**
      * 私域功能
@@ -546,6 +580,9 @@ object BotApi {
         url.plus("?since=$since")
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
         logger.debug(res.toString())
+        if(res.toString().contentEquals("null")){
+            return mutableListOf()
+        }
         return Gson().fromJson(res.toString(), object : TypeToken<List<Schedule>>() {}.type)
     }
 
@@ -557,6 +594,9 @@ object BotApi {
         val url = schedules.replace("{{channel_id}}", channelId)
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
         logger.debug(res.toString())
+        if(res.toString().contentEquals("null")){
+            return mutableListOf()
+        }
         return Gson().fromJson(res.toString(), object : TypeToken<List<Schedule>>() {}.type)
     }
 
@@ -576,12 +616,15 @@ object BotApi {
     /**
      * 创建日程
      * 要求操作人具有管理频道的权限，如果是机器人，则需要将机器人设置为管理员。
+     * 时间戳的值不允许创建开始时间早于现在的;
+     * 结束时间戳不能超过创建开始的时间戳7天
      * @param channelId 子频道id
      * @param schedule 日程对象
      */
     fun createSchedule(channelId: String, schedule: Schedule): Schedule {
         val url = schedules.replace("{{channel_id}}", channelId)
-        val json = schedule.objectToJson()
+        schedule.creator = null
+        val json = "{\"schedule\": ${schedule.objectToJson()}}"
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Schedule::class.java)
@@ -596,7 +639,8 @@ object BotApi {
      */
     fun changeScheduleById(channelId: String, scheduleId: String, schedule: Schedule): Schedule {
         val url = scheduleUrl.replace("{{channel_id}}", channelId).replace("{{schedule_id}}", scheduleId)
-        val json = schedule.objectToJson()
+        schedule.creator = null
+        val json = "{\"schedule\": ${schedule.objectToJson()}}"
         val res = OkHttpUtils.patchJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.toString())
         return Gson().fromJson(res.toString(), Schedule::class.java)
@@ -608,7 +652,7 @@ object BotApi {
      * @param channelId 子频道id
      * @param scheduleId 日程id
      */
-    fun deleteScheduleById(channelId: String, scheduleId: String):Boolean {
+    fun deleteScheduleById(channelId: String, scheduleId: String): Boolean {
         val url = scheduleUrl.replace("{{channel_id}}", channelId).replace("{{schedule_id}}", scheduleId)
         val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
         logger.debug(res.code.toString())

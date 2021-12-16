@@ -87,6 +87,7 @@ class BotListener(
                                             }
                                         }
                                     }
+
                                 }
                                 DispatchEnums.GUILD_MEMBER_REMOVE -> {
                                     text.jsonToObjectOrNull<Dispatch<GuildMemberEvent>>()?.also { guildMemberEvent ->
@@ -139,6 +140,60 @@ class BotListener(
                                 }
                                 DispatchEnums.RESUMED -> {
                                     officialEvents.forEach { runBlocking { it.onResumed(config, sessionId) } }
+                                }
+                                DispatchEnums.MESSAGE_REACTION_ADD ->{
+                                    text.jsonToObjectOrNull<Dispatch<MessageReactionEvent>>()?.also { messageReactionEvent ->
+                                        officialEvents.forEach { runBlocking { it.onMessageReactionAdd(messageReactionEvent.d) } }
+                                    }
+                                }
+                                DispatchEnums.MESSAGE_REACTION_REMOVE ->{
+                                    text.jsonToObjectOrNull<Dispatch<MessageReactionEvent>>()?.also { messageReactionEvent ->
+                                        officialEvents.forEach { runBlocking { it.onMessageReactionRemove(messageReactionEvent.d) } }
+                                    }
+                                }
+                                DispatchEnums.DIRECT_MESSAGE_CREATE ->{
+                                    logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
+                                }
+                                DispatchEnums.THREAD_CREATE ->{
+                                    logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
+                                }
+                                DispatchEnums.THREAD_UPDATE ->{
+                                    logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
+                                }
+                                DispatchEnums.THREAD_DELETE ->{
+                                    logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
+                                }
+                                DispatchEnums.POST_CREATE ->{
+                                    logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
+                                }
+                                DispatchEnums.POST_DELETE ->{
+                                    logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
+                                }
+                                DispatchEnums.REPLY_CREATE ->{
+                                    logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
+                                }
+                                DispatchEnums.REPLY_DELETE ->{
+                                    logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
+                                }
+                                DispatchEnums.AUDIO_START ->{
+                                    text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
+                                        officialEvents.forEach { runBlocking { it.onAudioStart(audioActionEvent.d) } }
+                                    }
+                                }
+                                DispatchEnums.AUDIO_FINISH ->{
+                                    text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
+                                        officialEvents.forEach { runBlocking { it.onAudioFinish(audioActionEvent.d) } }
+                                    }
+                                }
+                                DispatchEnums.AUDIO_ON_MIC ->{
+                                    text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
+                                        officialEvents.forEach { runBlocking { it.onAudioOnMic(audioActionEvent.d) } }
+                                    }
+                                }
+                                DispatchEnums.AUDIO_OFF_MIC ->{
+                                    text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
+                                        officialEvents.forEach { runBlocking { it.onAudioOffMic(audioActionEvent.d) } }
+                                    }
                                 }
                                 else -> {
                                     logger.warn("$logHeader 未知的事件! 信息:$text")
