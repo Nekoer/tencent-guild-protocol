@@ -1,5 +1,6 @@
 package com.hcyacg.protocol.event
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
 import kotlinx.serialization.Serializable
 
@@ -9,18 +10,18 @@ import kotlinx.serialization.SerialName
 @Serializable
 @NoArg
 data class ChannelEvent(
-    @SerialName("guild_id")
-    val guild_id: String,
-    @SerialName("id")
+    @SerializedName("guild_id")
+    val guildId: String,
+    @SerializedName("id")
     val id: String,
-    @SerialName("name")
+    @SerializedName("name")
     val name: String,
-    @SerialName("op_user_id")
-    val op_user_id: String,
-    @SerialName("owner_id")
-    val owner_id: String,
-    @SerialName("sub_type")
-    val sub_type: Int,
-    @SerialName("type")
+    @SerializedName("op_user_id")
+    val opUserId: String,
+    @SerializedName("owner_id")
+    val ownerId: String,
+    @SerializedName("sub_type")
+    val subType: Int,
+    @SerializedName("type")
     val type: Int
 )

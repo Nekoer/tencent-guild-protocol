@@ -8,15 +8,15 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MessageReactionEvent(
     @SerializedName("channel_id")
-    val channel_id: String,
+    val channelId: String,
     @SerializedName("emoji")
     val emoji: Emoji,
     @SerializedName("guild_id")
-    val guild_id: String,
+    val guildId: String,
     @SerializedName("target")
     val target: Target,
     @SerializedName("user_id")
-    val user_id: String
+    val userId: String
 )
 
 @NoArg

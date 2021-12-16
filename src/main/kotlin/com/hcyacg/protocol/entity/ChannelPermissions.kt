@@ -1,17 +1,17 @@
 package com.hcyacg.protocol.entity
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 @NoArg
 data class ChannelPermissions(
-    @SerialName("channel_id")
-    val channel_id: String,
-    @SerialName("user_id")
-    val user_id: String,
-    @SerialName("permissions")
+    @SerializedName("channel_id")
+    val channelId: String,
+    @SerializedName("user_id")
+    val userId: String,
+    @SerializedName("permissions")
     val permissions: String
 )
 

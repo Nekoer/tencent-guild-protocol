@@ -1,22 +1,22 @@
 package com.hcyacg.protocol.entity
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 @NoArg
 data class User(
-    @SerialName("bot")
+    @SerializedName("bot")
     var bot: Boolean?,
-    @SerialName("id")
+    @SerializedName("id")
     val id: String?,
-    @SerialName("username")
+    @SerializedName("username")
     val username: String?,
-    @SerialName("avatar")
+    @SerializedName("avatar")
     val avatar: String?,
-    @SerialName("union_openid")
-    val union_openid: String?,
-    @SerialName("union_user_account")
-    val union_user_account: String?,
+    @SerializedName("union_openid")
+    val unionOpenid: String?,
+    @SerializedName("union_user_account")
+    val unionUserAccount: String?,
 )

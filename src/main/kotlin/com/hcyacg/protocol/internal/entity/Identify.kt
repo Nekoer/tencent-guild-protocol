@@ -1,14 +1,13 @@
 package com.hcyacg.protocol.internal.entity
 
 import com.google.gson.annotations.SerializedName
-import com.hcyacg.protocol.internal.enums.OPCodeEnums
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Identify(
     @SerializedName("d")
     var d: D,
-) : Operation(OPCodeEnums.IDENTIFY) {
+) : Operation(2) {
     constructor(token: String) : this(D(token = token))
 }
 

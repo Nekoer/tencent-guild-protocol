@@ -1,21 +1,20 @@
 package com.hcyacg.protocol.internal.entity
 
-import com.hcyacg.protocol.internal.enums.OPCodeEnums
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerialName
 
 
 @Serializable
 data class Resume(
     val d: ResumeData
-) : Operation(OPCodeEnums.RESUME)
+) : Operation(6)
 
 @Serializable
 data class ResumeData(
-    @SerialName("seq")
+    @SerializedName("seq")
     val seq: Long,
-    @SerialName("session_id")
+    @SerializedName("session_id")
     val sessionId: String,
-    @SerialName("token")
+    @SerializedName("token")
     val token: String
 )

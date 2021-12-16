@@ -1,7 +1,7 @@
 package com.hcyacg.protocol.internal.enums
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
@@ -19,34 +19,35 @@ CODE	名称	            客户端操作	  描述
 9	    Invalid Session	Receive	      当identify或resume的时候，如果参数有错，服务端会返回该消息
 11	    Heartbeat ACK	Receive	      当发送心跳成功之后，就会收到该消息
  */
+
 @Serializable
 enum class OPCodeEnums(
     val code: Int,
     val description: String,
 ) {
 
-    @SerialName("Dispatch")
+    @SerializedName("Dispatch")
     DISPATCH(0, "服务端进行消息推送"),
 
-    @SerialName("Heartbeat")
+    @SerializedName("Heartbeat")
     HEARTBEAT(1, "客户端或服务端发送心跳"),
 
-    @SerialName("Identify")
+    @SerializedName("Identify")
     IDENTIFY(2, "客户端发送鉴权"),
 
-    @SerialName("Resume")
+    @SerializedName("Resume")
     RESUME(6, "客户端回复会话"),
 
-    @SerialName("Reconnect")
+    @SerializedName("Reconnect")
     RECONNECT(7, "服务端通知客户端重新连接"),
 
-    @SerialName("Invalid_Session")
+    @SerializedName("Invalid_Session")
     INVALID_SESSION(9, "当identify或resume的时候，如果参数有错，服务端会返回该消息"),
 
-    @SerialName("Hello")
+    @SerializedName("Hello")
     HELLO(10, "心跳参数"),
 
-    @SerialName("Heartbeat_ACK")
+    @SerializedName("Heartbeat_ACK")
     HEARTBEAT_ACK(11, "当发送心跳成功之后，就会收到该消息"),
     UNKNOWN(-1, "未知")
     ;

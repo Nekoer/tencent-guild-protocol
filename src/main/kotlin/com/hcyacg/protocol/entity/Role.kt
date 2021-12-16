@@ -1,22 +1,22 @@
 package com.hcyacg.protocol.entity
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 @NoArg
 data class Role(
-    @SerialName("id")
+    @SerializedName("id")
     val id: String,
-    @SerialName("name")
+    @SerializedName("name")
     val name: String,
-    @SerialName("color")
+    @SerializedName("color")
     val color: Long,
-    @SerialName("hoist")
+    @SerializedName("hoist")
     val hoist: Long,
-    @SerialName("number")
+    @SerializedName("number")
     val number: Long,
-    @SerialName("number_limit")
-    val number_limit: Int,
+    @SerializedName("number_limit")
+    val numberLimit: Int,
 )

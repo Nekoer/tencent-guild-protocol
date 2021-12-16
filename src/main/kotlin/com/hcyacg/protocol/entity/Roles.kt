@@ -1,19 +1,19 @@
 package com.hcyacg.protocol.entity
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 @NoArg
 data class Roles(
-    @SerialName("guild_id")
-    val guild_id: String,
-    @SerialName("roles")
+    @SerializedName("guild_id")
+    val guildId: String,
+    @SerializedName("roles")
     val roles: List<Role>,
-    @SerialName("number_limit")
-    val number_limit: Int,
+    @SerializedName("number_limit")
+    val numberLimit: Int,
 )
 
 /**
@@ -24,11 +24,11 @@ data class Roles(
 @Serializable
 @NoArg
 data class Filter(
-    @SerialName("name")
+    @SerializedName("name")
     val name: Long,
-    @SerialName("color")
+    @SerializedName("color")
     val color: Long,
-    @SerialName("hoist")
+    @SerializedName("hoist")
     val hoist: Long,
 )
 
@@ -40,11 +40,11 @@ data class Filter(
 @Serializable
 @NoArg
 data class Info(
-    @SerialName("name")
+    @SerializedName("name")
     val name: String,
-    @SerialName("color")
+    @SerializedName("color")
     val color: Long,
-    @SerialName("hoist")
+    @SerializedName("hoist")
     val hoist: Long,
 )
 
@@ -52,9 +52,9 @@ data class Info(
 @Serializable
 @NoArg
 data class RoleVo(
-    @SerialName("role_id")
-    val role_id: Long,
-    @SerialName("role")
+    @SerializedName("role_id")
+    val roleId: Long,
+    @SerializedName("role")
     val role: Role,
 )
 
@@ -65,9 +65,9 @@ data class RoleVo(
 @Serializable
 @NoArg
 data class RoleDto(
-    @SerialName("filter")
+    @SerializedName("filter")
     val filter: Filter,
-    @SerialName("info")
+    @SerializedName("info")
     val info: Info,
 )
 

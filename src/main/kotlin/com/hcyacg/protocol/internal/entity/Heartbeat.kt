@@ -1,11 +1,11 @@
 package com.hcyacg.protocol.internal.entity
 
-import com.hcyacg.protocol.internal.enums.OPCodeEnums
-import kotlinx.serialization.SerialName
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
+
 
 @Serializable
 data class Heartbeat(
-    @SerialName("d")
+    @SerializedName("d")
     val count: Long
-) : Operation(OPCodeEnums.HEARTBEAT)
+) : Operation(1)

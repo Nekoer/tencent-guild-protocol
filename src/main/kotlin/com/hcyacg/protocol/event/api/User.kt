@@ -1,14 +1,15 @@
 package com.hcyacg.protocol.event.api
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
-    @SerialName("bot")
+    @SerializedName("bot")
     val bot: Boolean,
-    @SerialName("id")
+    @SerializedName("id")
     val id: String,
-    @SerialName("username")
+    @SerializedName("username")
     val username: String
 )

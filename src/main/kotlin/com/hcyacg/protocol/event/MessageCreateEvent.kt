@@ -14,11 +14,11 @@ data class MessageCreateEvent(
     @SerializedName("author")
     var author: Author,
     @SerializedName("channel_id")
-    var channel_id: String = "",
+    var channelId: String = "",
     @SerializedName("content")
     var content: String = "",
     @SerializedName("guild_id")
-    var guild_id: String = "",
+    var guildId: String = "",
     @SerializedName("id")
     var id: String = "",
     @SerializedName("member")

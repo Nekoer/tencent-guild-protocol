@@ -1,6 +1,6 @@
 package com.hcyacg.protocol.utils
 
-import com.hcyacg.protocol.utils.JsonUtils.toJsonElement
+import com.google.gson.Gson
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import okhttp3.*
@@ -151,9 +151,9 @@ object OkHttpUtils {
     }
 
     @Throws(IOException::class)
-    fun getJson(response: Response): JsonElement {
+    fun getJson(response: Response): String {
         val str = getStr(response)
-        return str.toJsonElement()
+        return str
     }
 
     @Throws(IOException::class)
@@ -244,18 +244,18 @@ object OkHttpUtils {
     }
 
     @Throws(IOException::class)
-    fun getJson(url: String, headers: Headers): JsonElement {
+    fun getJson(url: String, headers: Headers): String {
         val response = OkHttpUtils[url, headers]
         return getJson(response)
     }
 
     @Throws(IOException::class)
-    fun getJson(url: String, map: Map<String, String>): JsonElement {
+    fun getJson(url: String, map: Map<String, String>): String {
         return getJson(url, addHeaders(map))
     }
 
     @Throws(IOException::class)
-    fun getJson(url: String): JsonElement {
+    fun getJson(url: String): String {
         val response = OkHttpUtils[url, emptyHeaders()]
         return getJson(response)
     }
@@ -279,19 +279,19 @@ object OkHttpUtils {
     }
 
     @Throws(IOException::class)
-    fun postJson(url: String, requestBody: RequestBody, headers: Headers): JsonElement {
+    fun postJson(url: String, requestBody: RequestBody, headers: Headers): String {
         val response = post(url, requestBody, headers)
         return getJson(response)
     }
 
     @Throws(IOException::class)
-    fun postJson(url: String, requestBody: RequestBody, headers: Map<String, String>): JsonElement {
+    fun postJson(url: String, requestBody: RequestBody, headers: Map<String, String>): String {
         val response = post(url, requestBody, headers)
         return getJson(response)
     }
 
     @Throws(IOException::class)
-    fun postJson(url: String, requestBody: RequestBody): JsonElement {
+    fun postJson(url: String, requestBody: RequestBody): String {
         val response = post(url, requestBody, emptyHeaders())
         return getJson(response)
     }
@@ -333,71 +333,55 @@ object OkHttpUtils {
     }
 
     @Throws(IOException::class)
-    fun postJson(url: String, map: Map<String, String>, headers: Headers): JsonElement {
+    fun postJson(url: String, map: Map<String, String>, headers: Headers): String {
         val str = postStr(url, map, headers)
-        return str.toJsonElement()
+        return Gson().toJson(str)
     }
 
     @Throws(IOException::class)
-    fun postJson(url: String, map: Map<String, String>, headers: Map<String, String>): JsonElement {
+    fun postJson(url: String, map: Map<String, String>, headers: Map<String, String>): String {
         val str = postStr(url, map, headers)
-        return str.toJsonElement()
+        return Gson().toJson(str)
     }
 
     @Throws(IOException::class)
-    fun postJson(url: String, map: Map<String, String>): JsonElement {
+    fun postJson(url: String, map: Map<String, String>): String {
         val str = postStr(url, map, emptyHeaders())
-        return str.toJsonElement()
+        return Gson().toJson(str)
     }
 
     @Throws(IOException::class)
-    fun patchJson(url: String, map: Map<String, String>): JsonElement {
+    fun patchJson(url: String, map: Map<String, String>): String {
         val str = getStr(patch(url, map, emptyHeaders()))
-        return str.toJsonElement()
+        return Gson().toJson(str)
     }
 
     @Throws(IOException::class)
-    fun patchJson(url: String, requestBody: RequestBody, headers: Map<String, String>): JsonElement {
+    fun patchJson(url: String, requestBody: RequestBody, headers: Map<String, String>): String {
         val str = getStr(patch(url, requestBody, headers))
-        return str.toJsonElement()
+        return Gson().toJson(str)
     }
 
 
     @Throws(IOException::class)
-    fun deleteJson(url: String, map: Map<String, String>, headers: Headers): JsonElement {
+    fun deleteJson(url: String, map: Map<String, String>, headers: Headers): String {
         val str = deleteStr(url, map, headers)
-        return str.toJsonElement()
+        return Gson().toJson(str)
     }
 
     @Throws(IOException::class)
-    fun deleteJson(url: String, map: Map<String, String>, headers: Map<String, String>): JsonElement {
+    fun deleteJson(url: String, map: Map<String, String>, headers: Map<String, String>): String {
         val str = deleteStr(url, map, headers)
-        return str.toJsonElement()
+        return Gson().toJson(str)
     }
 
     @Throws(IOException::class)
-    fun deleteJson(url: String, map: Map<String, String>): JsonElement {
+    fun deleteJson(url: String, map: Map<String, String>): String {
         val str = deleteStr(url, map, emptyHeaders())
-        return str.toJsonElement()
+        return Gson().toJson(str)
     }
 
-    @Throws(IOException::class)
-    fun getJsonp(response: Response): JsonElement {
-        val str = getStr(response)
-        val matcher = Pattern.compile("\\{[\\s\\S]*}").matcher(str)
-        return if (matcher.find()) matcher.group().toJsonElement() else JsonObject(emptyMap())
-    }
 
-    @Throws(IOException::class)
-    fun getJsonp(url: String, headers: Headers): JsonElement {
-        val response = OkHttpUtils[url, headers]
-        return getJsonp(response)
-    }
-
-    @Throws(IOException::class)
-    fun getJsonp(url: String): JsonElement {
-        return getJsonp(url, emptyHeaders())
-    }
 
     fun addJson(jsonStr: String): RequestBody {
         return jsonStr.toRequestBody(MEDIA_JSON)

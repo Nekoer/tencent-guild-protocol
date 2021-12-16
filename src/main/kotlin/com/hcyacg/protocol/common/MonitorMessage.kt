@@ -14,34 +14,34 @@ internal class MonitorMessage : BotEvent() {
     }
 
     override suspend fun onGuildMemberAdd(data: GuildMemberEvent) {
-        Constant.logger.info("${data.user.username}(${data.user.id}) 加入了 ${BotApi.getGuildById(data.guild_id).name}(${data.guild_id})")
+        Constant.logger.info("${data.user.username}(${data.user.id}) 加入了 ${BotApi.getGuildById(data.guildId).name}(${data.guildId})")
     }
 
     override suspend fun onGuildMemberUpdate(data: GuildMemberEvent) {}
 
     override suspend fun onGuildMemberRemove(data: GuildMemberEvent) {
-        Constant.logger.info("${data.user.username}(${data.user.id}) 退出了 ${BotApi.getGuildById(data.guild_id).name}(${data.guild_id})")
+        Constant.logger.info("${data.user.username}(${data.user.id}) 退出了 ${BotApi.getGuildById(data.guildId).name}(${data.guildId})")
     }
 
     override suspend fun onAtMessageCreate(data: AtMessageCreateEvent) {
         Constant.logger.info(
-            "${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${
+            "${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${
                 BotApi.getChannelInfo(
-                    data.channel_id
+                    data.channelId
                 ).name
-            }(${data.channel_id}) - ${data.author.username}(${data.author.id}): ${data.content}"
+            }(${data.channelId}) - ${data.author.username}(${data.author.id}): ${data.content}"
         )
     }
 
     override suspend fun onMessageCreate(data: MessageCreateEvent) {
         if (data.content.indexOf("<@!${bot!!.id}>") < 0) {
             Constant.logger.info(
-                "${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${
+                "${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${
                     BotApi.getChannelInfo(
-                        data.channel_id
+                        data.channelId
                     ).name
-                }(${data.channel_id}) - ${data.author.username}(${data.author.id}):${
-                    if (data.attachments.isNotEmpty()) Gson().toJson(
+                }(${data.channelId}) - ${data.author.username}(${data.author.id}):${
+                    if (null != data.attachments && data.attachments.isNotEmpty()) Gson().toJson(
                         data.attachments
                     ) else ""
                 } ${data.content}"
@@ -50,15 +50,15 @@ internal class MonitorMessage : BotEvent() {
     }
 
     override suspend fun onChannelCreate(data: ChannelEvent) {
-        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${data.name}(${data.id}) 子频道被创建")
+        Constant.logger.info("${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${data.name}(${data.id}) 子频道被创建")
     }
 
     override suspend fun onChannelUpdate(data: ChannelEvent) {
-        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${data.name}(${data.id}) 子频道信息已被修改")
+        Constant.logger.info("${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${data.name}(${data.id}) 子频道信息已被修改")
     }
 
     override suspend fun onChannelDelete(data: ChannelEvent) {
-        Constant.logger.info("${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${data.name}(${data.id}) 子频道被删除")
+        Constant.logger.info("${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${data.name}(${data.id}) 子频道被删除")
     }
 
     override suspend fun onGuildCreate(data: GuildEvent) {
@@ -75,13 +75,13 @@ internal class MonitorMessage : BotEvent() {
     }
 
     override suspend fun onMessageReactionAdd(data: MessageReactionEvent) {
-        val memberInfo = BotApi.getMemberInfo(data.guild_id, data.user_id)
+        val memberInfo = BotApi.getMemberInfo(data.guildId, data.userId)
         Constant.logger.info(
-            "${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${
+            "${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${
                 BotApi.getChannelInfo(
-                    data.channel_id
+                    data.channelId
                 ).name
-            }(${data.channel_id}) - ${memberInfo.user!!.username}(${data.user_id}): 添加了表情表态对象: ${data.emoji} ${
+            }(${data.channelId}) - ${memberInfo.user!!.username}(${data.userId}): 添加了表情表态对象: ${data.emoji} ${
                 getInfo(
                     data.emoji.id
                 )
@@ -90,13 +90,13 @@ internal class MonitorMessage : BotEvent() {
     }
 
     override suspend fun onMessageReactionRemove(data: MessageReactionEvent) {
-        val memberInfo = BotApi.getMemberInfo(data.guild_id, data.user_id)
+        val memberInfo = BotApi.getMemberInfo(data.guildId, data.userId)
         Constant.logger.info(
-            "${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${
+            "${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${
                 BotApi.getChannelInfo(
-                    data.channel_id
+                    data.channelId
                 ).name
-            }(${data.channel_id}) - ${memberInfo.user!!.username}(${data.user_id}): 删除了表情表态对象: ${data.emoji} ${
+            }(${data.channelId}) - ${memberInfo.user!!.username}(${data.userId}): 删除了表情表态对象: ${data.emoji} ${
                 getInfo(
                     data.emoji.id
                 )
@@ -107,42 +107,42 @@ internal class MonitorMessage : BotEvent() {
 
     override suspend fun onAudioStart(data: AudioActionEvent) {
         Constant.logger.info(
-            "${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${
+            "${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${
                 BotApi.getChannelInfo(
-                    data.channel_id
+                    data.channelId
                 ).name
-            }(${data.channel_id}) - ${data.text} -${data.audio_url}"
+            }(${data.channelId}) - ${data.text} -${data.audioUrl}"
         )
     }
 
     override suspend fun onAudioFinish(data: AudioActionEvent) {
         Constant.logger.info(
-            "${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${
+            "${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${
                 BotApi.getChannelInfo(
-                    data.channel_id
+                    data.channelId
                 ).name
-            }(${data.channel_id}) - ${data.text} -${data.audio_url}"
+            }(${data.channelId}) - ${data.text} -${data.audioUrl}"
         )
     }
 
     override suspend fun onAudioOnMic(data: AudioActionEvent) {
         Constant.logger.info(
-            "${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${
+            "${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${
                 BotApi.getChannelInfo(
-                    data.channel_id
+                    data.channelId
                 ).name
-            }(${data.channel_id}) - 上麦了"
+            }(${data.channelId}) - 上麦了"
         )
 
     }
 
     override suspend fun onAudioOffMic(data: AudioActionEvent) {
         Constant.logger.info(
-            "${BotApi.getGuildById(data.guild_id).name}(${data.guild_id}) - ${
+            "${BotApi.getGuildById(data.guildId).name}(${data.guildId}) - ${
                 BotApi.getChannelInfo(
-                    data.channel_id
+                    data.channelId
                 ).name
-            }(${data.channel_id}) - 下麦了"
+            }(${data.channelId}) - 下麦了"
         )
 
     }

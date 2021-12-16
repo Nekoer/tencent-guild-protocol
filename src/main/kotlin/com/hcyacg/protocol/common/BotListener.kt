@@ -1,5 +1,8 @@
 package com.hcyacg.protocol.common
 
+
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.BaseBotListener
@@ -7,13 +10,12 @@ import com.hcyacg.protocol.internal.config.IdentifyConfig
 import com.hcyacg.protocol.internal.entity.*
 import com.hcyacg.protocol.internal.enums.DispatchEnums
 import com.hcyacg.protocol.internal.enums.OPCodeEnums.*
-import com.hcyacg.protocol.utils.JsonUtils.jsonToObjectOrNull
-import com.hcyacg.protocol.utils.JsonUtils.objectToJson
 import com.hcyacg.protocol.utils.ScheduleUtils
 import kotlinx.coroutines.runBlocking
 import okhttp3.Response
 import okhttp3.WebSocket
 import com.hcyacg.protocol.event.ReadyEvent
+import com.hcyacg.protocol.internal.enums.OPCodeEnums
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicLong
@@ -24,7 +26,7 @@ class BotListener(
     private val heartbeatDelay: Long = 30000,
     private val reconnectTimeout: Long = 60000,
 ) : BaseBotListener() {
-    private val identifyOpDto = Identify(config.toIdentifyOperationData()).objectToJson()
+    private val identifyOpDto = Gson().toJson(Identify(config.toIdentifyOperationData()))
     var sessionId: String = ""
 
     private val logHeader = "${config.index + 1} of ${config.shards}"
@@ -39,13 +41,15 @@ class BotListener(
         logger.info("$logHeader 正在连接中 ")
     }
 
+    inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object : TypeToken<T>() {}.type)
+
+
     override fun onMessage(webSocket: WebSocket, text: String) {
         runCatching {
-            logger.trace("$logHeader 收到了信息 $text")
+//            logger.trace("$logHeader 收到了信息 $text")
+            Gson().fromJson(text, Operation::class.java)?.also { opType ->
 
-            text.jsonToObjectOrNull<Operation>()?.also { opType ->
-
-                when (opType.op) {
+                when (OPCodeEnums.getOPCodeByCode(opType.op)) {
                     HEARTBEAT_ACK -> {
                         lastReceivedHeartBeat.getAndSet(System.currentTimeMillis())
                     }
@@ -56,41 +60,45 @@ class BotListener(
                     }
                     //收到事件
                     DISPATCH -> {
-                        text.jsonToObjectOrNull<DispatchType>()?.also { dispatchDto ->
+                        Gson().fromJson(text, DispatchType::class.java)?.also { dispatchDto ->
                             successConnect(dispatchDto)
 //                            logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                             when (dispatchDto.type) {
+
                                 DispatchEnums.READY -> {
-                                    text.jsonToObjectOrNull<Dispatch<ReadyEvent>>()?.also { readyEvent ->
-                                        sessionId = readyEvent.d.session_id
+
+                                    Gson().fromJson<Dispatch<ReadyEvent>>(text)?.also { readyEvent ->
+                                        sessionId = readyEvent.d.sessionId
                                         officialEvents.forEach {
                                             runBlocking {
                                                 it.onReady(readyEvent.d)
                                             }
                                         }
+
                                     }
+
                                 }
                                 DispatchEnums.GUILD_MEMBER_ADD -> {
-                                    text.jsonToObjectOrNull<Dispatch<GuildMemberEvent>>()?.also { guildMemberEvent ->
+                                    Gson().fromJson<Dispatch<GuildMemberEvent>>(text)?.also { guildMemberEvent ->
                                         officialEvents.forEach {
                                             runBlocking {
                                                 it.onGuildMemberAdd(guildMemberEvent.d)
                                             }
                                         }
+
                                     }
                                 }
                                 DispatchEnums.GUILD_MEMBER_UPDATE -> {
-                                    text.jsonToObjectOrNull<Dispatch<GuildMemberEvent>>()?.also { guildMemberEvent ->
+                                    Gson().fromJson<Dispatch<GuildMemberEvent>>(text)?.also { guildMemberEvent ->
                                         officialEvents.forEach {
                                             runBlocking {
                                                 it.onGuildMemberUpdate(guildMemberEvent.d)
                                             }
                                         }
                                     }
-
                                 }
                                 DispatchEnums.GUILD_MEMBER_REMOVE -> {
-                                    text.jsonToObjectOrNull<Dispatch<GuildMemberEvent>>()?.also { guildMemberEvent ->
+                                    Gson().fromJson<Dispatch<GuildMemberEvent>>(text)?.also { guildMemberEvent ->
                                         officialEvents.forEach {
                                             runBlocking {
                                                 it.onGuildMemberRemove(guildMemberEvent.d)
@@ -99,70 +107,102 @@ class BotListener(
                                     }
                                 }
                                 DispatchEnums.AT_MESSAGE_CREATE -> {
-                                    text.jsonToObjectOrNull<Dispatch<AtMessageCreateEvent>>()?.also { guildAtMessage ->
-                                        officialEvents.forEach { runBlocking { it.onAtMessageCreate(guildAtMessage.d) } }
+                                    Gson().fromJson<Dispatch<AtMessageCreateEvent>>(text)?.also { guildAtMessage ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onAtMessageCreate(guildAtMessage.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.MESSAGE_CREATE -> {
-                                    text.jsonToObjectOrNull<Dispatch<MessageCreateEvent>>()?.also { guildAtMessage ->
-                                        officialEvents.forEach { runBlocking { it.onMessageCreate(guildAtMessage.d) } }
+                                    Gson().fromJson<Dispatch<MessageCreateEvent>>(text)?.also { guildAtMessage ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onMessageCreate(guildAtMessage.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.CHANNEL_CREATE -> {
-                                    text.jsonToObjectOrNull<Dispatch<ChannelEvent>>()?.also { channelEvent ->
-                                        officialEvents.forEach { runBlocking { it.onChannelCreate(channelEvent.d) } }
+                                    Gson().fromJson<Dispatch<ChannelEvent>>(text)?.also { channelEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onChannelCreate(channelEvent.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.CHANNEL_UPDATE -> {
-                                    text.jsonToObjectOrNull<Dispatch<ChannelEvent>>()?.also { channelEvent ->
-                                        officialEvents.forEach { runBlocking { it.onChannelUpdate(channelEvent.d) } }
+                                    Gson().fromJson<Dispatch<ChannelEvent>>(text)?.also { channelEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onChannelUpdate(channelEvent.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.CHANNEL_DELETE -> {
-                                    text.jsonToObjectOrNull<Dispatch<ChannelEvent>>()?.also { channelEvent ->
-                                        officialEvents.forEach { runBlocking { it.onChannelDelete(channelEvent.d) } }
+                                    Gson().fromJson<Dispatch<ChannelEvent>>(text)?.also { channelEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onChannelDelete(channelEvent.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.GUILD_CREATE -> {
-                                    text.jsonToObjectOrNull<Dispatch<GuildEvent>>()?.also { guildEvent ->
-                                        officialEvents.forEach { runBlocking { it.onGuildCreate(guildEvent.d) } }
+                                    Gson().fromJson<Dispatch<GuildEvent>>(text)?.also { guildEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onGuildCreate(guildEvent.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.GUILD_UPDATE -> {
-                                    text.jsonToObjectOrNull<Dispatch<GuildEvent>>()?.also { guildEvent ->
-                                        officialEvents.forEach { runBlocking { it.onGuildUpdate(guildEvent.d) } }
+                                    Gson().fromJson<Dispatch<GuildEvent>>(text)?.also { guildEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onGuildUpdate(guildEvent.d)
+                                            }
+                                        }
+
                                     }
                                 }
                                 DispatchEnums.GUILD_DELETE -> {
-                                    text.jsonToObjectOrNull<Dispatch<GuildEvent>>()?.also { guildEvent ->
-                                        officialEvents.forEach { runBlocking { it.onGuildDelete(guildEvent.d) } }
+                                    Gson().fromJson<Dispatch<GuildEvent>>(text)?.also { guildEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onGuildDelete(guildEvent.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.RESUMED -> {
                                     officialEvents.forEach { runBlocking { it.onResumed(config, sessionId) } }
                                 }
                                 DispatchEnums.MESSAGE_REACTION_ADD -> {
-                                    text.jsonToObjectOrNull<Dispatch<MessageReactionEvent>>()
+                                    Gson().fromJson<Dispatch<MessageReactionEvent>>(text)
                                         ?.also { messageReactionEvent ->
                                             officialEvents.forEach {
                                                 runBlocking {
-                                                    it.onMessageReactionAdd(
-                                                        messageReactionEvent.d
-                                                    )
+                                                    it.onMessageReactionAdd(messageReactionEvent.d)
                                                 }
                                             }
+
+
                                         }
                                 }
                                 DispatchEnums.MESSAGE_REACTION_REMOVE -> {
-                                    text.jsonToObjectOrNull<Dispatch<MessageReactionEvent>>()
+                                    Gson().fromJson<Dispatch<MessageReactionEvent>>(text)
                                         ?.also { messageReactionEvent ->
                                             officialEvents.forEach {
                                                 runBlocking {
-                                                    it.onMessageReactionRemove(
-                                                        messageReactionEvent.d
-                                                    )
+                                                    it.onMessageReactionRemove(messageReactionEvent.d)
                                                 }
                                             }
+
                                         }
                                 }
                                 DispatchEnums.DIRECT_MESSAGE_CREATE -> {
@@ -190,23 +230,39 @@ class BotListener(
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
                                 DispatchEnums.AUDIO_START -> {
-                                    text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
-                                        officialEvents.forEach { runBlocking { it.onAudioStart(audioActionEvent.d) } }
+                                    Gson().fromJson<Dispatch<AudioActionEvent>>(text)?.also { audioActionEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onAudioStart(audioActionEvent.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.AUDIO_FINISH -> {
-                                    text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
-                                        officialEvents.forEach { runBlocking { it.onAudioFinish(audioActionEvent.d) } }
+                                    Gson().fromJson<Dispatch<AudioActionEvent>>(text)?.also { audioActionEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onAudioFinish(audioActionEvent.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.AUDIO_ON_MIC -> {
-                                    text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
-                                        officialEvents.forEach { runBlocking { it.onAudioOnMic(audioActionEvent.d) } }
+                                    Gson().fromJson<Dispatch<AudioActionEvent>>(text)?.also { audioActionEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onAudioOnMic(audioActionEvent.d)
+                                            }
+                                        }
                                     }
                                 }
                                 DispatchEnums.AUDIO_OFF_MIC -> {
-                                    text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
-                                        officialEvents.forEach { runBlocking { it.onAudioOffMic(audioActionEvent.d) } }
+                                    Gson().fromJson<Dispatch<AudioActionEvent>>(text)?.also { audioActionEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onAudioOffMic(audioActionEvent.d)
+                                            }
+                                        }
                                     }
                                 }
                                 else -> {
@@ -230,6 +286,7 @@ class BotListener(
                     RESUME -> TODO()
                     UNKNOWN -> TODO()
                 }
+
             }
         }.onFailure {
             it.printStackTrace()
@@ -269,7 +326,7 @@ class BotListener(
         // 鉴权
         if (isResume.get()) {
             val resume = Resume(ResumeData(messageSeq.get(), sessionId, config.token))
-            webSocket.sendAndPrintLog(resume.objectToJson())
+            webSocket.sendAndPrintLog(Gson().toJson(resume))
         } else {
             webSocket.sendAndPrintLog(identifyOpDto)
         }
@@ -290,7 +347,7 @@ class BotListener(
                 logger.warn("$logHeader 心跳超时，尝试重新连接")
                 reconnectClient()
             } else {
-                val hb = Heartbeat(messageSeq.get()).objectToJson()
+                val hb = Gson().toJson(Heartbeat(messageSeq.get()))
                 webSocket.sendAndPrintLog(hb, true)
             }
         }

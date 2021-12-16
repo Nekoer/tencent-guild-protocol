@@ -1,5 +1,6 @@
 package com.hcyacg.protocol.event.api
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,12 +8,12 @@ import kotlinx.serialization.Serializable
 @Serializable
 @NoArg
 data class Author(
-    @SerialName("avatar")
+    @SerializedName("avatar")
     val avatar: String,
-    @SerialName("bot")
+    @SerializedName("bot")
     val bot: Boolean,
-    @SerialName("id")
+    @SerializedName("id")
     val id: String,
-    @SerialName("username")
+    @SerializedName("username")
     val username: String
 )

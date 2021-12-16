@@ -1,24 +1,23 @@
 package com.hcyacg.protocol.internal.entity
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.internal.enums.DispatchEnums
-import com.hcyacg.protocol.internal.enums.OPCodeEnums
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-open class Dispatch<T>(
-    @SerialName("s")
+data class Dispatch<T>(
+    @SerializedName("s")
     val seq: Long,
-    @SerialName("t")
+    @SerializedName("t")
     val type: DispatchEnums,
-    @SerialName("d")
+    @SerializedName("d")
     val d: T
-) : Operation(OPCodeEnums.DISPATCH)
+) : Operation(0)
 
 @Serializable
 data class DispatchType(
-    @SerialName("t")
+    @SerializedName("t")
     val type: DispatchEnums,
-    @SerialName("s")
+    @SerializedName("s")
     val seq: Long,
 )

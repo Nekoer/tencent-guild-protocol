@@ -1,28 +1,28 @@
 package com.hcyacg.protocol.entity
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 @NoArg
 data class Channel(
-    @SerialName("id")
+    @SerializedName("id")
     val id: String = "",
-    @SerialName("guild_id")
-    val guild_id: String = "",
-    @SerialName("name")
+    @SerializedName("guild_id")
+    val guildId: String = "",
+    @SerializedName("name")
     val name: String = "",
-    @SerialName("type")
+    @SerializedName("type")
     val type: Int = 0,
-    @SerialName("sub_type")
-    val sub_type: Int = 0,
-    @SerialName("position")
+    @SerializedName("sub_type")
+    val subType: Int = 0,
+    @SerializedName("position")
     val position: Int = 0,
-    @SerialName("parent_id")
-    val parent_id: String = "",
-    @SerialName("owner_id")
-    val owner_id: String = ""
+    @SerializedName("parent_id")
+    val parentId: String = "",
+    @SerializedName("owner_id")
+    val ownerId: String = ""
 )
 
 /**
@@ -105,12 +105,12 @@ object ChannelSubType {
 @Serializable
 @NoArg
 data class ChannelDto(
-    @SerialName("name")
+    @SerializedName("name")
     val name: String,
-    @SerialName("type")
+    @SerializedName("type")
     val type: Int,
-    @SerialName("position")
+    @SerializedName("position")
     val position: Int,
-    @SerialName("parent_id")
-    val parent_id: String
+    @SerializedName("parent_id")
+    val parentId: String
 )

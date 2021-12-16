@@ -1,10 +1,8 @@
 package com.hcyacg.protocol.internal.entity
 
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.Serializable
-
 import com.google.gson.annotations.SerializedName
-
+import kotlinx.serialization.Serializable
 
 /**
  * 获取带分片 WSS 接入点 时返回的实体对象
@@ -18,7 +16,7 @@ import com.google.gson.annotations.SerializedName
 @NoArg
 data class AccessWithFragmentedWss(
     @SerializedName("session_start_limit")
-    var session_start_limit: SessionStartLimit,
+    var sessionStartLimit: SessionStartLimit,
     @SerializedName("shards")
     var shards: Int,
     @SerializedName("url")
@@ -36,11 +34,11 @@ data class AccessWithFragmentedWss(
 @NoArg
 data class SessionStartLimit(
     @SerializedName("max_concurrency")
-    var max_concurrency: Int,
+    var maxConcurrency: Int,
     @SerializedName("remaining")
     var remaining: Int,
     @SerializedName("reset_after")
-    var reset_after: Int,
+    var resetAfter: Int,
     @SerializedName("total")
     var total: Int
 )

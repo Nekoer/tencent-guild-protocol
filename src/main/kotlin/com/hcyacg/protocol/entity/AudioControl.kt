@@ -1,16 +1,16 @@
 package com.hcyacg.protocol.entity
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 @NoArg
 data class AudioControl(
-    @SerialName("audio_url")
-    val audio_url: String,
-    @SerialName("text")
+    @SerializedName("audio_url")
+    val audioUrl: String,
+    @SerializedName("text")
     val text: String,
-    @SerialName("status")
+    @SerializedName("status")
     val status: Int
 )

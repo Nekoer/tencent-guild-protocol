@@ -1,7 +1,7 @@
 package com.hcyacg.protocol.entity
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -18,22 +18,22 @@ remind_type	     string	日程提醒类型，取值参考RemindType
 @Serializable
 @NoArg
 data class Schedule(
-    @SerialName("id")
+    @SerializedName("id")
     val id: String?,
-    @SerialName("name")
+    @SerializedName("name")
     val name: String,
-    @SerialName("description")
+    @SerializedName("description")
     val description: String,
-    @SerialName("start_timestamp")
-    val start_timestamp: String,
-    @SerialName("end_timestamp")
-    val end_timestamp: String,
-    @SerialName("creator")
+    @SerializedName("start_timestamp")
+    val startTimestamp: String,
+    @SerializedName("end_timestamp")
+    val endTimestamp: String,
+    @SerializedName("creator")
     var creator: Member?,
-    @SerialName("jump_channel_id")
-    val jump_channel_id: String,
-    @SerialName("remind_type")
-    val remind_type: String,
+    @SerializedName("jump_channel_id")
+    val jumpChannelId: String,
+    @SerializedName("remind_type")
+    val remindType: String,
 )
 
 /**

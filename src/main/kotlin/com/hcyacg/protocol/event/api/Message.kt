@@ -1,5 +1,6 @@
 package com.hcyacg.protocol.event.api
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.utils.LocalDateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,93 +8,93 @@ import java.time.LocalDateTime
 
 @Serializable
 data class Message(
-    @SerialName("content")
+    @SerializedName("content")
     val content: String,     //消息内容，文本内容，支持内嵌格式
-    @SerialName("embed")
+    @SerializedName("embed")
     val embed: MessageEmbed, //embed 消息，一种特殊的 ark
-    @SerialName("ark")
+    @SerializedName("ark")
     val ark: MessageArk,     //ark 消息
-    @SerialName("image")
+    @SerializedName("image")
     val image: String,       //图片url地址
-    @SerialName("msg_id")
-    val msg_id: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
+    @SerializedName("msg_id")
+    val msgId: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
 )
 
 @Serializable
 data class TextMessage(
-    @SerialName("content")
+    @SerializedName("content")
     val content: String,     //消息内容，文本内容，支持内嵌格式
-    @SerialName("msg_id")
-    val msg_id: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
+    @SerializedName("msg_id")
+    val msgId: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
 )
 
 @Serializable
 data class initiativeTextMessage(
-    @SerialName("content")
+    @SerializedName("content")
     val content: String     //消息内容，文本内容，支持内嵌格式
 )
 
 @Serializable
 data class TextWithImageMessage(
-    @SerialName("content")
+    @SerializedName("content")
     val content: String,     //消息内容，文本内容，支持内嵌格式
-    @SerialName("image")
+    @SerializedName("image")
     val image: String,       //图片url地址
-    @SerialName("msg_id")
-    val msg_id: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
+    @SerializedName("msg_id")
+    val msgId: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
 )
 
 @Serializable
 data class initiativeTextWithImageMessage(
-    @SerialName("content")
+    @SerializedName("content")
     val content: String,     //消息内容，文本内容，支持内嵌格式
-    @SerialName("image")
+    @SerializedName("image")
     val image: String       //图片url地址
 )
 
 
 @Serializable
 data class ImageMessage(
-    @SerialName("image")
+    @SerializedName("image")
     val image: String,       //图片url地址
-    @SerialName("msg_id")
-    val msg_id: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
+    @SerializedName("msg_id")
+    val msgId: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
 )
 
 @Serializable
 data class initiativeImageMessage(
-    @SerialName("image")
+    @SerializedName("image")
     val image: String,       //图片url地址
 )
 
 
 @Serializable
 data class ArkMessage(
-    @SerialName("ark")
+    @SerializedName("ark")
     val ark: MessageArk,     //ark 消息
-    @SerialName("msg_id")
-    val msg_id: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
+    @SerializedName("msg_id")
+    val msgId: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
 )
 
 @Serializable
 data class initiativeArkMessage(
-    @SerialName("ark")
+    @SerializedName("ark")
     val ark: MessageArk     //ark 消息
 )
 
 
 @Serializable
 data class EmbedMessage(
-    @SerialName("embed")
+    @SerializedName("embed")
     val embed: MessageEmbed, //embed 消息，一种特殊的 ark
-    @SerialName("msg_id")
-    val msg_id: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
+    @SerializedName("msg_id")
+    val msgId: String        //要回复的消息id(Message.id), 在 AT_CREATE_MESSAGE 事件中获取。带了 msg_id 视为被动回复消息，否则视为主动推送消息
 )
 
 
 @Serializable
 data class initiativeEmbedMessage(
-    @SerialName("embed")
+    @SerializedName("embed")
     val embed: MessageEmbed, //embed 消息，一种特殊的 ark
 )
 
@@ -107,16 +108,16 @@ data class initiativeEmbedMessage(
  */
 @Serializable
 data class MessageEmbed(
-    @SerialName("title")
+    @SerializedName("title")
     val title: String,            //标题
-    @SerialName("description")
+    @SerializedName("description")
     val description: String,      //描述
-    @SerialName("prompt")
+    @SerializedName("prompt")
     val prompt: String,           //消息弹窗内容
-    @SerialName("timestamp")
+    @SerializedName("timestamp")
     @Serializable(with = LocalDateTimeSerializer::class)
     val timestamp: LocalDateTime, //消息创建时间
-    @SerialName("fields")
+    @SerializedName("fields")
     val fields: MessageEmbedField //消息创建时间
 )
 
@@ -126,9 +127,9 @@ data class MessageEmbed(
  */
 @Serializable
 data class MessageEmbedField(
-    @SerialName("name")
+    @SerializedName("name")
     val name: String,
-    @SerialName("value")
+    @SerializedName("value")
     val value: String
 )
 
@@ -137,19 +138,19 @@ data class MessageEmbedField(
  */
 @Serializable
 data class MessageAttachment(
-    @SerialName("url")
+    @SerializedName("url")
     val url: String //下载地址
 )
 
 /**
- * @param template_id    ark模板id（需要先申请） 23 链接+文本列表模板 24 文本+缩略图模板 37 大图模板
+ * @param templateId    ark模板id（需要先申请） 23 链接+文本列表模板 24 文本+缩略图模板 37 大图模板
  * @param kv    MessageAkrKv arkkv数组	kv值列表
  */
 @Serializable
 data class MessageArk(
-    @SerialName("template_id")
-    val template_id: Int,
-    @SerialName("kv")
+    @SerializedName("template_id")
+    val templateId: Int,
+    @SerializedName("kv")
     val kv: List<MessageArkKv>
 )
 
@@ -160,21 +161,21 @@ data class MessageArk(
  */
 @Serializable
 data class MessageArkKv(
-    @SerialName("key")
+    @SerializedName("key")
     val key: String,
-    @SerialName("value")
+    @SerializedName("value")
     val value: String?,
-    @SerialName("obj")
+    @SerializedName("obj")
     val obj: List<MessageArkObj>?
 )
 
 /**
- *@param obj_kv    MessageArkObjKv objkv类型的数组	ark objkv列表
+ *@param objKv    MessageArkObjKv objkv类型的数组	ark objkv列表
  */
 @Serializable
 data class MessageArkObj(
-    @SerialName("obj_kv")
-    val obj_kv: List<MessageArkObjKv>
+    @SerializedName("obj_kv")
+    val objKv: List<MessageArkObjKv>
 )
 
 /**
@@ -183,8 +184,8 @@ data class MessageArkObj(
  */
 @Serializable
 data class MessageArkObjKv(
-    @SerialName("key")
+    @SerializedName("key")
     val key: String,
-    @SerialName("value")
+    @SerializedName("value")
     val value: String
 )

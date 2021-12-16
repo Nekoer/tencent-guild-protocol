@@ -12,7 +12,6 @@ import com.hcyacg.protocol.entity.User
 import com.hcyacg.protocol.event.AtMessageCreateEvent
 import com.hcyacg.protocol.event.MessageCreateEvent
 import com.hcyacg.protocol.event.api.*
-import com.hcyacg.protocol.utils.JsonUtils.objectToJson
 import com.hcyacg.protocol.utils.OkHttpUtils
 import okhttp3.Headers
 
@@ -50,190 +49,189 @@ object BotApi {
 
 
     fun AtMessageCreateEvent.replyText(msg: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = TextMessage(msg, this.id).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(TextMessage(msg, this.id))
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyTextNotId(msg: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeTextMessage(msg).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeTextMessage(msg))
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyTextWithImage(msg: String, imageUrl: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = TextWithImageMessage(msg, imageUrl, this.id).objectToJson()
-
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(TextWithImageMessage(msg, imageUrl, this.id))
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyTextWithImageNotId(msg: String, imageUrl: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeTextWithImageMessage(msg, imageUrl).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeTextWithImageMessage(msg, imageUrl))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyImage(imageUrl: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = ImageMessage(imageUrl, this.id).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(ImageMessage(imageUrl, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
 
     fun AtMessageCreateEvent.replyImageNotId(imageUrl: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeImageMessage(imageUrl).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeImageMessage(imageUrl))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyArk(messageArk: MessageArk): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = ArkMessage(messageArk, this.id).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(ArkMessage(messageArk, this.id))
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyArkNotId(messageArk: MessageArk): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeArkMessage(messageArk).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeArkMessage(messageArk))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyEmbed(messageEmbed: MessageEmbed): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = EmbedMessage(messageEmbed, this.id).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(EmbedMessage(messageEmbed, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyEmbedNotId(messageEmbed: MessageEmbed): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeEmbedMessage(messageEmbed).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeEmbedMessage(messageEmbed))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun AtMessageCreateEvent.replyAudio(audioUrl: String, text: String, status: Int): Message {
-        val url = sendAudio.replace("{{channel_id}}", this.channel_id)
-        val json = AudioControl(audioUrl, text, status).objectToJson()
+        val url = sendAudio.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(AudioControl(audioUrl, text, status))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
 
     fun MessageCreateEvent.replyText(msg: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = TextMessage(msg, this.id).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(TextMessage(msg, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun MessageCreateEvent.replyTextNotId(msg: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeTextMessage(msg).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeTextMessage(msg))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun MessageCreateEvent.replyTextWithImage(msg: String, imageUrl: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = TextWithImageMessage(msg, imageUrl, this.id).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(TextWithImageMessage(msg, imageUrl, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun MessageCreateEvent.replyTextWithImageNotId(msg: String, imageUrl: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeTextWithImageMessage(msg, imageUrl).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeTextWithImageMessage(msg, imageUrl))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun MessageCreateEvent.replyImage(imageUrl: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = ImageMessage(imageUrl, this.id).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(ImageMessage(imageUrl, this.id))
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
 
     fun MessageCreateEvent.replyImageNotId(imageUrl: String): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeImageMessage(imageUrl).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeImageMessage(imageUrl))
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun MessageCreateEvent.replyArk(messageArk: MessageArk): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = ArkMessage(messageArk, this.id).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(ArkMessage(messageArk, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun MessageCreateEvent.replyArkNotId(messageArk: MessageArk): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeArkMessage(messageArk).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeArkMessage(messageArk))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun MessageCreateEvent.replyEmbed(messageEmbed: MessageEmbed): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = EmbedMessage(messageEmbed, this.id).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(EmbedMessage(messageEmbed, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     fun MessageCreateEvent.replyEmbedNotId(messageEmbed: MessageEmbed): Message {
-        val url = sendMessage.replace("{{channel_id}}", this.channel_id)
-        val json = initiativeEmbedMessage(messageEmbed).objectToJson()
+        val url = sendMessage.replace("{{channel_id}}", this.channelId)
+        val json = Gson().toJson(initiativeEmbedMessage(messageEmbed))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     /**
@@ -244,8 +242,8 @@ object BotApi {
         val url = guildInfo.replace("{{guild_id}}", guildId)
 
         val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Guild::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Guild::class.java)
     }
 
 
@@ -256,8 +254,8 @@ object BotApi {
     fun getRolesByGuild(guildId: String): Roles {
         val url = roles.replace("{{guild_id}}", guildId)
         val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Roles::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Roles::class.java)
     }
 
     /**
@@ -269,10 +267,10 @@ object BotApi {
     fun createRolesByGuild(guildId: String, filter: Filter, info: Info): RoleVo {
         val url = roles.replace("{{guild_id}}", guildId)
 
-        val json = RoleDto(filter, info).objectToJson()
+        val json = Gson().toJson(RoleDto(filter, info))
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), RoleVo::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, RoleVo::class.java)
     }
 
     /**
@@ -284,10 +282,10 @@ object BotApi {
      */
     fun changeRolesByGuild(guildId: String, roleId: String, filter: Filter, info: Info): RoleVo {
         val url = changeRole.replace("{{guild_id}}", guildId).replace("{{role_id}}", roleId)
-        val json = RoleDto(filter, info).objectToJson()
+        val json = Gson().toJson(RoleDto(filter, info))
         val res = OkHttpUtils.patchJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), RoleVo::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, RoleVo::class.java)
     }
 
     /**
@@ -328,7 +326,7 @@ object BotApi {
     fun createChildMemberRolesByGuild(guildId: String, channel: Channel, userId: String, roleId: String): Boolean {
         val url = editMemberRole.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
             .replace("{{role_id}}", roleId)
-        val json = channel.objectToJson()
+        val json = Gson().toJson(channel)
         val res = OkHttpUtils.put(url, OkHttpUtils.addJson(json), Headers.headersOf("Authorization", botToken!!))
         logger.debug(res.code.toString())
         return res.code == 204
@@ -358,7 +356,7 @@ object BotApi {
     fun deleteChildMemberRolesByGuild(guildId: String, channel: Channel, userId: String, roleId: String): Boolean {
         val url = editMemberRole.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
             .replace("{{role_id}}", roleId)
-        val json = channel.objectToJson()
+        val json = Gson().toJson(channel)
         val res = OkHttpUtils.delete(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.code.toString())
         return res.code == 204
@@ -396,8 +394,8 @@ object BotApi {
         val url = channelList.replace("{{guild_id}}", guildId)
 
         val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), object : TypeToken<List<Channel>>() {}.type)
+        logger.debug(res)
+        return Gson().fromJson(res, object : TypeToken<List<Channel>>() {}.type)
     }
 
     /**
@@ -516,10 +514,10 @@ object BotApi {
      */
     fun createChannel(guildId: String, channelDto: ChannelDto): Channel {
         val url = channelList.replace("{{guild_id}}", guildId)
-        val json = channelDto.objectToJson()
+        val json = Gson().toJson(channelDto)
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Channel::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Channel::class.java)
     }
 
     /**
@@ -529,10 +527,10 @@ object BotApi {
      */
     fun changeChannelInfo(channelId: String, channelDto: ChannelDto): Channel {
         val url = channel.replace("{{channel_id}}", channelId)
-        val json = channelDto.objectToJson()
+        val json = Gson().toJson(channelDto)
         val res = OkHttpUtils.patchJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Channel::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Channel::class.java)
     }
 
     /**
@@ -555,8 +553,8 @@ object BotApi {
         val url = announces.replace("{{channel_id}}", channelId)
         val json = "{\"message_id\": \"$messageId\"}"
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Announces::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Announces::class.java)
     }
 
     /**
@@ -580,11 +578,11 @@ object BotApi {
         val url = schedules.replace("{{channel_id}}", channelId)
         url.plus("?since=$since")
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
-        logger.debug(res.toString())
-        if (res.toString().contentEquals("null")) {
+        logger.debug(res)
+        if (res.contentEquals("null")) {
             return mutableListOf()
         }
-        return Gson().fromJson(res.toString(), object : TypeToken<List<Schedule>>() {}.type)
+        return Gson().fromJson(res, object : TypeToken<List<Schedule>>() {}.type)
     }
 
     /**
@@ -594,11 +592,11 @@ object BotApi {
     fun getScheduleList(channelId: String): List<Schedule> {
         val url = schedules.replace("{{channel_id}}", channelId)
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
-        logger.debug(res.toString())
-        if (res.toString().contentEquals("null")) {
+        logger.debug(res)
+        if (res.contentEquals("null")) {
             return mutableListOf()
         }
-        return Gson().fromJson(res.toString(), object : TypeToken<List<Schedule>>() {}.type)
+        return Gson().fromJson(res, object : TypeToken<List<Schedule>>() {}.type)
     }
 
     /**
@@ -609,8 +607,8 @@ object BotApi {
     fun getScheduleById(channelId: String, scheduleId: String): Schedule {
         val url = scheduleUrl.replace("{{channel_id}}", channelId).replace("{{schedule_id}}", scheduleId)
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Schedule::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Schedule::class.java)
     }
 
 
@@ -625,10 +623,10 @@ object BotApi {
     fun createSchedule(channelId: String, schedule: Schedule): Schedule {
         val url = schedules.replace("{{channel_id}}", channelId)
         schedule.creator = null
-        val json = "{\"schedule\": ${schedule.objectToJson()}}"
+        val json = "{\"schedule\": ${Gson().toJson(schedule)}}"
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Schedule::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Schedule::class.java)
     }
 
     /**
@@ -641,10 +639,10 @@ object BotApi {
     fun changeScheduleById(channelId: String, scheduleId: String, schedule: Schedule): Schedule {
         val url = scheduleUrl.replace("{{channel_id}}", channelId).replace("{{schedule_id}}", scheduleId)
         schedule.creator = null
-        val json = "{\"schedule\": ${schedule.objectToJson()}}"
+        val json = "{\"schedule\": ${Gson().toJson(schedule)}}"
         val res = OkHttpUtils.patchJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Schedule::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Schedule::class.java)
     }
 
     /**

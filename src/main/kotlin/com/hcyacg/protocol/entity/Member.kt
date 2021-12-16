@@ -1,42 +1,43 @@
 package com.hcyacg.protocol.entity
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
 import com.hcyacg.protocol.utils.LocalDateTimeSerializer
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
 @Serializable
 @NoArg
 data class Member(
-    @SerialName("user")
+    @SerializedName("user")
     val user: User?,
-    @SerialName("nick")
+    @SerializedName("nick")
     val nick: String,
-    @SerialName("joined_at")
-    val joined_at: String,
-    @SerialName("roles")
+    @Serializable(with = LocalDateTimeSerializer::class)
+    @SerializedName("joined_at")
+    val joinedAt: LocalDateTime,
+    @SerializedName("roles")
     val roles: List<String>,
-    @SerialName("deaf")
+    @SerializedName("deaf")
     val deaf: Boolean,
-    @SerialName("mute")
+    @SerializedName("mute")
     val mute: Boolean,
-    @SerialName("pending")
+    @SerializedName("pending")
     val pending: Boolean
 )
 
 @Serializable
 @NoArg
 data class MemberWithGuildID(
-    @SerialName("guild_id")
-    val guild_id: String,
-    @SerialName("user")
+    @SerializedName("guild_id")
+    val guildId: String,
+    @SerializedName("user")
     val user: User,
-    @SerialName("nick")
+    @SerializedName("nick")
     val nick: String,
-    @SerialName("joined_at")
+    @SerializedName("joined_at")
     @Serializable(with = LocalDateTimeSerializer::class)
-    val joined_at: LocalDateTime,
-    @SerialName("roles")
+    val joinedAt: LocalDateTime,
+    @SerializedName("roles")
     val roles: List<String>
 )

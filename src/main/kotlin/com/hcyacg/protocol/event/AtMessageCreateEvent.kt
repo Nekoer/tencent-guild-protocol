@@ -1,5 +1,6 @@
 package com.hcyacg.protocol.event
 
+import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
 import com.hcyacg.protocol.event.api.Author
 import com.hcyacg.protocol.event.api.Member
@@ -11,23 +12,23 @@ import java.time.LocalDateTime
 @NoArg
 @Serializable
 data class AtMessageCreateEvent(
-    @SerialName("author")
+    @SerializedName("author")
     val author: Author,
-    @SerialName("channel_id")
-    val channel_id: String,
-    @SerialName("content")
+    @SerializedName("channel_id")
+    val channelId: String,
+    @SerializedName("content")
     val content: String,
-    @SerialName("guild_id")
-    val guild_id: String,
-    @SerialName("id")
+    @SerializedName("guild_id")
+    val guildId: String,
+    @SerializedName("id")
     val id: String,
-    @SerialName("member")
+    @SerializedName("member")
     val member: Member,
-    @SerialName("mentions")
+    @SerializedName("mentions")
     val mentions: List<Author>,
-    @SerialName("timestamp")
-    @Serializable(with = LocalDateTimeSerializer::class)
-    val timestamp: LocalDateTime
+    @SerializedName("timestamp")
+//    @Serializable(with = LocalDateTimeSerializer::class)
+    val timestamp: String
 ) {
     fun messageContent(): String {
         return content.replace(Regex("<@!\\d+>"), "")
