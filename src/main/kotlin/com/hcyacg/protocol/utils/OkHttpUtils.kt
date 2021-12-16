@@ -25,7 +25,8 @@ object OkHttpUtils {
     private val MEDIA_TEXT: MediaType = "text/plain;charset=UTF-8".toMediaType()
     private const val TIME_OUT = 10L
     private val okHttpClient: OkHttpClient by lazy {
-        OkHttpClient.Builder().followRedirects(false).followSslRedirects(false).connectTimeout(10L, TimeUnit.SECONDS).readTimeout(10L, TimeUnit.SECONDS).build()
+        OkHttpClient.Builder().followRedirects(false).followSslRedirects(false).connectTimeout(10L, TimeUnit.SECONDS)
+            .readTimeout(10L, TimeUnit.SECONDS).build()
     }
 
     private fun emptyHeaders(): Headers {
@@ -348,6 +349,7 @@ object OkHttpUtils {
         val str = postStr(url, map, emptyHeaders())
         return str.toJsonElement()
     }
+
     @Throws(IOException::class)
     fun patchJson(url: String, map: Map<String, String>): JsonElement {
         val str = getStr(patch(url, map, emptyHeaders()))
@@ -496,7 +498,8 @@ object OkHttpUtils {
     }
 
     fun getCookie(cookie: String, vararg name: String): Map<String, String> {
-        return name.toList().map { it to getCookie(cookie,it) }.filter { it.second != null }.associate { it.first to it.second!! }
+        return name.toList().map { it to getCookie(cookie, it) }.filter { it.second != null }
+            .associate { it.first to it.second!! }
     }
 
     fun cookieToMap(cookie: String): Map<String, String> {
@@ -537,7 +540,7 @@ object OkHttpUtils {
 
     fun urlParams(map: Map<String, String>): String {
         val sb = StringBuilder()
-        val var2: Iterator< Map.Entry<String, String>> = map.entries.iterator()
+        val var2: Iterator<Map.Entry<String, String>> = map.entries.iterator()
         while (var2.hasNext()) {
             val (key, value) = var2.next()
             try {

@@ -1,4 +1,5 @@
 package com.hcyacg.protocol.internal.entity
+
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.internal.enums.OPCodeEnums
 import kotlinx.serialization.Serializable
@@ -7,9 +8,10 @@ import kotlinx.serialization.Serializable
 data class Identify(
     @SerializedName("d")
     var d: D,
-): Operation(OPCodeEnums.IDENTIFY) {
+) : Operation(OPCodeEnums.IDENTIFY) {
     constructor(token: String) : this(D(token = token))
 }
+
 @Serializable
 data class D(
     @SerializedName("intents")
@@ -21,6 +23,7 @@ data class D(
     @SerializedName("token")
     var token: String
 )
+
 @Serializable
 data class Properties(
     @SerializedName("\$browser")

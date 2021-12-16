@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 open class Operation(
     @Serializable(with = OPCodeEnums.OperationKSerializer::class)
-    val op:OPCodeEnums
+    val op: OPCodeEnums
 )

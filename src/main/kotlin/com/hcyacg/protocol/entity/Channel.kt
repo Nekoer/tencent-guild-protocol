@@ -29,40 +29,47 @@ data class Channel(
  * 子频道种类
  */
 @Serializable
-object ChannelType{
+object ChannelType {
 
-        /**
-         * 文字子频道
-         */
-         val textSubchannel = 0
-        /**
-         * 保留，不可用
-         */
-         val unavailable1 = 1
-        /**
-         * 语音子频道
-         */
-         val voiceSubchannel = 2
-        /**
-         * 保留，不可用
-         */
-         val unavailable3 = 3
-        /**
-         * 子频道分组
-         */
-         val subchannelGrouping = 4
-        /**
-         * 直播子频道
-         */
-         val liveSubchannel = 10005
-        /**
-         * 应用子频道
-         */
-         val applicationSubchannel = 10006
-        /**
-         * 论坛子频道
-         */
-         val forumSubchannel = 10007
+    /**
+     * 文字子频道
+     */
+    val textSubchannel = 0
+
+    /**
+     * 保留，不可用
+     */
+    val unavailable1 = 1
+
+    /**
+     * 语音子频道
+     */
+    val voiceSubchannel = 2
+
+    /**
+     * 保留，不可用
+     */
+    val unavailable3 = 3
+
+    /**
+     * 子频道分组
+     */
+    val subchannelGrouping = 4
+
+    /**
+     * 直播子频道
+     */
+    val liveSubchannel = 10005
+
+    /**
+     * 应用子频道
+     */
+    val applicationSubchannel = 10006
+
+    /**
+     * 论坛子频道
+     */
+    val forumSubchannel = 10007
 
 }
 
@@ -70,24 +77,27 @@ object ChannelType{
  * 文字子频道种类
  */
 @Serializable
-object ChannelSubType{
+object ChannelSubType {
 
-        /**
-         * 闲聊
-         */
-         val smallTalk = 0
-        /**
-         * 公告
-         */
-         val announcement = 1
-        /**
-         * 攻略
-         */
-         val strategy = 2
-        /**
-         * 开黑
-         */
-         val openBlack = 3
+    /**
+     * 闲聊
+     */
+    val smallTalk = 0
+
+    /**
+     * 公告
+     */
+    val announcement = 1
+
+    /**
+     * 攻略
+     */
+    val strategy = 2
+
+    /**
+     * 开黑
+     */
+    val openBlack = 3
 
 
 }

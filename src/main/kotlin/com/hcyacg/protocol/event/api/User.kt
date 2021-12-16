@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class User (
+data class User(
     @SerialName("bot")
     val bot: Boolean,
     @SerialName("id")

@@ -16,16 +16,16 @@ data class ChannelPermissions(
 )
 
 @Serializable
-class Permissions{
-     companion object {
+class Permissions {
+    companion object {
         /**
          * 可查看子频道
          */
-         const val CHANNEL_VIEWABLE: Long = 1 shl 0
+        const val CHANNEL_VIEWABLE: Long = 1 shl 0
 
         /**
          * 可管理子频道
          */
-         const val CHANNEL_MANAGEABLE: Long = 1 shl 1
+        const val CHANNEL_MANAGEABLE: Long = 1 shl 1
     }
 }

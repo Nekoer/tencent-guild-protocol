@@ -257,7 +257,7 @@ fun getInfo(id: String): String {
         "😚" -> return "亲亲"
         "😌" -> return "羞涩"
         "😊" -> return "嘿嘿"
-        "❔" -> return "问好"
+        "❔" -> return "问号"
         "❕" -> return "叹号"
         "❌" -> return "错误"
         "☎" -> return "电话"

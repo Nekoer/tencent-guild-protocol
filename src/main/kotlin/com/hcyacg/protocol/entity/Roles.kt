@@ -7,55 +7,55 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @NoArg
-data class Roles (
+data class Roles(
     @SerialName("guild_id")
-    val guild_id:String,
+    val guild_id: String,
     @SerialName("roles")
-    val roles:List<Role>,
+    val roles: List<Role>,
     @SerialName("number_limit")
-    val number_limit:Int,
+    val number_limit: Int,
 )
 
 /**
- *@param  name	是否修改名称: 0-否, 1-是
+ *@param  name    是否修改名称: 0-否, 1-是
  *@param  color 是否修改颜色: 0-否, 1-是
- *@param  hoist	是否修改在成员列表中单独展示: 0-否, 1-是
+ *@param  hoist    是否修改在成员列表中单独展示: 0-否, 1-是
  */
 @Serializable
 @NoArg
-data class Filter (
+data class Filter(
     @SerialName("name")
-    val name:Long,
+    val name: Long,
     @SerialName("color")
-    val color:Long,
+    val color: Long,
     @SerialName("hoist")
-    val hoist:Long,
+    val hoist: Long,
 )
 
 /**
- *@param name	名称
- *@param color	ARGB的HEX十六进制颜色值转换后的十进制数值
- *@param hoist	在成员列表中单独展示: 0-否, 1-是
+ *@param name    名称
+ *@param color    ARGB的HEX十六进制颜色值转换后的十进制数值
+ *@param hoist    在成员列表中单独展示: 0-否, 1-是
  */
 @Serializable
 @NoArg
-data class Info (
+data class Info(
     @SerialName("name")
-    val name:String,
+    val name: String,
     @SerialName("color")
-    val color:Long,
+    val color: Long,
     @SerialName("hoist")
-    val hoist:Long,
+    val hoist: Long,
 )
 
 
 @Serializable
 @NoArg
-data class RoleVo (
+data class RoleVo(
     @SerialName("role_id")
-    val role_id:Long,
+    val role_id: Long,
     @SerialName("role")
-    val role:Role,
+    val role: Role,
 )
 
 /**
@@ -64,7 +64,7 @@ data class RoleVo (
  */
 @Serializable
 @NoArg
-data class RoleDto (
+data class RoleDto(
     @SerialName("filter")
     val filter: Filter,
     @SerialName("info")
@@ -75,7 +75,7 @@ data class RoleDto (
  * 系统自带的身份组
  */
 @Serializable
-class DefaultRoles{
+class DefaultRoles {
     companion object {
         /**
          * 全体成员

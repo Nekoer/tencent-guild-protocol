@@ -28,8 +28,8 @@ data class AtMessageCreateEvent(
     @SerialName("timestamp")
     @Serializable(with = LocalDateTimeSerializer::class)
     val timestamp: LocalDateTime
-){
-    fun messageContent():String{
-        return content.replace(Regex("<@!\\d+>"),"")
+) {
+    fun messageContent(): String {
+        return content.replace(Regex("<@!\\d+>"), "")
     }
 }

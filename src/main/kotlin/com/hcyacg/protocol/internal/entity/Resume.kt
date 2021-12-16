@@ -7,8 +7,8 @@ import kotlinx.serialization.SerialName
 
 @Serializable
 data class Resume(
-    val d:ResumeData
-):Operation(OPCodeEnums.RESUME)
+    val d: ResumeData
+) : Operation(OPCodeEnums.RESUME)
 
 @Serializable
 data class ResumeData(

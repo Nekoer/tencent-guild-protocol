@@ -141,56 +141,70 @@ class BotListener(
                                 DispatchEnums.RESUMED -> {
                                     officialEvents.forEach { runBlocking { it.onResumed(config, sessionId) } }
                                 }
-                                DispatchEnums.MESSAGE_REACTION_ADD ->{
-                                    text.jsonToObjectOrNull<Dispatch<MessageReactionEvent>>()?.also { messageReactionEvent ->
-                                        officialEvents.forEach { runBlocking { it.onMessageReactionAdd(messageReactionEvent.d) } }
-                                    }
+                                DispatchEnums.MESSAGE_REACTION_ADD -> {
+                                    text.jsonToObjectOrNull<Dispatch<MessageReactionEvent>>()
+                                        ?.also { messageReactionEvent ->
+                                            officialEvents.forEach {
+                                                runBlocking {
+                                                    it.onMessageReactionAdd(
+                                                        messageReactionEvent.d
+                                                    )
+                                                }
+                                            }
+                                        }
                                 }
-                                DispatchEnums.MESSAGE_REACTION_REMOVE ->{
-                                    text.jsonToObjectOrNull<Dispatch<MessageReactionEvent>>()?.also { messageReactionEvent ->
-                                        officialEvents.forEach { runBlocking { it.onMessageReactionRemove(messageReactionEvent.d) } }
-                                    }
+                                DispatchEnums.MESSAGE_REACTION_REMOVE -> {
+                                    text.jsonToObjectOrNull<Dispatch<MessageReactionEvent>>()
+                                        ?.also { messageReactionEvent ->
+                                            officialEvents.forEach {
+                                                runBlocking {
+                                                    it.onMessageReactionRemove(
+                                                        messageReactionEvent.d
+                                                    )
+                                                }
+                                            }
+                                        }
                                 }
-                                DispatchEnums.DIRECT_MESSAGE_CREATE ->{
+                                DispatchEnums.DIRECT_MESSAGE_CREATE -> {
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
-                                DispatchEnums.THREAD_CREATE ->{
+                                DispatchEnums.THREAD_CREATE -> {
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
-                                DispatchEnums.THREAD_UPDATE ->{
+                                DispatchEnums.THREAD_UPDATE -> {
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
-                                DispatchEnums.THREAD_DELETE ->{
+                                DispatchEnums.THREAD_DELETE -> {
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
-                                DispatchEnums.POST_CREATE ->{
+                                DispatchEnums.POST_CREATE -> {
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
-                                DispatchEnums.POST_DELETE ->{
+                                DispatchEnums.POST_DELETE -> {
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
-                                DispatchEnums.REPLY_CREATE ->{
+                                DispatchEnums.REPLY_CREATE -> {
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
-                                DispatchEnums.REPLY_DELETE ->{
+                                DispatchEnums.REPLY_DELETE -> {
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
-                                DispatchEnums.AUDIO_START ->{
+                                DispatchEnums.AUDIO_START -> {
                                     text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
                                         officialEvents.forEach { runBlocking { it.onAudioStart(audioActionEvent.d) } }
                                     }
                                 }
-                                DispatchEnums.AUDIO_FINISH ->{
+                                DispatchEnums.AUDIO_FINISH -> {
                                     text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
                                         officialEvents.forEach { runBlocking { it.onAudioFinish(audioActionEvent.d) } }
                                     }
                                 }
-                                DispatchEnums.AUDIO_ON_MIC ->{
+                                DispatchEnums.AUDIO_ON_MIC -> {
                                     text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
                                         officialEvents.forEach { runBlocking { it.onAudioOnMic(audioActionEvent.d) } }
                                     }
                                 }
-                                DispatchEnums.AUDIO_OFF_MIC ->{
+                                DispatchEnums.AUDIO_OFF_MIC -> {
                                     text.jsonToObjectOrNull<Dispatch<AudioActionEvent>>()?.also { audioActionEvent ->
                                         officialEvents.forEach { runBlocking { it.onAudioOffMic(audioActionEvent.d) } }
                                     }

@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 @Serializable
 data class Member(
     @SerialName("joined_at")
-    @Serializable( with = LocalDateTimeSerializer::class )
+    @Serializable(with = LocalDateTimeSerializer::class)
     val joined_at: LocalDateTime,
     @SerialName("roles")
     val roles: List<String>

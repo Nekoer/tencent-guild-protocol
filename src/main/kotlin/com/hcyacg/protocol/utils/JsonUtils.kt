@@ -28,10 +28,10 @@ object JsonUtils {
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    inline fun <reified T> String.jsonToObjectOrNull(failureReason:Boolean = true): T? {
+    inline fun <reified T> String.jsonToObjectOrNull(failureReason: Boolean = true): T? {
         return kotlin.runCatching { formatter.decodeFromString<T>(this) }
             .onFailure {
-                if(failureReason) {
+                if (failureReason) {
                     logger.warn("format string to json failed !! string :{}", this, it)
                 }
             }.getOrNull()
@@ -46,10 +46,10 @@ object JsonUtils {
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    inline fun <reified T> JsonElement.jsonToObjectOrNull(failureReason:Boolean = true): T? {
+    inline fun <reified T> JsonElement.jsonToObjectOrNull(failureReason: Boolean = true): T? {
         return kotlin.runCatching { formatter.decodeFromJsonElement<T>(this) }
             .onFailure {
-                if(failureReason) {
+                if (failureReason) {
                     logger.warn("format string to json failed !! string :{}", this, it)
                 }
             }.getOrNull()

@@ -29,12 +29,14 @@ class Gateway {
         /**
          * 获取wss的地址以及相关数据 封装成对象
          */
-        fun gatewayAccessWithFragmentedWss(token:String): AccessWithFragmentedWss? {
-            if (null != accessWithFragmentedWss){
+        fun gatewayAccessWithFragmentedWss(token: String): AccessWithFragmentedWss? {
+            if (null != accessWithFragmentedWss) {
                 return accessWithFragmentedWss
             }
-            headers.add("Authorization",token)
-            val request: Request by lazy { Request.Builder().get().url(Constant.proUrl+"/gateway/bot").header("Authorization",token).build() }
+            headers.add("Authorization", token)
+            val request: Request by lazy {
+                Request.Builder().get().url(Constant.proUrl + "/gateway/bot").header("Authorization", token).build()
+            }
             val execute = client.newCall(request).execute()
             accessWithFragmentedWss = Gson().fromJson(execute.body!!.string(), AccessWithFragmentedWss::class.java)
             logger.info("wss地址已获取 ${accessWithFragmentedWss!!.url}")

@@ -1,4 +1,5 @@
 package com.hcyacg.protocol.event
+
 import com.hcyacg.protocol.anno.NoArg
 import kotlinx.serialization.Serializable
 

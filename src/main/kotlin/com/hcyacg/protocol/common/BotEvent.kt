@@ -1,8 +1,6 @@
 package com.hcyacg.protocol.common
 
-import com.google.gson.Gson
 import com.hcyacg.protocol.constant.Constant.Companion.botToken
-import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.config.IdentifyConfig
 import com.hcyacg.protocol.event.ReadyEvent
@@ -13,7 +11,7 @@ import com.hcyacg.protocol.event.ReadyEvent
 abstract class BotEvent {
 
 
-    open fun getToken():String?{
+    open fun getToken(): String? {
         return botToken
     }
 
@@ -43,17 +41,17 @@ abstract class BotEvent {
 
     open suspend fun onResumed(config: IdentifyConfig, sessionId: String) {}
 
-    open suspend fun onMessageReactionAdd(data:MessageReactionEvent){}
+    open suspend fun onMessageReactionAdd(data: MessageReactionEvent) {}
 
-    open suspend fun onMessageReactionRemove(data:MessageReactionEvent){}
+    open suspend fun onMessageReactionRemove(data: MessageReactionEvent) {}
 
-    open suspend fun onAudioStart(data:AudioActionEvent){}
+    open suspend fun onAudioStart(data: AudioActionEvent) {}
 
-    open suspend fun onAudioFinish(data:AudioActionEvent){}
+    open suspend fun onAudioFinish(data: AudioActionEvent) {}
 
-    open suspend fun onAudioOnMic(data:AudioActionEvent){}
+    open suspend fun onAudioOnMic(data: AudioActionEvent) {}
 
-    open suspend fun onAudioOffMic(data:AudioActionEvent){}
+    open suspend fun onAudioOffMic(data: AudioActionEvent) {}
 
     //TODO 官方有许多事件，后续在这里添加事件名称
 

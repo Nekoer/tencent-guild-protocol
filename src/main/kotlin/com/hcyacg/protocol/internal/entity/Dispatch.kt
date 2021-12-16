@@ -12,8 +12,8 @@ open class Dispatch<T>(
     @SerialName("t")
     val type: DispatchEnums,
     @SerialName("d")
-    val d:T
-):Operation(OPCodeEnums.DISPATCH)
+    val d: T
+) : Operation(OPCodeEnums.DISPATCH)
 
 @Serializable
 data class DispatchType(

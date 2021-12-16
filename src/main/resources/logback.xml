@@ -13,7 +13,7 @@
         </encoder>
         <!-- 此日志文件只记录In级别的 -->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>DEBUG</level>
+            <level>INFO</level>
         </filter>
     </appender>
     <!-- 时间滚动输出 level为 INFO 日志 -->

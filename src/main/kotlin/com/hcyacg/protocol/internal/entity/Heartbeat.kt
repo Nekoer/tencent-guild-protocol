@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Heartbeat(
     @SerialName("d")
-    val count:Long
-): Operation(OPCodeEnums.HEARTBEAT)
+    val count: Long
+) : Operation(OPCodeEnums.HEARTBEAT)

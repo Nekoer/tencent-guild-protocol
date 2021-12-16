@@ -460,18 +460,19 @@ object BotApi {
      * guildId	string	读此id之前的数据	guild id, before/after 只能带一个
      * limit	int	每次拉取多少条数据	最大不超过100，默认100
      */
-    fun getMeGuildsBefore(guildId: String, limit: Int):List<Guild> {
+    fun getMeGuildsBefore(guildId: String, limit: Int): List<Guild> {
         val url = userMeGuild.plus("?before=$guildId").plus("&limit=$limit")
         val res = OkHttpUtils.getJson(url, officeApiHeader())
         logger.debug(res.toString())
         return Gson().fromJson(res.toString(), object : TypeToken<List<Guild>>() {}.type)
     }
+
     /**
      * 获取当前用户频道列表
      * guildId	string	读此id之后的数据	guild id, before/after 只能带一个
      * limit	int	每次拉取多少条数据	最大不超过100，默认100
      */
-    fun getMeGuildsAfter(guildId: String, limit: Int) :List<Guild> {
+    fun getMeGuildsAfter(guildId: String, limit: Int): List<Guild> {
         val url = userMeGuild.plus("?after=$guildId").plus("&limit=$limit")
         val res = OkHttpUtils.getJson(url, officeApiHeader())
         logger.debug(res.toString())
@@ -580,7 +581,7 @@ object BotApi {
         url.plus("?since=$since")
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
         logger.debug(res.toString())
-        if(res.toString().contentEquals("null")){
+        if (res.toString().contentEquals("null")) {
             return mutableListOf()
         }
         return Gson().fromJson(res.toString(), object : TypeToken<List<Schedule>>() {}.type)
@@ -594,7 +595,7 @@ object BotApi {
         val url = schedules.replace("{{channel_id}}", channelId)
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
         logger.debug(res.toString())
-        if(res.toString().contentEquals("null")){
+        if (res.toString().contentEquals("null")) {
             return mutableListOf()
         }
         return Gson().fromJson(res.toString(), object : TypeToken<List<Schedule>>() {}.type)

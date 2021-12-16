@@ -8,24 +8,24 @@ import java.time.LocalDateTime
 
 @Serializable
 @NoArg
-data class Guild (
+data class Guild(
     @SerialName("id")
-    val id:String,
+    val id: String,
     @SerialName("name")
-    val name:String,
+    val name: String,
     @SerialName("icon")
-    val icon:String,
+    val icon: String,
     @SerialName("owner_id")
-    val owner_id:String,
+    val owner_id: String,
     @SerialName("owner")
-    val owner:Boolean,
+    val owner: Boolean,
     @SerialName("member_count")
-    val member_count:Int,
+    val member_count: Int,
     @SerialName("max_members")
-    val max_members:Int,
+    val max_members: Int,
     @SerialName("description")
-    val description:String,
+    val description: String,
     @SerialName("joined_at")
-    @Serializable( with = LocalDateTimeSerializer::class )
-    val joined_at:LocalDateTime,
+    @Serializable(with = LocalDateTimeSerializer::class)
+    val joined_at: LocalDateTime,
 )

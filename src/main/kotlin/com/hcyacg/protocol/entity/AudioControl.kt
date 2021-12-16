@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @NoArg
-data class AudioControl (
+data class AudioControl(
     @SerialName("audio_url")
-    val audio_url:String,
+    val audio_url: String,
     @SerialName("text")
-    val text:String,
+    val text: String,
     @SerialName("status")
-    val status:Int
+    val status: Int
 )

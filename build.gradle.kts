@@ -3,13 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     `java-library`
     kotlin("jvm") version "1.6.0"
-    application
     kotlin("plugin.serialization") version "1.6.0"
     id("org.jetbrains.kotlin.plugin.noarg") version "1.6.0"
-    id("org.jetbrains.dokka") version "1.5.30" apply false
     `maven-publish`
     signing
-    // see https://github.com/gradle-nexus/publish-plugin
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
@@ -17,12 +14,10 @@ group = "com.hcyacg"
 version = "0.3.0"
 
 
-
 repositories {
     mavenLocal()
     mavenCentral()
 }
-
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2-native-mt")
@@ -33,8 +28,8 @@ dependencies {
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
     implementation("org.jsoup:jsoup:1.14.3")
     implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("ch.qos.logback:logback-core:1.2.7")
-    implementation("ch.qos.logback:logback-classic:1.2.7")
+    implementation("ch.qos.logback:logback-core:1.2.8")
+    implementation("ch.qos.logback:logback-classic:1.2.8")
     implementation("com.google.code.gson:gson:2.8.9")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
@@ -46,11 +41,6 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "11"
-}
-
-
-application {
-    mainClass.set("MainKt")
 }
 
 noArg {
@@ -66,8 +56,6 @@ tasks.register<Zip>("stuffZip") {
     archiveBaseName.set("stuff")
     from("src/stuff")
 }
-
-
 
 publishing {
     publications {
@@ -122,13 +110,7 @@ publishing {
 }
 
 signing {
-//    val signingKeyId: String? by project
-//    val signingKey: String? by project
-//    val signingPassword: String? by project
-//    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-//    sign(tasks["stuffZip"])
     sign(publishing.publications["mavenJava"])
-//    sign(publishing.publications)
 }
 
 tasks.javadoc {
@@ -136,11 +118,6 @@ tasks.javadoc {
         (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
 }
-
-
-
-
-
 
 nexusPublishing {
     repositories {

@@ -17,7 +17,8 @@ enum class UA(private val value: String) {
     override fun toString(): String {
         return "UA.$name(value=$value)"
     }
-    fun getValue():String{
+
+    fun getValue(): String {
         return this.value
     }
 }

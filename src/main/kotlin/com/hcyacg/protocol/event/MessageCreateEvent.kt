@@ -1,4 +1,5 @@
 package com.hcyacg.protocol.event
+
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
 import com.hcyacg.protocol.event.api.Author
@@ -15,15 +16,15 @@ data class MessageCreateEvent(
     @SerializedName("channel_id")
     var channel_id: String = "",
     @SerializedName("content")
-    var content: String= "",
+    var content: String = "",
     @SerializedName("guild_id")
-    var guild_id: String= "",
+    var guild_id: String = "",
     @SerializedName("id")
-    var id: String= "",
+    var id: String = "",
     @SerializedName("member")
     var member: Member,
     @SerializedName("timestamp")
-    var timestamp: String= ""
+    var timestamp: String = ""
 )
 
 /**
@@ -39,11 +40,11 @@ data class Attachment(
     @SerializedName("height")
     var height: Int = 0,
     @SerializedName("id")
-    var id: String= "",
+    var id: String = "",
     @SerializedName("size")
-    var size: Int  = 0,
+    var size: Int = 0,
     @SerializedName("url")
-    var url: String= "",
+    var url: String = "",
     @SerializedName("width")
-    var width: Int  = 0
+    var width: Int = 0
 )

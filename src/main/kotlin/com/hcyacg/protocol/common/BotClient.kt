@@ -5,9 +5,9 @@ import com.hcyacg.protocol.internal.config.IdentifyConfig
 
 open class BotClient(
     config: IdentifyConfig,
-    officialEvents:List<BotEvent> = emptyList(),
+    officialEvents: List<BotEvent> = emptyList(),
     uri: String = accessWithFragmentedWss!!.url,
 ) : SequelBotClient<BotListener>(
     uri = uri,
-    BotListener(config,officialEvents)
+    BotListener(config, officialEvents)
 )
