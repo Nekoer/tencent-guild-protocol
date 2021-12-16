@@ -1,24 +1,24 @@
 package com.hcyacg.protocol.utils
 
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
 
-object ScheduleUtils {
-    @OptIn(DelicateCoroutinesApi::class)
+object ScheduleUtils : CoroutineScope {
     fun loopEvent(process: suspend () -> Unit, start: Date, period: Long): Timer {
-        val t = Timer()
-        val tt = object : TimerTask() {
+        val timer = Timer()
+        val task = object : TimerTask() {
             override fun run() {
-                GlobalScope.launch {
+                launch {
                     process()
                 }
             }
         }
-        t.schedule(tt, start, period)
-        return t
+        timer.schedule(task, start, period)
+        return timer
     }
 
+    override val coroutineContext: CoroutineContext =
+        Dispatchers.IO + CoroutineName(this::class.simpleName!!) + SupervisorJob()
 }
