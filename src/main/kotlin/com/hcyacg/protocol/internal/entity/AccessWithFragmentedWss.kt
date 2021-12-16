@@ -2,7 +2,6 @@ package com.hcyacg.protocol.internal.entity
 
 import com.hcyacg.protocol.anno.NoArg
 import com.google.gson.annotations.SerializedName
-import kotlinx.serialization.Serializable
 
 /**
  * 获取带分片 WSS 接入点 时返回的实体对象
@@ -12,7 +11,7 @@ import kotlinx.serialization.Serializable
  * session_start_limit	  SessionStartLimit	  创建Session限制信息
  *
  */
-@Serializable
+
 @NoArg
 data class AccessWithFragmentedWss(
     @SerializedName("session_start_limit")
@@ -30,7 +29,7 @@ data class AccessWithFragmentedWss(
  * reset_after	    int	  重置计数的剩余时间(ms)
  * max_concurrency	int	  每 5s 可以创建的 Session 数
  */
-@Serializable
+
 @NoArg
 data class SessionStartLimit(
     @SerializedName("max_concurrency")

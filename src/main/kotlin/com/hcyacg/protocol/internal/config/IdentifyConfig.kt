@@ -2,9 +2,8 @@ package com.hcyacg.protocol.internal.config
 
 import com.hcyacg.protocol.internal.entity.D
 import com.hcyacg.protocol.internal.entity.Properties
-import kotlinx.serialization.Serializable
 
-@Serializable
+
 data class IdentifyConfig(
     val token: String,
     val shards: Int = 1,
@@ -22,7 +21,7 @@ data class IdentifyConfig(
     }
 }
 
-@Serializable
+
 data class Intents(
     val guilds: Boolean = true,
     val guildMembers: Boolean = true,

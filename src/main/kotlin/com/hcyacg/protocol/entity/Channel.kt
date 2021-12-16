@@ -2,9 +2,7 @@ package com.hcyacg.protocol.entity
 
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.Serializable
 
-@Serializable
 @NoArg
 data class Channel(
     @SerializedName("id")
@@ -28,7 +26,7 @@ data class Channel(
 /**
  * 子频道种类
  */
-@Serializable
+
 object ChannelType {
 
     /**
@@ -76,7 +74,7 @@ object ChannelType {
 /**
  * 文字子频道种类
  */
-@Serializable
+
 object ChannelSubType {
 
     /**
@@ -102,7 +100,7 @@ object ChannelSubType {
 
 }
 
-@Serializable
+
 @NoArg
 data class ChannelDto(
     @SerializedName("name")

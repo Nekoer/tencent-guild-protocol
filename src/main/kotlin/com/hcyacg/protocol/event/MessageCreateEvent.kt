@@ -4,9 +4,8 @@ import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
 import com.hcyacg.protocol.event.api.Author
 import com.hcyacg.protocol.event.api.Member
-import kotlinx.serialization.Serializable
 
-@Serializable
+
 @NoArg
 data class MessageCreateEvent(
     @SerializedName("attachments")
@@ -31,7 +30,7 @@ data class MessageCreateEvent(
  * 附件 例：图片
  */
 @NoArg
-@Serializable
+
 data class Attachment(
     @SerializedName("content_type")
     var content_type: String = "",

@@ -2,10 +2,9 @@ package com.hcyacg.protocol.event
 
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.Serializable
 
 @NoArg
-@Serializable
+
 data class MessageReactionEvent(
     @SerializedName("channel_id")
     val channelId: String,
@@ -20,7 +19,7 @@ data class MessageReactionEvent(
 )
 
 @NoArg
-@Serializable
+
 data class Emoji(
     @SerializedName("id")
     val id: String,
@@ -29,7 +28,7 @@ data class Emoji(
 )
 
 @NoArg
-@Serializable
+
 data class Target(
     @SerializedName("id")
     val id: String,

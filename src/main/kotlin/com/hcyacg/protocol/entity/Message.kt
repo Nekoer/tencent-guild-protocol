@@ -5,9 +5,8 @@ import com.hcyacg.protocol.anno.NoArg
 import com.hcyacg.protocol.event.api.MessageArk
 import com.hcyacg.protocol.event.api.MessageAttachment
 import com.hcyacg.protocol.event.api.MessageEmbed
-import kotlinx.serialization.Serializable
 
-@Serializable
+
 @NoArg
 data class Message(
     @SerializedName("id")

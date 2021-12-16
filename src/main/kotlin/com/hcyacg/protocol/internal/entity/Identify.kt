@@ -1,9 +1,8 @@
 package com.hcyacg.protocol.internal.entity
 
 import com.google.gson.annotations.SerializedName
-import kotlinx.serialization.Serializable
 
-@Serializable
+
 data class Identify(
     @SerializedName("d")
     var d: D,
@@ -11,7 +10,7 @@ data class Identify(
     constructor(token: String) : this(D(token = token))
 }
 
-@Serializable
+
 data class D(
     @SerializedName("intents")
     var intents: Long = 1610612739L,
@@ -23,7 +22,7 @@ data class D(
     var token: String
 )
 
-@Serializable
+
 data class Properties(
     @SerializedName("\$browser")
     var browser: String = "okhttp",

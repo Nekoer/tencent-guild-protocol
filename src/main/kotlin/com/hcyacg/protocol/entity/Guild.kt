@@ -2,11 +2,8 @@ package com.hcyacg.protocol.entity
 
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import com.hcyacg.protocol.utils.LocalDateTimeSerializer
-import kotlinx.serialization.Serializable
-import java.time.LocalDateTime
 
-@Serializable
+
 @NoArg
 data class Guild(
     @SerializedName("id")
@@ -26,6 +23,5 @@ data class Guild(
     @SerializedName("description")
     val description: String,
     @SerializedName("joined_at")
-    @Serializable(with = LocalDateTimeSerializer::class)
-    val joinedAt: LocalDateTime,
+    val joinedAt: String,
 )

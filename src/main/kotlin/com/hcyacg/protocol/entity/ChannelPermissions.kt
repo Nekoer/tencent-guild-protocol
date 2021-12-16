@@ -2,9 +2,8 @@ package com.hcyacg.protocol.entity
 
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.Serializable
 
-@Serializable
+
 @NoArg
 data class ChannelPermissions(
     @SerializedName("channel_id")
@@ -15,7 +14,7 @@ data class ChannelPermissions(
     val permissions: String
 )
 
-@Serializable
+
 class Permissions {
     companion object {
         /**

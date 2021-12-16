@@ -2,12 +2,8 @@ package com.hcyacg.protocol.event
 
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.Serializable
-
-import kotlinx.serialization.SerialName
 
 @NoArg
-@Serializable
 data class GuildEvent(
     @SerializedName("description")
     val description: String,

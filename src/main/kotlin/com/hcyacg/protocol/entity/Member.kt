@@ -2,20 +2,16 @@ package com.hcyacg.protocol.entity
 
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import com.hcyacg.protocol.utils.LocalDateTimeSerializer
-import kotlinx.serialization.Serializable
-import java.time.LocalDateTime
 
-@Serializable
+
 @NoArg
 data class Member(
     @SerializedName("user")
     val user: User?,
     @SerializedName("nick")
     val nick: String,
-    @Serializable(with = LocalDateTimeSerializer::class)
     @SerializedName("joined_at")
-    val joinedAt: LocalDateTime,
+    val joinedAt: String,
     @SerializedName("roles")
     val roles: List<String>,
     @SerializedName("deaf")
@@ -26,7 +22,7 @@ data class Member(
     val pending: Boolean
 )
 
-@Serializable
+
 @NoArg
 data class MemberWithGuildID(
     @SerializedName("guild_id")
@@ -36,8 +32,7 @@ data class MemberWithGuildID(
     @SerializedName("nick")
     val nick: String,
     @SerializedName("joined_at")
-    @Serializable(with = LocalDateTimeSerializer::class)
-    val joinedAt: LocalDateTime,
+    val joinedAt: String,
     @SerializedName("roles")
     val roles: List<String>
 )

@@ -2,10 +2,8 @@ package com.hcyacg.protocol.entity
 
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.serialization.Serializable
 
 
-@Serializable
 @NoArg
 data class Roles(
     @SerializedName("guild_id")
@@ -21,7 +19,7 @@ data class Roles(
  *@param  color 是否修改颜色: 0-否, 1-是
  *@param  hoist    是否修改在成员列表中单独展示: 0-否, 1-是
  */
-@Serializable
+
 @NoArg
 data class Filter(
     @SerializedName("name")
@@ -37,7 +35,7 @@ data class Filter(
  *@param color    ARGB的HEX十六进制颜色值转换后的十进制数值
  *@param hoist    在成员列表中单独展示: 0-否, 1-是
  */
-@Serializable
+
 @NoArg
 data class Info(
     @SerializedName("name")
@@ -49,7 +47,7 @@ data class Info(
 )
 
 
-@Serializable
+
 @NoArg
 data class RoleVo(
     @SerializedName("role_id")
@@ -62,7 +60,7 @@ data class RoleVo(
  * @param filter 标识需要修改哪些字段
  * @param info 携带需要修改的字段内容
  */
-@Serializable
+
 @NoArg
 data class RoleDto(
     @SerializedName("filter")
@@ -74,7 +72,7 @@ data class RoleDto(
 /**
  * 系统自带的身份组
  */
-@Serializable
+
 class DefaultRoles {
     companion object {
         /**

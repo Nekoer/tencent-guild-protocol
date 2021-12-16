@@ -1,13 +1,7 @@
 package com.hcyacg.protocol.internal.enums
 
 import com.google.gson.annotations.SerializedName
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
+
 
 /*
 CODE	名称	            客户端操作	  描述
@@ -20,7 +14,7 @@ CODE	名称	            客户端操作	  描述
 11	    Heartbeat ACK	Receive	      当发送心跳成功之后，就会收到该消息
  */
 
-@Serializable
+
 enum class OPCodeEnums(
     val code: Int,
     val description: String,
@@ -57,18 +51,5 @@ enum class OPCodeEnums(
         fun getOPCodeByCode(code: Int): OPCodeEnums {
             return codeMap[code] ?: UNKNOWN
         }
-    }
-
-    object OperationKSerializer : KSerializer<OPCodeEnums> {
-        override fun deserialize(decoder: Decoder): OPCodeEnums {
-            return getOPCodeByCode(decoder.decodeInt())
-        }
-
-        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("OPCodeEnums", PrimitiveKind.INT)
-
-        override fun serialize(encoder: Encoder, value: OPCodeEnums) {
-            encoder.encodeInt(value.code)
-        }
-
     }
 }

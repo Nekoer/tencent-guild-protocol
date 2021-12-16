@@ -1,8 +1,6 @@
 package com.hcyacg.protocol.utils
 
 import com.google.gson.Gson
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -396,9 +394,9 @@ object OkHttpUtils {
         return text.toRequestBody(mediaType)
     }
 
-    fun addJson(JsonElement: JsonElement): RequestBody {
-        return JsonElement.toString().toRequestBody(MEDIA_JSON)
-    }
+//    fun addJson(JsonElement: String): RequestBody {
+//        return JsonElement.toRequestBody(MEDIA_JSON)
+//    }
 
     fun addEncryptedJson(str: String): RequestBody {
         return str.toRequestBody(MEDIA_ENCRYPTED_JSON)
