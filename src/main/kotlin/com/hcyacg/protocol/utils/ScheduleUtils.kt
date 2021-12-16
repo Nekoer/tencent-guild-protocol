@@ -6,7 +6,6 @@ import kotlin.coroutines.CoroutineContext
 
 
 object ScheduleUtils : CoroutineScope {
-    @OptIn(DelicateCoroutinesApi::class)
     fun loopEvent(process: suspend () -> Unit, start: Date, period: Long): Timer {
         val timer = Timer()
         val task = object : TimerTask() {
