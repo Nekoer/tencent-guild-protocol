@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class Resume(
+    @SerializedName("d")
     val d: ResumeData
 ) : Operation(6)
 

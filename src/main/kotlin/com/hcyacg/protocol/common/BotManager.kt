@@ -19,7 +19,7 @@ class BotManager(token: String, isPrivate: Boolean) {
         atMessages = true,
         messages = false,
         forum = false,
-        guildMessageReactions = true
+        guildMessageReactions = false
     )
 
     init {
