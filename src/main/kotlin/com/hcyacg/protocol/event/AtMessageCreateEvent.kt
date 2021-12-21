@@ -6,8 +6,9 @@ import com.hcyacg.protocol.event.api.Author
 import com.hcyacg.protocol.event.api.Member
 
 @NoArg
-
 data class AtMessageCreateEvent(
+    @SerializedName("attachments")
+    var attachments: List<Attachment> = mutableListOf(),
     @SerializedName("author")
     val author: Author,
     @SerializedName("channel_id")
