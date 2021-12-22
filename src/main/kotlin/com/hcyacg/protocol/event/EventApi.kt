@@ -30,7 +30,7 @@ open class EventApi : MessageEvent() {
         val json = Gson().toJson(TextMessage(msg, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -39,7 +39,7 @@ open class EventApi : MessageEvent() {
         val json = Gson().toJson(initiativeTextMessage(msg))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -48,7 +48,7 @@ open class EventApi : MessageEvent() {
         val json = Gson().toJson(TextWithImageMessage(msg, imageUrl, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -57,7 +57,7 @@ open class EventApi : MessageEvent() {
         val json = Gson().toJson(initiativeTextWithImageMessage(msg, imageUrl))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -65,7 +65,7 @@ open class EventApi : MessageEvent() {
         val url = sendMessage.replace("{{channel_id}}", this.channelId)
         val json = Gson().toJson(ImageMessage(imageUrl, this.id))
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -74,7 +74,7 @@ open class EventApi : MessageEvent() {
         val url = sendMessage.replace("{{channel_id}}", this.channelId)
         val json = Gson().toJson(initiativeImageMessage(imageUrl))
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -83,7 +83,7 @@ open class EventApi : MessageEvent() {
         val json = Gson().toJson(ArkMessage(messageArk, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -92,7 +92,7 @@ open class EventApi : MessageEvent() {
         val json = Gson().toJson(initiativeArkMessage(messageArk))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -101,7 +101,7 @@ open class EventApi : MessageEvent() {
         val json = Gson().toJson(EmbedMessage(messageEmbed, this.id))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -110,7 +110,7 @@ open class EventApi : MessageEvent() {
         val json = Gson().toJson(initiativeEmbedMessage(messageEmbed))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
@@ -119,7 +119,7 @@ open class EventApi : MessageEvent() {
         val json = Gson().toJson(AudioControl(audioUrl, text, status))
 
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
-        Constant.logger.debug(res)
+        logger.debug(res)
         return Gson().fromJson(res, Message::class.java)
     }
 
