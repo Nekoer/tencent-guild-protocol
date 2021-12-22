@@ -15,43 +15,43 @@ abstract class BotEvent {
         return botToken
     }
 
-    open suspend fun onReady(data: ReadyEvent) {}
+    open suspend fun onReady(event: ReadyEvent) {}
 
-    open suspend fun onGuildMemberAdd(data: GuildMemberEvent) {}
+    open suspend fun onGuildMemberAdd(event: GuildMemberEvent) {}
 
-    open suspend fun onGuildMemberUpdate(data: GuildMemberEvent) {}
+    open suspend fun onGuildMemberUpdate(event: GuildMemberEvent) {}
 
-    open suspend fun onGuildMemberRemove(data: GuildMemberEvent) {}
+    open suspend fun onGuildMemberRemove(event: GuildMemberEvent) {}
 
-    open suspend fun onAtMessageCreate(data: AtMessageCreateEvent) {}
+    open suspend fun onAtMessageCreate(event: AtMessageCreateEvent) {}
 
-    open suspend fun onMessageCreate(data: MessageCreateEvent) {}
+    open suspend fun onMessageCreate(event: MessageCreateEvent) {}
 
-    open suspend fun onChannelCreate(data: ChannelEvent) {}
+    open suspend fun onChannelCreate(event: ChannelEvent) {}
 
-    open suspend fun onChannelUpdate(data: ChannelEvent) {}
+    open suspend fun onChannelUpdate(event: ChannelEvent) {}
 
-    open suspend fun onChannelDelete(data: ChannelEvent) {}
+    open suspend fun onChannelDelete(event: ChannelEvent) {}
 
-    open suspend fun onGuildCreate(data: GuildEvent) {}
+    open suspend fun onGuildCreate(event: GuildEvent) {}
 
-    open suspend fun onGuildUpdate(data: GuildEvent) {}
+    open suspend fun onGuildUpdate(event: GuildEvent) {}
 
-    open suspend fun onGuildDelete(data: GuildEvent) {}
+    open suspend fun onGuildDelete(event: GuildEvent) {}
 
     open suspend fun onResumed(config: IdentifyConfig, sessionId: String) {}
 
-    open suspend fun onMessageReactionAdd(data: MessageReactionEvent) {}
+    open suspend fun onMessageReactionAdd(event: MessageReactionEvent) {}
 
-    open suspend fun onMessageReactionRemove(data: MessageReactionEvent) {}
+    open suspend fun onMessageReactionRemove(event: MessageReactionEvent) {}
 
-    open suspend fun onAudioStart(data: AudioActionEvent) {}
+    open suspend fun onAudioStart(event: AudioActionEvent) {}
 
-    open suspend fun onAudioFinish(data: AudioActionEvent) {}
+    open suspend fun onAudioFinish(event: AudioActionEvent) {}
 
-    open suspend fun onAudioOnMic(data: AudioActionEvent) {}
+    open suspend fun onAudioOnMic(event: AudioActionEvent) {}
 
-    open suspend fun onAudioOffMic(data: AudioActionEvent) {}
+    open suspend fun onAudioOffMic(event: AudioActionEvent) {}
 
     //TODO 官方有许多事件，后续在这里添加事件名称
 

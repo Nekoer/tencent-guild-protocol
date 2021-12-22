@@ -38,7 +38,9 @@ class Gateway {
                 Request.Builder().get().url(Constant.proUrl + "/gateway/bot").header("Authorization", token).build()
             }
             val execute = client.newCall(request).execute()
-            accessWithFragmentedWss = Gson().fromJson(execute.body!!.string(), AccessWithFragmentedWss::class.java)
+            val string = execute.body!!.string()
+            logger.debug(string)
+            accessWithFragmentedWss = Gson().fromJson(string, AccessWithFragmentedWss::class.java)
             logger.info("wss地址已获取 ${accessWithFragmentedWss!!.url}")
             return accessWithFragmentedWss
         }

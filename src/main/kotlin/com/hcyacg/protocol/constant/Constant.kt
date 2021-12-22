@@ -22,10 +22,16 @@ class Constant {
          */
         var accessWithFragmentedWss: AccessWithFragmentedWss? = null
 
+        /**
+         * 机器人token
+         */
         var botToken: String? = null
 
         val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
+        /**
+         * 机器人自身信息
+         */
         var bot: User? = null
     }
 }
