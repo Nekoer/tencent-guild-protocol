@@ -33,5 +33,8 @@ class Constant {
          * 机器人自身信息
          */
         var bot: User? = null
+
+        val threadLocal = ThreadLocal<String>()
+
     }
 }

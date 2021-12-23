@@ -33,8 +33,10 @@ object BotApi {
     private const val changeRole = "$guildInfo/roles/{{role_id}}"
     private const val editMemberRole = "$guildInfo/members/{{user_id}}/roles/{{role_id}}"
 
-    private const val announces = "$proUrl/channels/{{channel_id}}/announces"
-    private const val deleteAnnounces = "$announces/{{message_id}}"
+    private const val guildAnnounce = "$proUrl/guilds/{{guild_id}}/announces"
+    private const val deleteGuildAnnounce = "$guildAnnounce/{{message_id}}"
+    private const val channelAnnounces = "$proUrl/channels/{{channel_id}}/announces"
+    private const val deleteChannelAnnounces = "$channelAnnounces/{{message_id}}"
 
     private const val schedules = "$proUrl/channels/{{channel_id}}/schedules"
     private const val scheduleUrl = "$schedules/{{schedule_id}}"
@@ -382,14 +384,44 @@ object BotApi {
         return res.code == 200
     }
 
+
+    /**
+     * 创建全频道公告
+     * @param guildId 频道id
+     * @param channelId 子频道id
+     * @param messageId 消息id
+     */
+    @JvmStatic
+    fun createGuildAnnounces(guildId: String,channelId: String, messageId: String): Announces {
+        val url = guildAnnounce.replace("{{guild_id}}", guildId)
+        val json = "{\"message_id\": \"$messageId\",\"channel_id\":\"$channelId\"}"
+        val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
+        logger.debug(res)
+        return Gson().fromJson(res, Announces::class.java)
+    }
+
+    /**
+     * 删除全频道公告
+     * @param guildId 频道id
+     * @param messageId 消息id
+     */
+    @JvmStatic
+    fun deleteGuildAnnounces(guildId: String, messageId: String): Boolean {
+        val url = deleteGuildAnnounce.replace("{{guild_id}}", guildId).replace("{{message_id}}", messageId)
+        val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
+        logger.debug(res.code.toString())
+        return res.code == 204
+    }
+
+
     /**
      * 创建子频道公告
      * @param channelId 子频道id
      * @param messageId 消息id
      */
     @JvmStatic
-    fun createAnnounces(channelId: String, messageId: String): Announces {
-        val url = announces.replace("{{channel_id}}", channelId)
+    fun createChannelAnnounces(channelId: String, messageId: String): Announces {
+        val url = channelAnnounces.replace("{{channel_id}}", channelId)
         val json = "{\"message_id\": \"$messageId\"}"
         val res = OkHttpUtils.postJson(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res)
@@ -402,11 +434,11 @@ object BotApi {
      * @param messageId 消息id
      */
     @JvmStatic
-    fun deleteAnnounces(channelId: String, messageId: String): Boolean {
-        val url = deleteAnnounces.replace("{{channel_id}}", channelId).replace("{{message_id}}", messageId)
+    fun deleteChannelAnnounces(channelId: String, messageId: String): Boolean {
+        val url = deleteChannelAnnounces.replace("{{channel_id}}", channelId).replace("{{message_id}}", messageId)
         val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
         logger.debug(res.code.toString())
-        return res.code == 200
+        return res.code == 204
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.hcyacg.protocol.common
 
+import com.hcyacg.protocol.constant.Constant
 import com.hcyacg.protocol.constant.Constant.Companion.botToken
 import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.config.IdentifyConfig

@@ -4,6 +4,7 @@ package com.hcyacg.protocol.common
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hcyacg.protocol.constant.Constant.Companion.logger
+import com.hcyacg.protocol.constant.Constant.Companion.threadLocal
 import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.BaseBotListener
 import com.hcyacg.protocol.internal.config.IdentifyConfig
@@ -11,11 +12,11 @@ import com.hcyacg.protocol.internal.entity.*
 import com.hcyacg.protocol.internal.enums.DispatchEnums
 import com.hcyacg.protocol.internal.enums.OPCodeEnums.*
 import com.hcyacg.protocol.utils.ScheduleUtils
-import kotlinx.coroutines.runBlocking
 import okhttp3.Response
 import okhttp3.WebSocket
 import com.hcyacg.protocol.event.ReadyEvent
 import com.hcyacg.protocol.internal.enums.OPCodeEnums
+import kotlinx.coroutines.*
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicLong
@@ -44,6 +45,7 @@ class BotListener(
     inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object : TypeToken<T>() {}.type)
 
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onMessage(webSocket: WebSocket, text: String) {
         runCatching {
 //            logger.trace("$logHeader 收到了信息 $text")
@@ -109,7 +111,7 @@ class BotListener(
                                 DispatchEnums.AT_MESSAGE_CREATE -> {
                                     Gson().fromJson<Dispatch<AtMessageCreateEvent>>(text)?.also { guildAtMessage ->
                                         officialEvents.forEach {
-                                            runBlocking {
+                                            GlobalScope.launch(threadLocal.asContextElement(guildAtMessage.d.guildId)) {
                                                 it.onAtMessageCreate(guildAtMessage.d)
                                             }
                                         }
@@ -118,7 +120,7 @@ class BotListener(
                                 DispatchEnums.MESSAGE_CREATE -> {
                                     Gson().fromJson<Dispatch<MessageCreateEvent>>(text)?.also { guildAtMessage ->
                                         officialEvents.forEach {
-                                            runBlocking {
+                                            GlobalScope.launch(threadLocal.asContextElement(guildAtMessage.d.guildId)) {
                                                 it.onMessageCreate(guildAtMessage.d)
                                             }
                                         }

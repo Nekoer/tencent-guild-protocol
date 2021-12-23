@@ -33,6 +33,7 @@ open class MessageEvent {
 
     @SerializedName("timestamp")
     lateinit var timestamp: String
+
 }
 
 /**

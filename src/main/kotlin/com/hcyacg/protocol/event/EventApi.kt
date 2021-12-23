@@ -19,6 +19,8 @@ open class EventApi : MessageEvent() {
     private val memberMute = "${guildInfo}/members/{{user_id}}/mute"
     private val mute = "$proUrl/guilds/{{guild_id}}/mute"
 
+
+
     private fun officeApiHeader(): MutableMap<String, String> {
         return mutableMapOf(
             "Authorization" to Constant.botToken!!
@@ -126,10 +128,9 @@ open class EventApi : MessageEvent() {
 
     /**
      * 全局禁言
-     * @param guildId 频道id
      * @param timestamp 时间戳 单位：秒
      */
-    fun guildMute(guildId:String,timestamp:Long):Boolean{
+    fun mute(timestamp:Long):Boolean{
         val url = mute.replace("{{guild_id}}", guildId)
         val json = "{\"mute_end_timstamp\": ${timestamp}}"
         val res = OkHttpUtils.patch(url, OkHttpUtils.addJson(json), officeApiHeader())
@@ -138,10 +139,9 @@ open class EventApi : MessageEvent() {
     }
     /**
      * 全局禁言
-     * @param guildId 频道id
      * @param seconds 时间戳 单位：秒
      */
-    fun guildMute(guildId:String,seconds:Int):Boolean{
+    fun mute(seconds:Int):Boolean{
         val url = mute.replace("{{guild_id}}", guildId)
         val json = "{\"mute_seconds\": ${seconds}}"
         val res = OkHttpUtils.patch(url, OkHttpUtils.addJson(json), officeApiHeader())
@@ -149,30 +149,4 @@ open class EventApi : MessageEvent() {
         return res.code == 204
     }
 
-    /**
-     * 成员禁言
-     * @param guildId 频道id
-     * @param userId 用户id
-     * @param timestamp 时间戳 单位：秒
-     */
-    fun mute(guildId:String,userId: String,timestamp:Long):Boolean{
-        val url = memberMute.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
-        val json = "{\"mute_end_timstamp\": ${timestamp}}"
-        val res = OkHttpUtils.patch(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.code.toString())
-        return res.code == 204
-    }
-    /**
-     * 成员禁言
-     * @param guildId 频道id
-     * @param userId 用户id
-     * @param seconds 时间戳 单位：秒
-     */
-    fun mute(guildId:String,userId: String,seconds:Int):Boolean{
-        val url = memberMute.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
-        val json = "{\"mute_seconds\": ${seconds}}"
-        val res = OkHttpUtils.patch(url, OkHttpUtils.addJson(json), officeApiHeader())
-        logger.debug(res.code.toString())
-        return res.code == 204
-    }
 }
