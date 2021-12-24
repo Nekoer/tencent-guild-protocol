@@ -42,6 +42,7 @@ class Gateway {
             logger.debug(string)
             accessWithFragmentedWss = Gson().fromJson(string, AccessWithFragmentedWss::class.java)
             logger.info("wss地址已获取 ${accessWithFragmentedWss!!.url}")
+            execute.close()
             return accessWithFragmentedWss
         }
 
