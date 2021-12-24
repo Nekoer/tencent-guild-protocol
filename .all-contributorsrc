@@ -7,28 +7,6 @@
   "imageSize": 100,
   "commit": false,
   "contributors": [
-    {
-      "login": "Nekoer",
-      "name": "牧瀬くりす",
-      "avatar_url": "https://avatars.githubusercontent.com/u/32485369?s=48&v=4",
-      "profile": "https://www.hcyacg.com",
-      "contributions": [
-        "eventOrganizing",
-        "code",
-        "doc",
-        "ideas",
-        "test"
-      ]
-    },
-    {
-      "login": "cssxsh",
-      "name": "cssxsh",
-      "avatar_url": "https://avatars.githubusercontent.com/u/32539286?v=4",
-      "profile": "https://github.com/cssxsh",
-      "contributions": [
-        "code",
-        "bug"
-      ]
-    }
+
   ]
 }
