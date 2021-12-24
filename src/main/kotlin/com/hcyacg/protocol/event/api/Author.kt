@@ -33,7 +33,7 @@ open class Author{
      */
     fun mute(timestamp: Long): Boolean {
         val url = memberMute.replace("{{guild_id}}", threadLocal.get()).replace("{{user_id}}", this.id)
-        val json = "{\"mute_end_timstamp\": ${timestamp}}"
+        val json = "{\"mute_end_timestamp\": ${timestamp}}"
         val res = OkHttpUtils.patch(url, OkHttpUtils.addJson(json), officeApiHeader())
         Constant.logger.debug(res.code.toString())
         return res.code == 204

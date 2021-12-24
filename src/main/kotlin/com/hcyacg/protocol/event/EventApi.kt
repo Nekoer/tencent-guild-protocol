@@ -132,7 +132,7 @@ open class EventApi : MessageEvent() {
      */
     fun mute(timestamp:Long):Boolean{
         val url = mute.replace("{{guild_id}}", guildId)
-        val json = "{\"mute_end_timstamp\": ${timestamp}}"
+        val json = "{\"mute_end_timestamp\": ${timestamp}}"
         val res = OkHttpUtils.patch(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.code.toString())
         return res.code == 204
