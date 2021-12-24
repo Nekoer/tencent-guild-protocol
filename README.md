@@ -37,9 +37,9 @@ fun main(args: Array<String>) {
     val token = "Bot id.token"
     //放入你的Listener
     //默认是获取公域的信息
-    BotManager(token, false).addListen(Test())
+    BotManager.configuration(token, false).addListen(Test())
     //私域请使用
-    BotManager(token, true).addListen(Test())
+    BotManager.configuration(token,true).addListen(Test())
 }
 
 ```
@@ -51,7 +51,7 @@ fun main(args: Array<String>) {
 class Test : BotEvent() {
 
     //这里我实现了 私域中 事件的 监听
-    override suspend fun onMessageCreate(data: MessageCreateEvent) {
+    override suspend fun onMessageCreate(event: MessageCreateEvent) {
 
     }
 }
@@ -120,7 +120,7 @@ BotApi.createChannel(data.guild_id, ChannelDto("测试", ChannelType.textSubchan
 BotApi.changeChannelInfo(data.channel_id, ChannelDto("测试", ChannelType.textSubchannel, 排序id, "父类节点"))
 //删除子频道
 BotApi.deleteChannel(data.channel_id)
-//删除用户
+//删除指定频道成员
 BotApi.deleteMember(data.guild_id, "用户id")
 ```
 
@@ -128,21 +128,24 @@ BotApi.deleteMember(data.guild_id, "用户id")
 
 ```kotlin
 //被动
-data.replyArk()
-data.replyImage()
-data.replyEmbed()
-data.replyText()
-data.replyAudio()
-data.replyTextWithImage()
+event.replyArk()
+event.replyImage()
+event.replyEmbed()
+event.replyText()
+event.replyAudio()
+event.replyTextWithImage()
 //主动消息
-data.replyArkNotId()
-data.replyImageNotId()
-data.replyEmbedNotId()
-data.replyTextNotId()
-data.replyTextWithImageNotId()
+event.replyArkNotId()
+event.replyImageNotId()
+event.replyEmbedNotId()
+event.replyTextNotId()
+event.replyTextWithImageNotId()
+//禁言
+event.mute(120)
+event.author.mute(120)
 
 //ark模板例子
-data.replyArk(
+event.replyArk(
     MessageArk(
         23, listOf(
             MessageArkKv("#DESC#", "descaaaaaa", null),
