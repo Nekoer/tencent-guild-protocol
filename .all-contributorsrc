@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "Nekoer",
+      "name": "牧瀬くりす",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32485369?v=4",
+      "profile": "https://www.hcyacg.com/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "tencent-guild-protocol",
+  "projectOwner": "Nekoer",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
