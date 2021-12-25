@@ -1,6 +1,6 @@
 # tencent-guild-protocol
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > Tencent频道的机器人Kotlin SDK
@@ -175,7 +175,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://www.hcyacg.com/"><img src="https://avatars.githubusercontent.com/u/32485369?v=4?s=100" width="100px;" alt=""/><br /><sub><b>牧瀬くりす</b></sub></a><br /><a href="https://github.com/Nekoer/tencent-guild-protocol/commits?author=Nekoer" title="Code">💻</a> <a href="https://github.com/Nekoer/tencent-guild-protocol/commits?author=Nekoer" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.hcyacg.com/"><img src="https://avatars.githubusercontent.com/u/32485369?v=4?s=100" width="100px;" alt=""/><br /><sub><b>牧瀬くりす</b></sub></a><br /><a href="https://github.com/Nekoer/tencent-guild-protocol/commits?author=Nekoer" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/cssxsh"><img src="https://avatars.githubusercontent.com/u/32539286?v=4?s=100" width="100px;" alt=""/><br /><sub><b>cssxsh</b></sub></a><br /><a href="https://github.com/Nekoer/tencent-guild-protocol/pulls?q=is%3Apr+reviewed-by%3Acssxsh" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
