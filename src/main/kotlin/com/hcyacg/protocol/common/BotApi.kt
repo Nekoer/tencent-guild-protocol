@@ -22,6 +22,7 @@ object BotApi {
     private const val sendMessage = "$channel/messages"
     private const val getMessage = "$channel/messages/{{message_id}}"
     private const val sendAudio = "$channel/audio"
+    private const val recall = "$sendMessage/{{message_id}}"
 
     private const val channelRolePermissions = "$channel/roles/{{role_id}}/permissions"
 
@@ -572,4 +573,18 @@ object BotApi {
         return res.code == 204
     }
 
+
+    /**
+     * 撤回当前消息
+     * 用来撤回频道内的消息
+     * 管理员可以撤回普通成员的消息
+     * 频道主可以撤回所有人的消息
+     */
+    @JvmStatic
+    fun recall(channelId:String,messageId: String): Boolean {
+        val url = recall.replace("{{channel_id}}", channelId).replace("{{message_id}}", messageId)
+        val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
+        logger.debug(res.code.toString())
+        return res.code == 200
+    }
 }

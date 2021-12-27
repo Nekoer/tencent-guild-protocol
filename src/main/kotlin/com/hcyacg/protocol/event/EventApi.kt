@@ -14,11 +14,11 @@ open class EventApi : MessageEvent() {
     private val channel = "${proUrl}/channels/{{channel_id}}"
     private val sendMessage = "$channel/messages"
     private val sendAudio = "$channel/audio"
+    private val recall = "$sendMessage/{{message_id}}"
 
     private val guildInfo = "$proUrl/guilds/{{guild_id}}"
     private val memberMute = "${guildInfo}/members/{{user_id}}/mute"
     private val mute = "$proUrl/guilds/{{guild_id}}/mute"
-
 
 
     private fun officeApiHeader(): MutableMap<String, String> {
@@ -130,23 +130,38 @@ open class EventApi : MessageEvent() {
      * 全局禁言
      * @param timestamp 时间戳 单位：秒
      */
-    fun mute(timestamp:Long):Boolean{
+    fun mute(timestamp: Long): Boolean {
         val url = mute.replace("{{guild_id}}", guildId)
         val json = "{\"mute_end_timestamp\": ${timestamp}}"
         val res = OkHttpUtils.patch(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.code.toString())
         return res.code == 204
     }
+
     /**
      * 全局禁言
      * @param seconds 时间戳 单位：秒
      */
-    fun mute(seconds:Int):Boolean{
+    fun mute(seconds: Int): Boolean {
         val url = mute.replace("{{guild_id}}", guildId)
         val json = "{\"mute_seconds\": ${seconds}}"
         val res = OkHttpUtils.patch(url, OkHttpUtils.addJson(json), officeApiHeader())
         logger.debug(res.code.toString())
         return res.code == 204
+    }
+
+
+    /**
+     * 撤回当前消息
+     * 用来撤回频道内的消息
+     * 管理员可以撤回普通成员的消息
+     * 频道主可以撤回所有人的消息
+     */
+    fun recall(): Boolean {
+        val url = recall.replace("{{channel_id}}", channelId).replace("{{message_id}}", id)
+        val res = OkHttpUtils.delete(url, mutableMapOf(), officeApiHeader())
+        logger.debug(res.code.toString())
+        return res.code == 200
     }
 
 }
