@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.hcyacg"
-version = "0.3.7-fix1"
+version = "0.3.8"
 
 
 repositories {
@@ -28,8 +28,8 @@ dependencies {
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
     implementation("org.jsoup:jsoup:1.14.3")
     implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("ch.qos.logback:logback-core:1.2.8")
-    implementation("ch.qos.logback:logback-classic:1.2.8")
+    implementation("ch.qos.logback:logback-core:1.2.9")
+    implementation("ch.qos.logback:logback-classic:1.2.9")
     implementation("com.google.code.gson:gson:2.8.9")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")

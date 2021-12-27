@@ -23,6 +23,8 @@ object BotApi {
     private const val getMessage = "$channel/messages/{{message_id}}"
     private const val sendAudio = "$channel/audio"
 
+    private const val channelRolePermissions = "$channel/roles/{{role_id}}/permissions"
+
     private const val guildInfo = "$proUrl/guilds/{{guild_id}}"
     private const val channelList = "$guildInfo/channels"
     private const val memberInfo = "$guildInfo/members/{{user_id}}"
@@ -198,8 +200,8 @@ object BotApi {
         val url = memberInfo.replace("{{guild_id}}", guildId).replace("{{user_id}}", userId)
 
         val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Member::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Member::class.java)
     }
 
     /**
@@ -210,8 +212,8 @@ object BotApi {
     fun getChannelInfo(channelId: String): Channel {
         val url = channel.replace("{{channel_id}}", channelId)
         val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Channel::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Channel::class.java)
     }
 
     /**
@@ -237,8 +239,8 @@ object BotApi {
         val url = getMessage.replace("{{channel_id}}", channelId).replace("{{message_id}}", messageId)
 
         val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), Message::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, Message::class.java)
     }
 
     /**
@@ -250,8 +252,8 @@ object BotApi {
     fun getChannelPermissions(channelId: String, userId: String): ChannelPermissions {
         val url = channelPermissions.replace("{{channel_id}}", channelId).replace("{{user_id}}", userId)
         val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), ChannelPermissions::class.java)
+        logger.debug(res)
+        return Gson().fromJson(res, ChannelPermissions::class.java)
     }
 
     /**
@@ -273,6 +275,40 @@ object BotApi {
         logger.debug(res.code.toString())
         return res.code == 204
     }
+    
+    /**
+     * 获取指定子频道身份组的权限
+     * @param channelId 子频道id
+     * @param roleId 身份组id
+     */
+    @JvmStatic
+    fun getChannelRolePermissions(channelId: String, roleId: String): ChannelPermissions {
+        val url = channelRolePermissions.replace("{{channel_id}}", channelId).replace("{{role_id}}", roleId)
+        val res = OkHttpUtils.getJson(url, officeApiHeader())
+        logger.debug(res)
+        return Gson().fromJson(res, ChannelPermissions::class.java)
+    }
+
+    /**
+     * 修改指定子频道身份组的权限 目前只支持修改查看权限
+     * @param channelId 子频道id
+     * @param roleId 身份组id
+     * @param isAdd 是否赋予用户查看子频道权限
+     */
+    @JvmStatic
+    fun changeChannelRolePermissions(channelId: String, roleId: String, isAdd: Boolean): Boolean {
+        val url = channelRolePermissions.replace("{{channel_id}}", channelId).replace("{{role_id}}", roleId)
+        val map = mutableMapOf<String, String>()
+        if (isAdd) {
+            map["add"] = 0.shl(1).toString()
+        } else {
+            map["remove"] = 1.shl(1).toString()
+        }
+        val res = OkHttpUtils.put(url, map, officeApiHeader())
+        logger.debug(res.code.toString())
+        return res.code == 204
+    }
+
 
     /**
      * 获取当前用户信息
@@ -280,8 +316,8 @@ object BotApi {
     @JvmStatic
     fun getMe(): User {
         val res = OkHttpUtils.getJson(userMe, officeApiHeader())
-        logger.debug(res.toString())
-        val user = Gson().fromJson(res.toString(), User::class.java)
+        logger.debug(res)
+        val user = Gson().fromJson(res, User::class.java)
         user.bot = true
         return user
     }
@@ -295,8 +331,8 @@ object BotApi {
     fun getMeGuildsBefore(guildId: String, limit: Int): List<Guild> {
         val url = userMeGuild.plus("?before=$guildId").plus("&limit=$limit")
         val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), object : TypeToken<List<Guild>>() {}.type)
+        logger.debug(res)
+        return Gson().fromJson(res, object : TypeToken<List<Guild>>() {}.type)
     }
 
     /**
@@ -308,8 +344,8 @@ object BotApi {
     fun getMeGuildsAfter(guildId: String, limit: Int): List<Guild> {
         val url = userMeGuild.plus("?after=$guildId").plus("&limit=$limit")
         val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), object : TypeToken<List<Guild>>() {}.type)
+        logger.debug(res)
+        return Gson().fromJson(res, object : TypeToken<List<Guild>>() {}.type)
     }
 
     /**
@@ -327,8 +363,8 @@ object BotApi {
         val url = memberList.replace("{{guild_id}}", guildId)
         url.plus("?after=$userId").plus("&limit=$limit")
         val res = OkHttpUtils.getJson(url, Headers.headersOf("Authorization", botToken!!))
-        logger.debug(res.toString())
-        return Gson().fromJson(res.toString(), object : TypeToken<List<Member>>() {}.type)
+        logger.debug(res)
+        return Gson().fromJson(res, object : TypeToken<List<Member>>() {}.type)
     }
 
     /**
