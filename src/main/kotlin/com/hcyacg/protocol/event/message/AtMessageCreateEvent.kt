@@ -1,7 +1,6 @@
-package com.hcyacg.protocol.event
+package com.hcyacg.protocol.event.message
 
 import com.hcyacg.protocol.anno.NoArg
-import kotlinx.coroutines.runBlocking
 
 
 @NoArg

@@ -22,7 +22,8 @@ object BotManager {
         atMessages = true,
         messages = false,
         forum = false,
-        guildMessageReactions = false
+        guildMessageReactions = false,
+        messageAudit = true
     )
 
     @JvmStatic
@@ -39,12 +40,13 @@ object BotManager {
             intent = Intents(
                 guilds = true,
                 guildMembers = true,
-                directMessage = false,
+                directMessage = true,
                 audioAction = true,
                 atMessages = true,
                 messages = true,
                 forum = false,
-                guildMessageReactions = true
+                guildMessageReactions = true,
+                messageAudit = true
             )
         }
         return this

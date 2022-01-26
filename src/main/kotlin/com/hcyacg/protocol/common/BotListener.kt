@@ -15,6 +15,8 @@ import com.hcyacg.protocol.utils.ScheduleUtils
 import okhttp3.Response
 import okhttp3.WebSocket
 import com.hcyacg.protocol.event.ReadyEvent
+import com.hcyacg.protocol.event.message.*
+import com.hcyacg.protocol.event.message.directMessage.DirectMessageCreateEvent
 import com.hcyacg.protocol.internal.enums.OPCodeEnums
 import kotlinx.coroutines.*
 import java.util.*
@@ -208,6 +210,15 @@ class BotListener(
                                         }
                                 }
                                 DispatchEnums.DIRECT_MESSAGE_CREATE -> {
+                                    Gson().fromJson<Dispatch<DirectMessageCreateEvent>>(text)
+                                        ?.also { directMessageCreateEvent ->
+                                            officialEvents.forEach {
+                                                runBlocking {
+                                                    it.onDirectMessageCreate(directMessageCreateEvent.d)
+                                                }
+                                            }
+
+                                        }
                                     logger.debug("$logHeader 收到了事件:${dispatchDto.type} 内容:$text")
                                 }
                                 DispatchEnums.THREAD_CREATE -> {
@@ -263,6 +274,24 @@ class BotListener(
                                         officialEvents.forEach {
                                             runBlocking {
                                                 it.onAudioOffMic(audioActionEvent.d)
+                                            }
+                                        }
+                                    }
+                                }
+                                DispatchEnums.MESSAGE_AUDIT_PASS -> {
+                                    Gson().fromJson<Dispatch<MessageAuditPassEvent>>(text)?.also { messageAuditPassEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onMessageAuditPass(messageAuditPassEvent.d)
+                                            }
+                                        }
+                                    }
+                                }
+                                DispatchEnums.MESSAGE_AUDIT_REJECT -> {
+                                    Gson().fromJson<Dispatch<MessageAuditRejectEvent>>(text)?.also { messageAuditRejectEvent ->
+                                        officialEvents.forEach {
+                                            runBlocking {
+                                                it.onMessageAuditReject(messageAuditRejectEvent.d)
                                             }
                                         }
                                     }

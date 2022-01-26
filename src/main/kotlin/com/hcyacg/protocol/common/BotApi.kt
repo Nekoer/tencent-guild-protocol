@@ -60,11 +60,14 @@ object BotApi {
      */
     @JvmStatic
     fun getGuildById(guildId: String): Guild {
-        val url = guildInfo.replace("{{guild_id}}", guildId)
 
-        val res = OkHttpUtils.getJson(url, officeApiHeader())
-        logger.debug(res)
-        return Gson().fromJson(res, Guild::class.java)
+
+        val url = guildInfo.replace("{{guild_id}}", guildId)
+        val res = OkHttpUtils[url, officeApiHeader()]
+
+        val result = res.body?.string()
+        logger.debug(result)
+        return Gson().fromJson(result, Guild::class.java)
     }
 
 

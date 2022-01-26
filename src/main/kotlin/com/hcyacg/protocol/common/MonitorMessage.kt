@@ -3,28 +3,31 @@ package com.hcyacg.protocol.common
 import com.google.gson.Gson
 import com.hcyacg.protocol.constant.Constant
 import com.hcyacg.protocol.constant.Constant.Companion.bot
+import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.event.*
+import com.hcyacg.protocol.event.message.*
+import com.hcyacg.protocol.event.message.directMessage.DirectMessageCreateEvent
 
 
 internal class MonitorMessage : BotEvent() {
 
     override suspend fun onReady(event: ReadyEvent) {
         bot = event.user
-        Constant.logger.info("${event.shard[0] + 1} of ${event.shard[1]} 已连接")
+        logger.info("${event.shard[0] + 1} of ${event.shard[1]} 已连接")
     }
 
     override suspend fun onGuildMemberAdd(event: GuildMemberEvent) {
-        Constant.logger.info("${event.user.username}(${event.user.id}) 加入了 ${BotApi.getGuildById(event.guildId).name}(${event.guildId})")
+        logger.info("${event.user.username}(${event.user.id}) 加入了 ${BotApi.getGuildById(event.guildId).name}(${event.guildId})")
     }
 
     override suspend fun onGuildMemberUpdate(event: GuildMemberEvent) {}
 
     override suspend fun onGuildMemberRemove(event: GuildMemberEvent) {
-        Constant.logger.info("${event.user.username}(${event.user.id}) 退出了 ${BotApi.getGuildById(event.guildId).name}(${event.guildId})")
+        logger.info("${event.user.username}(${event.user.id}) 退出了 ${BotApi.getGuildById(event.guildId).name}(${event.guildId})")
     }
 
     override suspend fun onAtMessageCreate(event: AtMessageCreateEvent) {
-        Constant.logger.info(
+        logger.info(
             "${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${
                 BotApi.getChannelInfo(
                     event.channelId
@@ -34,8 +37,8 @@ internal class MonitorMessage : BotEvent() {
     }
 
     override suspend fun onMessageCreate(event: MessageCreateEvent) {
-        if (event.content.indexOf("<@!${bot!!.id}>") < 0) {
-            Constant.logger.info(
+        if (event.isContentInitialized() && event.content.indexOf("<@!${bot!!.id}>") < 0) {
+            logger.info(
                 "${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${
                     BotApi.getChannelInfo(
                         event.channelId
@@ -49,34 +52,42 @@ internal class MonitorMessage : BotEvent() {
         }
     }
 
+    override suspend fun onDirectMessageCreate(event: DirectMessageCreateEvent) {
+        if (event.isContentInitialized() && event.content.indexOf("<@!${bot!!.id}>") < 0) {
+            logger.info(
+                "${event.author.username}(${event.author.id}): ${event.content}"
+            )
+        }
+    }
+
     override suspend fun onChannelCreate(event: ChannelEvent) {
-        Constant.logger.info("${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${event.name}(${event.id}) 子频道被创建")
+        logger.info("${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${event.name}(${event.id}) 子频道被创建")
     }
 
     override suspend fun onChannelUpdate(event: ChannelEvent) {
-        Constant.logger.info("${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${event.name}(${event.id}) 子频道信息已被修改")
+        logger.info("${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${event.name}(${event.id}) 子频道信息已被修改")
     }
 
     override suspend fun onChannelDelete(event: ChannelEvent) {
-        Constant.logger.info("${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${event.name}(${event.id}) 子频道被删除")
+        logger.info("${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${event.name}(${event.id}) 子频道被删除")
     }
 
     override suspend fun onGuildCreate(event: GuildEvent) {
-        Constant.logger.info("机器人加入了 ${event.name}(${event.id}) 介绍: ${event.description}")
+        logger.info("机器人加入了 ${event.name}(${event.id}) 介绍: ${event.description}")
     }
 
     override suspend fun onGuildUpdate(event: GuildEvent) {
-        Constant.logger.info("${event.name}(${event.id}) 频道信息变更")
+        logger.info("${event.name}(${event.id}) 频道信息变更")
 
     }
 
     override suspend fun onGuildDelete(event: GuildEvent) {
-        Constant.logger.info("机器人离开了 ${event.name}(${event.id})")
+        logger.info("机器人离开了 ${event.name}(${event.id})")
     }
 
     override suspend fun onMessageReactionAdd(event: MessageReactionEvent) {
         val memberInfo = BotApi.getMemberInfo(event.guildId, event.userId)
-        Constant.logger.info(
+       logger.info(
             "${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${
                 BotApi.getChannelInfo(
                     event.channelId
@@ -91,7 +102,7 @@ internal class MonitorMessage : BotEvent() {
 
     override suspend fun onMessageReactionRemove(event: MessageReactionEvent) {
         val memberInfo = BotApi.getMemberInfo(event.guildId, event.userId)
-        Constant.logger.info(
+        logger.info(
             "${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${
                 BotApi.getChannelInfo(
                     event.channelId
@@ -106,7 +117,7 @@ internal class MonitorMessage : BotEvent() {
 
 
     override suspend fun onAudioStart(event: AudioActionEvent) {
-        Constant.logger.info(
+        logger.info(
             "${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${
                 BotApi.getChannelInfo(
                     event.channelId
@@ -116,7 +127,7 @@ internal class MonitorMessage : BotEvent() {
     }
 
     override suspend fun onAudioFinish(event: AudioActionEvent) {
-        Constant.logger.info(
+        logger.info(
             "${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${
                 BotApi.getChannelInfo(
                     event.channelId
@@ -126,7 +137,7 @@ internal class MonitorMessage : BotEvent() {
     }
 
     override suspend fun onAudioOnMic(event: AudioActionEvent) {
-        Constant.logger.info(
+        logger.info(
             "${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${
                 BotApi.getChannelInfo(
                     event.channelId
@@ -137,7 +148,7 @@ internal class MonitorMessage : BotEvent() {
     }
 
     override suspend fun onAudioOffMic(event: AudioActionEvent) {
-        Constant.logger.info(
+        logger.info(
             "${BotApi.getGuildById(event.guildId).name}(${event.guildId}) - ${
                 BotApi.getChannelInfo(
                     event.channelId
@@ -145,5 +156,13 @@ internal class MonitorMessage : BotEvent() {
             }(${event.channelId}) - 下麦了"
         )
 
+    }
+
+    override suspend fun onMessageAuditPass(event: MessageAuditPassEvent) {
+        logger.info("${event.createTime} 发送的消息未通过审核")
+    }
+
+    override suspend fun onMessageAuditReject(event: MessageAuditRejectEvent) {
+        logger.info("${event.createTime} 发送的消息通过审核")
     }
 }

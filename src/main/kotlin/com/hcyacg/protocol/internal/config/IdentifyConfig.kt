@@ -31,6 +31,7 @@ data class Intents(
     val atMessages: Boolean = true,
     val messages: Boolean = false,
     val guildMessageReactions: Boolean = true,
+    val messageAudit:Boolean = true
 ) {
     fun toIntentsValue(): Long {
         return ((if (guilds) 1.shl(0) else 0)
@@ -38,6 +39,7 @@ data class Intents(
                 + (if (messages) 1.shl(9) else 0)
                 + (if (guildMessageReactions) 1.shl(10) else 0)
                 + (if (directMessage) 1.shl(12) else 0)
+                + (if (messageAudit) 1.shl(27) else 0)
                 + (if (forum) 1.shl(28) else 0)
                 + (if (audioAction) 1.shl(29) else 0)
                 + (if (atMessages) 1.shl(30) else 0))

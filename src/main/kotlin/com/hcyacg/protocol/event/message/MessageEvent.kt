@@ -1,4 +1,4 @@
-package com.hcyacg.protocol.event
+package com.hcyacg.protocol.event.message
 
 import com.google.gson.annotations.SerializedName
 import com.hcyacg.protocol.anno.NoArg
@@ -34,6 +34,9 @@ open class MessageEvent {
     @SerializedName("timestamp")
     lateinit var timestamp: String
 
+    fun isContentInitialized(): Boolean {
+        return this::content.isInitialized
+    }
 }
 
 /**

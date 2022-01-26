@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.hcyacg"
-version = "0.3.8-supplement1"
+version = "0.3.9"
 
 
 repositories {
@@ -20,16 +20,16 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2-native-mt")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0-native-mt")
 //    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
 
     implementation("org.apache.commons:commons-lang3:3.12.0")
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
     implementation("org.jsoup:jsoup:1.14.3")
-    implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("ch.qos.logback:logback-core:1.2.9")
-    implementation("ch.qos.logback:logback-classic:1.2.9")
+    implementation("org.slf4j:slf4j-api:1.7.33")
+    implementation("ch.qos.logback:logback-core:1.2.10")
+    implementation("ch.qos.logback:logback-classic:1.2.10")
     implementation("com.google.code.gson:gson:2.8.9")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")

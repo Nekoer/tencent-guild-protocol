@@ -21,6 +21,10 @@ enum class DispatchEnums {
     MESSAGE_REACTION_ADD,    // 为消息添加表情表态
     MESSAGE_REACTION_REMOVE, // 为消息删除表情表态
     DIRECT_MESSAGE_CREATE,   // 当收到用户发给机器人的私信消息时
+
+    MESSAGE_AUDIT_PASS,     // 消息审核通过
+    MESSAGE_AUDIT_REJECT,   // 消息审核不通过
+
     THREAD_CREATE,     // 当用户创建主题时
     THREAD_UPDATE,     // 当用户更新主题时
     THREAD_DELETE,     // 当用户删除主题时

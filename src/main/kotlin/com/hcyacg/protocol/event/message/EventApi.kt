@@ -1,7 +1,6 @@
-package com.hcyacg.protocol.event
+package com.hcyacg.protocol.event.message
 
 import com.google.gson.Gson
-import com.hcyacg.protocol.common.BotApi
 import com.hcyacg.protocol.constant.Constant
 import com.hcyacg.protocol.constant.Constant.Companion.logger
 import com.hcyacg.protocol.constant.Constant.Companion.proUrl

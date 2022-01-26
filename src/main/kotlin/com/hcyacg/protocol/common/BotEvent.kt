@@ -1,10 +1,11 @@
 package com.hcyacg.protocol.common
 
-import com.hcyacg.protocol.constant.Constant
 import com.hcyacg.protocol.constant.Constant.Companion.botToken
 import com.hcyacg.protocol.event.*
 import com.hcyacg.protocol.internal.config.IdentifyConfig
 import com.hcyacg.protocol.event.ReadyEvent
+import com.hcyacg.protocol.event.message.*
+import com.hcyacg.protocol.event.message.directMessage.DirectMessageCreateEvent
 
 /**
  * 频道事件
@@ -28,6 +29,8 @@ abstract class BotEvent {
 
     open suspend fun onMessageCreate(event: MessageCreateEvent) {}
 
+    open suspend fun onDirectMessageCreate(event: DirectMessageCreateEvent) {}
+
     open suspend fun onChannelCreate(event: ChannelEvent) {}
 
     open suspend fun onChannelUpdate(event: ChannelEvent) {}
@@ -45,6 +48,10 @@ abstract class BotEvent {
     open suspend fun onMessageReactionAdd(event: MessageReactionEvent) {}
 
     open suspend fun onMessageReactionRemove(event: MessageReactionEvent) {}
+
+    open suspend fun onMessageAuditPass(event: MessageAuditPassEvent) {}
+
+    open suspend fun onMessageAuditReject(event: MessageAuditRejectEvent) {}
 
     open suspend fun onAudioStart(event: AudioActionEvent) {}
 
