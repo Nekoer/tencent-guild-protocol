@@ -185,3 +185,10 @@ data class MessageArkObjKv(
     @SerializedName("value")
     val value: String
 )
+
+data class MessageReference(
+    @SerializedName("message_id")
+    val messageId:String,
+    @SerializedName("ignore_get_message_error")
+    val ignoreGetMessageError : Boolean
+)

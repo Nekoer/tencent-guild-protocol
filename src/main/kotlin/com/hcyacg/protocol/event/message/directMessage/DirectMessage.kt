@@ -22,6 +22,10 @@ open class DirectMessage{
     lateinit var member: Member
     @SerializedName("seq")
     var seq: Int = 0
+    @SerializedName("seq_in_channel")
+    lateinit var seqInChannel: String
+    @SerializedName("src_guild_id")
+    lateinit var srcGuildId: String
     @SerializedName("timestamp")
     lateinit var timestamp: String
 

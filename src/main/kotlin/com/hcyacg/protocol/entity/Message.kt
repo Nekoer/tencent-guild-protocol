@@ -5,6 +5,7 @@ import com.hcyacg.protocol.anno.NoArg
 import com.hcyacg.protocol.event.api.MessageArk
 import com.hcyacg.protocol.event.api.MessageAttachment
 import com.hcyacg.protocol.event.api.MessageEmbed
+import com.hcyacg.protocol.event.api.MessageReference
 
 
 @NoArg
@@ -36,5 +37,11 @@ data class Message(
     @SerializedName("member")
     val member: Member,
     @SerializedName("ark")
-    val ark: MessageArk
+    val ark: MessageArk,
+    @SerializedName("message_reference")
+    val messageReference: MessageReference,
+    @SerializedName("seq_in_channel")
+    val seqInChannel: String,
+    @SerializedName("src_guild_id")
+    val srcGuildId: String,
 )
